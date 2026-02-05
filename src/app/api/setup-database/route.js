@@ -2,6 +2,14 @@ import { query } from '@lib/db'
 
 export async function POST(request) {
   try {
+    // Skip database operations during build time
+    if (process.env.NODE_ENV === 'production' && process.env.VERCEL) {
+      return Response.json({
+        success: true,
+        message: 'Database setup skipped during build'
+      })
+    }
+
     // Read the SQL file
     const fs = require('fs')
     const path = require('path')

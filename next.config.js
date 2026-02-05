@@ -12,6 +12,10 @@ const nextConfig = {
     };
     return config;
   },
+  // Skip database-dependent routes during build
+  experimental: {
+    serverComponentsExternalPackages: ['pg'],
+  },
 };
 
 module.exports = nextConfig;
