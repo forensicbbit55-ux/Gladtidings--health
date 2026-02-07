@@ -27,10 +27,10 @@ export default function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/remedies" 
+                  href="/products" 
                   className="text-gray-300 hover:text-white transition-colors duration-300 text-sm"
                 >
-                  Remedies
+                  Products
                 </Link>
               </li>
               <li>

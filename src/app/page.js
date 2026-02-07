@@ -164,7 +164,7 @@ export default function Home() {
                 <h2 className="text-3xl md:text-5xl font-bold mb-6">{slide.subtitle}</h2>
                 <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">{slide.description}</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/shop" className="bg-amber-500 hover:bg-amber-600 text-emerald-900 px-8 py-3 rounded-lg font-bold transition-colors">
+                  <Link href="/products" className="bg-amber-500 hover:bg-amber-600 text-emerald-900 px-8 py-3 rounded-lg font-bold transition-colors">
                     Shop Now
                   </Link>
                   <Link href="/consultation" className="bg-white text-emerald-700 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
@@ -221,7 +221,7 @@ export default function Home() {
                   <span className="text-3xl">{category.icon}</span>
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{category.name}</h3>
-                <Link href="/shop" className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+                <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
                   View Products →
                 </Link>
               </div>
@@ -253,7 +253,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-10">
             <h2 className="text-2xl font-bold text-gray-900">New Products</h2>
-            <Link href="/shop" className="text-emerald-600 hover:text-emerald-700 font-medium">
+            <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium">
               View All →
             </Link>
           </div>
@@ -295,7 +295,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Best Sellers products</h2>
-            <Link href="/shop" className="text-emerald-600 hover:text-emerald-700 font-medium">
+            <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium">
               View All →
             </Link>
           </div>
@@ -317,7 +317,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-4">SALE 50% OFF</h2>
           <p className="text-xl mb-8">Limited time offer on selected natural remedies</p>
-          <Link href="/shop?sale=true" className="bg-white text-red-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+          <Link href="/products?sale=true" className="bg-white text-red-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
               Shop Sale Items
             </Link>
         </div>
@@ -328,7 +328,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">Trending Products</h2>
-            <Link href="/shop" className="text-emerald-600 hover:text-emerald-700 font-medium">
+            <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium">
               View All →
             </Link>
           </div>

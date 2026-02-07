@@ -103,7 +103,7 @@ export default function AdminLogin() {
 
         <div className="mt-6 text-center">
           <a 
-            href="/login" 
+            href="/admin/login" 
             className="text-emerald-600 hover:text-emerald-700 text-sm font-medium"
           >
             ← Back to User Login
