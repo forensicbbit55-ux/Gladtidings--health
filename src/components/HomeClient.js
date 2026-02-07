@@ -16,21 +16,21 @@ export default function HomeClient() {
 
   const slides = [
     {
-      id: 1,
+      id: 'slide-1',
       title: 'Medical Missionary Services',
       subtitle: 'Natural Health Solutions',
       description: 'Discover holistic wellness through natural remedies and spiritual health practices',
       image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'
     },
     {
-      id: 2,
+      id: 'slide-2',
       title: 'Spiritual Wellness',
       subtitle: 'Faith-Based Healing',
       description: 'Integrating spiritual practices with natural health for complete wellness',
       image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80'
     },
     {
-      id: 3,
+      id: 'slide-3',
       title: 'Community Health',
       subtitle: 'Medical Missionary Outreach',
       description: 'Serving communities with natural health education and spiritual support',
@@ -88,11 +88,11 @@ export default function HomeClient() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Carousel Section */}
       <section className="relative h-[600px] md:h-[700px] overflow-hidden border-b-4 border-emerald-600">
-        {slides.map((slide, index) => (
+        {slides.map((slide) => (
           <div
-            key={index}
+            key={slide.id}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+              currentSlide === slides.indexOf(slide) ? 'opacity-100' : 'opacity-0'
             }`}
           >
             <img
