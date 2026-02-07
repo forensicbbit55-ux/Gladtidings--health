@@ -1,22 +1,62 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 function AdminLayoutContent({ children }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const pathname = usePathname()
+  const router = useRouter()
 
-  // TODO: Implement authentication check with Neon database
-  // For now, allow access to admin pages without authentication
-  // if (!user || !profile) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center">
-  //       <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-600"></div>
-  //     </div>
-  //   )
-  // }
+  useEffect(() => {
+    // Check authentication
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/admin/auth/verify')
+        const data = await response.json()
+        
+        if (data.authenticated) {
+          setIsAuthenticated(true)
+        } else {
+          router.push('/admin/login')
+        }
+      } catch (error) {
+        router.push('/admin/login')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkAuth()
+  }, [router])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-600"></div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Authentication Required</h2>
+          <p className="text-gray-600 mb-4">Please log in to access the admin panel.</p>
+          <Link
+            href="/admin/login"
+            className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-700 transition-colors"
+          >
+            Go to Login
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
   const menuItems = [
     {

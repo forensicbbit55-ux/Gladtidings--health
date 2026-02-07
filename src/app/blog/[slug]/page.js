@@ -204,10 +204,9 @@ export default function BlogPost() {
 
           {/* Article Content */}
           <article className="prose prose-lg max-w-none">
-            <div 
-              className="text-gray-700 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
+            <div className="text-gray-700 leading-relaxed">
+              {post.content}
+            </div>
           </article>
 
           {/* Author Bio */}
