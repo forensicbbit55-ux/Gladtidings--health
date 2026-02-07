@@ -57,15 +57,16 @@ export default function HomeClient() {
   ]
 
   const features = [
-    { icon: '🚚', title: 'Free Shipping', description: 'Free shipping on qualifying orders and select natural remedy bundles.' },
-    { icon: '🎧', title: 'Support 24/7', description: 'Caring support for questions about products, lifestyle changes, and prayer.' },
-    { icon: '↩️', title: 'Easy Returns', description: 'Simple return options if something isn\'t the right fit for you.' },
-    { icon: '🔒', title: '100% Payment Secure', description: 'Secure checkout for every order with trusted payment providers.' }
+    { id: 1, icon: '🚚', title: 'Free Shipping', description: 'Free shipping on qualifying orders and select natural remedy bundles.' },
+    { id: 2, icon: '🎧', title: 'Support 24/7', description: 'Caring support for questions about products, lifestyle changes, and prayer.' },
+    { id: 3, icon: '↩️', title: 'Easy Returns', description: 'Simple return options if something isn\'t the right fit for you.' },
+    { id: 4, icon: '🔒', title: '100% Payment Secure', description: 'Secure checkout for every order with trusted payment providers.' }
   ]
 
   const blogPosts = [
-    { title: 'Natural Remedies for Seasonal Wellness', category: 'Health Tips', date: '2 days ago' },
-    { title: 'Spiritual Practices for Holistic Healing', category: 'Spiritual Health', date: '5 days ago' }
+    { id: 1, title: 'Natural Remedies for Seasonal Wellness', category: 'Health Tips', date: '2 days ago', image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop', excerpt: 'Discover natural ways to boost your immune system during seasonal changes with herbal remedies and lifestyle adjustments.', slug: 'natural-remedies-seasonal-wellness', readTime: '5 min read' },
+    { id: 2, title: 'Spiritual Practices for Holistic Healing', category: 'Spiritual Health', date: '5 days ago', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', excerpt: 'Explore how spiritual practices can complement natural healing methods for complete wellness.', slug: 'spiritual-practices-holistic-healing', readTime: '7 min read' },
+    { id: 3, title: 'The Power of Herbal Medicine', category: 'Herbal Remedies', date: '1 week ago', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop', excerpt: 'Understanding the healing properties of traditional herbal medicines and their modern applications.', slug: 'power-herbal-medicine', readTime: '6 min read' }
   ]
 
   useEffect(() => {
@@ -252,8 +253,8 @@ export default function HomeClient() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {blogPosts.map((post, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors">
+            {blogPosts.map((post) => (
+              <div key={post.id} className="bg-gray-50 rounded-lg p-6 hover:bg-gray-100 transition-colors">
                 <div className="flex items-center text-sm text-gray-500 mb-3">
                   <span>{post.category}</span>
                   <span className="mx-2">•</span>
