@@ -128,61 +128,11 @@ export default function ImageCarousel() {
                     with the transformative power of the Gospel, bringing wholeness to both physical 
                     health and spiritual well-being.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                    <button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-10 py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 hover:scale-105">
-                      Learn More
-                    </button>
-                    <button className="bg-white/20 backdrop-blur-md text-white px-10 py-4 rounded-xl font-bold text-lg border-2 border-white/30 hover:bg-white/30 transition-all duration-300 shadow-xl hover:shadow-2xl">
-                      Get Started
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Enhanced Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300 z-10 shadow-xl hover:shadow-2xl transform hover:scale-110"
-        aria-label="Previous slide"
-      >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      
-      <button
-        onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-md text-white p-4 rounded-full hover:bg-white/30 transition-all duration-300 z-10 shadow-xl hover:shadow-2xl transform hover:scale-110"
-        aria-label="Next slide"
-      >
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-
-      {/* Enhanced Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-10">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex 
-                ? 'bg-white w-12 shadow-lg' 
-                : 'bg-white/50 hover:bg-white/75 w-3'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
-
-      {/* Enhanced Swipe hint for mobile */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/80 text-sm lg:hidden z-10 bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm">
-        ← Swipe to navigate →
       </div>
     </div>
   )
