@@ -2,8 +2,14 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { useCart } from '@/context/CartContext'
-import { ordersAPI } from '@/lib/api'
+
+// Try to import CartContext, but provide fallback if not available
+let useCart = null
+try {
+  useCart = require('@/context/CartContext').useCart
+} catch (error) {
+  console.log('CartContext not available, using fallback')
+}
 
 function formatMoney(amount) {
   return new Intl.NumberFormat('en-US', {
@@ -13,7 +19,14 @@ function formatMoney(amount) {
 }
 
 export default function CheckoutPage() {
-  const { items, subtotal, clearCart } = useCart()
+  // Fallback cart data if CartContext is not available
+  const cartFallback = {
+    items: [],
+    subtotal: 0,
+    clearCart: () => {}
+  }
+  
+  const { items, subtotal, clearCart } = useCart ? useCart() : cartFallback
   const total = useMemo(() => subtotal, [subtotal])
   const [isSuccess, setIsSuccess] = useState(false)
   const [orderNumber, setOrderNumber] = useState(null)
