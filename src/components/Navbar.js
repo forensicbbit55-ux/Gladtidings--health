@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, BUTTON_STYLES, FORM_STYLES } from '../../styles/design-system'
 
 export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -75,7 +74,7 @@ export default function Navbar() {
                 {/* Login Button */}
                 <button
                   onClick={() => setIsLoginOpen(true)}
-                  className={`${BUTTON_STYLES.variants.primary} ${BUTTON_STYLES.sizes.sm}`}
+                  className="bg-emerald-600 text-white px-3 py-1.5 rounded-lg hover:bg-emerald-700 transition-colors duration-200 text-sm font-medium"
                 >
                   Login
                 </button>
@@ -173,22 +172,22 @@ export default function Navbar() {
               </div>
               <form className="space-y-4">
                 <div>
-                  <label className={FORM_STYLES.label}>Email</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                   <input
                     type="email"
-                    className={FORM_STYLES.input}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     placeholder="Enter your email"
                   />
                 </div>
                 <div>
-                  <label className={FORM_STYLES.label}>Password</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
                   <input
                     type="password"
-                    className={FORM_STYLES.input}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                     placeholder="Enter your password"
                   />
                 </div>
-                <button type="submit" className={`${BUTTON_STYLES.variants.primary} w-full`}>
+                <button type="submit" className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors duration-200 text-sm font-medium w-full">
                   Login
                 </button>
               </form>
