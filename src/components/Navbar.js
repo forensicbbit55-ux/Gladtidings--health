@@ -96,7 +96,7 @@ export default function Navbar() {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="lg:hidden absolute top-full right-0 left-0 bg-white border-t border-gray-200 shadow-lg">
+            <div className="lg:hidden absolute top-full right-0 left-0 bg-white border-t border-gray-200 shadow-lg transform transition-all duration-300 ease-in-out origin-top">
               <div className="flex flex-col space-y-3 py-4 px-4">
                 <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Home

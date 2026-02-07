@@ -1,49 +1,35 @@
+import { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { AuthProvider } from '../contexts/AuthProvider'
-import { CartProvider } from '../context/CartContext'
+import { CartProvider } from '@/contexts/CartContext'
+import { AuthProvider } from '@/contexts/AuthContext'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: {
-    default: 'Glad Tidings - Medical Missionary Health & Wellness',
-    template: '%s | Glad Tidings'
-  },
-  description: 'Discover natural health remedies, medical missionary insights, and wellness tips. Your trusted source for holistic health and spiritual wellness.',
+  title: 'Glad Tidings - Medical Missionary Health & Wellness',
+  description: 'Discover natural health remedies, medical missionary insights, and holistic wellness tips. Your trusted source for spiritual health and natural healing.',
   keywords: [
     'medical missionary',
     'natural health',
-    'wellness tips',
-    'herbal remedies',
-    'spiritual health',
-    'holistic healing',
+    'wellness',
+    'holistic health',
+    'spiritual wellness',
     'natural remedies',
+    'herbal medicine',
     'health tips',
-    'medical missionary work',
-    'alternative medicine'
+    'wellness advice',
+    'natural healing'
   ],
-  authors: [{ name: 'Glad Tidings Medical Missionary' }],
-  creator: 'Glad Tidings',
-  publisher: 'Glad Tidings',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://gladtidings-health.vercel.app'),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://gladtidings-health.vercel.app',
     title: 'Glad Tidings - Medical Missionary Health & Wellness',
-    description: 'Discover natural health remedies, medical missionary insights, and wellness tips. Your trusted source for holistic health and spiritual wellness.',
-    siteName: 'Glad Tidings',
+    description: 'Discover natural health remedies, medical missionary insights, and holistic wellness tips. Your trusted source for spiritual health and natural healing.',
+    type: 'website',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/images/home-og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Glad Tidings Medical Missionary Health & Wellness',
@@ -53,30 +39,18 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Glad Tidings - Medical Missionary Health & Wellness',
-    description: 'Discover natural health remedies, medical missionary insights, and wellness tips.',
-    images: ['/images/og-image.jpg'],
-    creator: '@gladtidings',
+    description: 'Discover natural health remedies, medical missionary insights, and holistic wellness tips.',
+    images: ['/images/blog-og-image.jpg'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: 'your-google-verification-code',
+  alternates: {
+    canonical: '/',
   },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
+      <body className={inter.className}>
         <AuthProvider>
           <CartProvider>
             <Navbar />
@@ -103,5 +77,5 @@ export default function RootLayout({ children }) {
         </AuthProvider>
       </body>
     </html>
-  );
+  )
 }
