@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, BUTTON_STYLES, FORM_STYLES } from '../styles/design-system'
+import { COLORS, TYPOGRAPHY, SPACING, BORDER_RADIUS, SHADOWS, BUTTON_STYLES, FORM_STYLES } from '../../styles/design-system'
 
 export default function Navbar() {
   const [isCartOpen, setIsCartOpen] = useState(false)
@@ -21,36 +21,36 @@ export default function Navbar() {
                 <div className="relative">
                   <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center shadow-lg overflow-hidden">
                     {/* Logo */}
-                    <div className="text-white font-bold text-xl">GT</div>
+                    <img src="/images/logo.png" alt="Glad Tidings" className="w-8 h-8 object-contain" />
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900" style={TYPOGRAPHY.weights.bold}>Glad Tidings</h1>
-                  <p className="text-sm text-gray-600" style={TYPOGRAPHY.weights.medium}>Natural Health & Wellness</p>
+                  <h1 className="text-xl font-bold text-gray-900">Glad Tidings</h1>
+                  <p className="text-sm text-gray-600 font-medium">Natural Health & Wellness</p>
                 </div>
               </div>
 
               {/* Desktop Navigation - Center */}
               <div className="hidden lg:flex items-center space-x-8">
-                <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Home
                 </Link>
-                <Link href="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   About
                 </Link>
-                <Link href="/services" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/services" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Services
                 </Link>
-                <Link href="/products" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/products" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Shop
                 </Link>
-                <Link href="/blog" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/blog" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Blog
                 </Link>
-                <Link href="/consultation" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/consultation" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Consultation
                 </Link>
-                <Link href="/contact" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/contact" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Contact
                 </Link>
               </div>
@@ -66,7 +66,7 @@ export default function Navbar() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                   {cartItems > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center" style={TYPOGRAPHY.weights.bold}>
+                    <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
                       {cartItems}
                     </span>
                   )}
@@ -97,25 +97,25 @@ export default function Navbar() {
           {isMobileMenuOpen && (
             <div className="lg:hidden py-4 border-t border-gray-200">
               <div className="flex flex-col space-y-3">
-                <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Home
                 </Link>
-                <Link href="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/about" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   About
                 </Link>
-                <Link href="/services" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/services" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Services
                 </Link>
-                <Link href="/products" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/products" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Shop
                 </Link>
-                <Link href="/blog" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/blog" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Blog
                 </Link>
-                <Link href="/consultation" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/consultation" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Consultation
                 </Link>
-                <Link href="/contact" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200" style={TYPOGRAPHY.weights.medium}>
+                <Link href="/contact" className="text-gray-700 hover:text-emerald-600 font-medium transition-colors duration-200">
                   Contact
                 </Link>
               </div>
@@ -192,6 +192,20 @@ export default function Navbar() {
                   Login
                 </button>
               </form>
+              
+              {/* Sign Up Link */}
+              <div className="mt-6 text-center">
+                <p className="text-gray-600">
+                  Don't have an account?{' '}
+                  <Link 
+                    href="/signup" 
+                    className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
+                    onClick={() => setIsLoginOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>
