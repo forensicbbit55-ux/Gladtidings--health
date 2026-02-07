@@ -7,6 +7,13 @@ export default function HomeClient() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('all')
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(price)
+  }
+
   const slides = [
     {
       id: 1,
@@ -127,48 +134,107 @@ export default function HomeClient() {
       </section>
 
       {/* Features Section */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-                <p className="text-gray-600 text-sm">{feature.description}</p>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Our Services</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in">
+              Comprehensive natural health solutions for your wellness journey
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {categories.map((category, index) => (
+              <div key={category.id} className="feature-card animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
+                <div className="feature-icon">
+                  {category.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{category.name}</h3>
+                <p className="text-gray-600 text-center">{category.description}</p>
+                <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
+                  Explore →
+                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* New Products Section */}
-      <section className="py-12">
+      {/* Blog Section */}
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-10">
-            <h2 className="text-2xl font-bold text-gray-900">New Products</h2>
-            <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Latest Blog Posts</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in">
+              Stay informed with our latest health and wellness insights
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {blogPosts.slice(0, 3).map((post, index) => (
+              <article key={post.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="relative">
+                  <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-t-xl" />
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                      {post.category}
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="flex items-center mb-3">
+                    <span className="text-gray-500 text-sm">{post.date}</span>
+                    <span className="mx-2 text-gray-300">•</span>
+                    <span className="text-gray-500 text-sm">{post.readTime}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
+                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
+                    Read More →
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link href="/blog" className="btn-primary">
+              View All Posts
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* New Products Section */}
+      <section className="py-16 bg-gradient-to-b from-emerald-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 animate-fade-in">New Products</h2>
+            <Link href="/products" className="btn-outline">
               View All →
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.slice(0, 4).map((product) => (
-              <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-                <div className="relative">
-                  <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-t-lg" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.slice(0, 4).map((product, index) => (
+              <div key={product.id} className="product-card animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                <div className="relative overflow-hidden rounded-t-xl">
+                  <img src={product.image} alt={product.name} className="product-image" />
                   {product.badge && (
-                    <span className="absolute top-2 right-2 bg-amber-500 text-white px-2 py-1 rounded text-xs font-semibold">
+                    <span className="product-badge">
                       {product.badge}
                     </span>
                   )}
                 </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{product.category}</p>
-                  <div className="flex items-center mb-2">
-                    <span className="text-yellow-400">★</span>
-                    <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
+                <div className="p-6">
+                  <h3 className="font-bold text-gray-900 mb-2 text-lg">{product.name}</h3>
+                  <p className="text-gray-600 mb-4">{product.category}</p>
+                  <div className="flex items-center mb-4">
+                    <span className="text-yellow-400 text-lg">★</span>
+                    <span className="text-sm text-gray-600 ml-2">{product.rating}</span>
                   </div>
-                  <span className="text-lg font-bold text-emerald-600">${product.price}</span>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-emerald-600">{product.price}</span>
+                    <button className="btn-primary text-sm">
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
