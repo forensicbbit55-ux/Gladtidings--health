@@ -79,7 +79,7 @@ export default function HomeClient() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Carousel Section */}
-      <section className="relative h-[500px] md:h-[600px] overflow-hidden border-b-4 border-emerald-600">
+      <section className="relative h-[600px] md:h-[700px] overflow-hidden border-b-4 border-emerald-600">
         {slides.map((slide, index) => (
           <div
             key={index}
