@@ -1,6 +1,6 @@
 import { query } from '@lib/db'
-
-export async function GET() {
+;
+;export async function GET() {
   try {
     // Fetch all categories for public access
     const result = await query(`
@@ -26,4 +26,4 @@ export async function GET() {
       message: 'Internal server error'
     }, { status: 500 })
   }
-}
+};

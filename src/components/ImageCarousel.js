@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-
-export default function ImageCarousel() {
+;
+;export default function ImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const touchStartX = useRef(0)
@@ -104,7 +104,7 @@ export default function ImageCarousel() {
           className={`flex transition-transform duration-500 ease-in-out h-full ${
             isTransitioning ? '' : ''
           }`}
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          style={ transform: `translateX(-${currentIndex * 100}%)` }
         >
           {images.map((image, index) => (
             <div key={index} className="w-full h-full flex-shrink-0 relative">
@@ -136,4 +136,4 @@ export default function ImageCarousel() {
       </div>
     </div>
   )
-}
+};;

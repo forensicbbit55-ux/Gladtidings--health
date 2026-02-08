@@ -1,10 +1,11 @@
-import { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import { CartProvider } from '@/contexts/CartContext'
-import { AuthProvider } from '@/contexts/AuthContext'
+import { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { CartProvider } from '@/contexts/CartContext';
+import { SessionProvider } from 'next-auth/react';
+import { AuthProvider } from '@/contexts/NextAuthContext';
 
 const inter = Inter({ subsets: ['latin'] })
 

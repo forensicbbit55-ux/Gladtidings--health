@@ -1,8 +1,8 @@
 'use client'
 
 import { createContext, useContext, useReducer } from 'react'
-
-// Cart context for managing shopping cart state
+;
+;// Cart context for managing shopping cart state
 const CartContext = createContext()
 
 // Initial cart state
@@ -76,7 +76,7 @@ function cartReducer(state, action) {
     default:
       return state
   }
-}
+};
 
 // Cart provider component
 export function CartProvider({ children }) {

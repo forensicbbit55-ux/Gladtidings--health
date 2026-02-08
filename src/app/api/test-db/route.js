@@ -2,13 +2,11 @@
 // This route handles server-side database operations
 
 import { query } from '@lib/db'
-
-export async function GET() {
+;
+;export async function GET() {
   try {
     // Test basic database connection
     const versionResult = await query('SELECT version()')
-    console.log('Database version:', versionResult.rows[0].version)
-    
     // Try to fetch products from the database
     const productsResult = await query('SELECT * FROM products ORDER BY created_at DESC')
     
@@ -31,4 +29,4 @@ export async function GET() {
       message: 'Failed to connect to Neon database'
     }, { status: 500 })
   }
-}
+};

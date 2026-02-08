@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function MediaLibrary() {
+;
+;export default function MediaLibrary() {
   const [selectedFiles, setSelectedFiles] = useState([])
   const [viewMode, setViewMode] = useState('grid') // 'grid' or 'list'
   const [searchTerm, setSearchTerm] = useState('')
@@ -155,8 +155,7 @@ export default function MediaLibrary() {
 
   const handleDelete = (fileId) => {
     // Mock delete
-    console.log('Deleting file:', fileId)
-  }
+    }
 
   const getFileIcon = (type) => {
     switch (type) {
@@ -470,9 +469,8 @@ export default function MediaLibrary() {
                 </button>
                 <button
                   onClick={() => {
-                    console.log('Uploading files...')
                     setShowUploadModal(false)
-                  }}
+                  }
                   className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
                 >
                   Upload
@@ -484,4 +482,4 @@ export default function MediaLibrary() {
       )}
     </div>
   )
-}
+};;

@@ -28,7 +28,7 @@ async function fetchAPI(endpoint, options = {}) {
     console.error('API Error:', error)
     throw error
   }
-}
+};
 
 // Products API
 export const productsAPI = {

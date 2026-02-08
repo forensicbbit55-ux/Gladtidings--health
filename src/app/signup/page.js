@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-
-export default function Signup() {
+import { useState } from 'react';
+;import Link from 'next/link';
+;import { useRouter } from 'next/navigation'
+;
+;export default function Signup() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -194,4 +194,4 @@ export default function Signup() {
       </div>
     </div>
   )
-}
+};;

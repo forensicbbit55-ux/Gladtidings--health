@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-
-export default function Shop() {
+import { useState } from 'react';
+;import Link from 'next/link'
+;
+;export default function Shop() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [priceRange, setPriceRange] = useState([0, 100])
 
@@ -123,4 +123,4 @@ export default function Shop() {
       </div>
     </div>
   )
-}
+};;

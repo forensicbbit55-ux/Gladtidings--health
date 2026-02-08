@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
-
-export default function BlogClient() {
+import { useState, useEffect } from 'react';
+;import Link from 'next/link';
+;import Image from 'next/image'
+;
+;export default function BlogClient() {
   const [posts, setPosts] = useState([])
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
@@ -245,4 +245,4 @@ export default function BlogClient() {
       </section>
     </div>
   )
-}
+};;

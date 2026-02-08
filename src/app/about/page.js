@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-export default function About() {
+;
+;export default function About() {
   const [currentSlide, setCurrentSlide] = useState(0)
   
   const slides = [
@@ -181,4 +181,4 @@ export default function About() {
       </section>
     </div>
   )
-}
+};;

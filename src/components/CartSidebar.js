@@ -1,14 +1,14 @@
 'use client'
 
-import Link from 'next/link'
-import { useCart } from '@/context/CartContext'
-
-function formatMoney(amount) {
+import Link from 'next/link';
+;import { useCart } from '@/context/CartContext'
+;
+;function formatMoney(amount) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   }).format(amount)
-}
+};
 
 export default function CartSidebar() {
   const { items, subtotal, isCartOpen, closeCart, removeItem, setQty } = useCart()
@@ -171,5 +171,5 @@ export default function CartSidebar() {
       </aside>
     </>
   )
-}
+};
 

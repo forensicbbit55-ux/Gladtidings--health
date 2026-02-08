@@ -1,6 +1,6 @@
 import ProductsClient from './ProductsClient'
-
-// SEO metadata for products page
+;
+;// SEO metadata for products page
 export const metadata = {
   title: 'Natural Health Products - Medical Missionary Store',
   description: 'Shop our selection of natural health remedies, herbal supplements, and wellness products. All natural, ethically sourced for your holistic health journey.',
@@ -56,7 +56,7 @@ async function getCategories() {
     console.error('Error fetching categories:', error)
     return []
   }
-}
+};
 
 async function getRemedies(categoryId = null) {
   try {

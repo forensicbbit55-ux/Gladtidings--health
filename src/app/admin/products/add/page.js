@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-
-export default function AddProduct() {
+import { useState, useEffect } from 'react';
+;import { useRouter } from 'next/navigation'
+;
+;export default function AddProduct() {
   const router = useRouter()
   const [formData, setFormData] = useState({
     title: '',
@@ -229,4 +229,4 @@ export default function AddProduct() {
       </div>
     </div>
   )
-}
+};;

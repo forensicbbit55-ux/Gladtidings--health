@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-
-export default function HomeClient() {
+import { useState, useEffect } from 'react';
+;import Link from 'next/link'
+;
+;export default function HomeClient() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('all')
 
@@ -184,7 +184,7 @@ export default function HomeClient() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {categories.map((category, index) => (
-              <div key={category.id} className="feature-card animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
+              <div key={category.id} className="feature-card animate-fade-in" style={ animationDelay: `${index * 150}ms` }>
                 <div className="feature-icon">
                   {category.icon}
                 </div>
@@ -253,7 +253,7 @@ export default function HomeClient() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {products.slice(0, 4).map((product, index) => (
-              <div key={product.id} className="product-card animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+              <div key={product.id} className="product-card animate-fade-in" style={ animationDelay: `${index * 100}ms` }>
                 <div className="relative overflow-hidden rounded-t-xl">
                   <img src={product.image} alt={product.name} className="product-image" />
                   {product.badge && (
@@ -332,4 +332,4 @@ export default function HomeClient() {
       </section>
     </div>
   )
-}
+};;

@@ -1,8 +1,8 @@
-import { useAuth } from '@/contexts/AuthContext'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-// Higher-order component for protecting routes
+import { useAuth } from '@/contexts/AuthContext';
+;import { useRouter } from 'next/navigation';
+;import { useEffect } from 'react'
+;
+;// Higher-order component for protecting routes
 export const withAuth = (WrappedComponent, requiredRole = 'viewer') => {
   return function AuthenticatedComponent(props) {
     const { user, profile, loading, hasPermission } = useAuth()
@@ -12,7 +12,7 @@ export const withAuth = (WrappedComponent, requiredRole = 'viewer') => {
       if (loading) return
 
       if (!user) {
-        router.push('/login')
+        router.push(';/login')
         return
       }
 

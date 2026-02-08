@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-export default function Consultation() {
+;
+;export default function Consultation() {
   const [currentSlide, setCurrentSlide] = useState(0)
   
   const slides = [
@@ -83,7 +83,6 @@ export default function Consultation() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Consultation form submitted:', formData)
     alert('Thank you for booking a consultation! We will contact you within 24 hours to confirm your appointment.')
   }
 
@@ -421,4 +420,4 @@ export default function Consultation() {
       </div>
     </div>
   )
-}
+};;

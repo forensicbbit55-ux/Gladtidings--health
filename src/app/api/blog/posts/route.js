@@ -1,8 +1,8 @@
-import { query } from '@lib/db'
-import { NextResponse } from 'next/server'
-import { verifySessionToken } from '@lib/auth'
-
-// GET /api/blog/posts - Fetch posts (public)
+import { query } from '@lib/db';
+;import { NextResponse } from 'next/server';
+;import { verifySessionToken } from '@lib/auth'
+;
+;// GET /api/blog/posts - Fetch posts (public)
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url)
@@ -94,7 +94,7 @@ export async function GET(request) {
       error: 'Failed to fetch posts'
     }, { status: 500 })
   }
-}
+};
 
 // POST /api/blog/posts - Create new post (admin only)
 export async function POST(request) {

@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
-import Image from 'next/image'
-import Link from 'next/link'
-
-export default function BlogPostClient({ post }) {
+import { useState, useEffect } from 'react';
+;import { useParams } from 'next/navigation';
+;import Image from 'next/image';
+;import Link from 'next/link';
+;import BlogShareButtons from './BlogShareButtons'
+;
+;export default function BlogPostClient({ post }) {
   const [relatedPosts, setRelatedPosts] = useState([])
   const params = useParams()
 
@@ -49,6 +50,10 @@ export default function BlogPostClient({ post }) {
       day: 'numeric'
     })
   }
+
+  const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${post.slug}`
+  const shareTitle = post.title
+  const shareDescription = post.excerpt || post.content?.substring(0, 160) || ''
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -94,6 +99,17 @@ export default function BlogPostClient({ post }) {
                 />
               </div>
             )}
+
+            {/* Share Buttons */}
+            <div className="mb-8">
+              <BlogShareButtons
+                url={shareUrl}
+                title={shareTitle}
+                description={shareDescription}
+                imageUrl={post.featured_image}
+                className="justify-center"
+              />
+            </div>
 
             {/* Article Body */}
             <article className="prose prose-lg max-w-none">
@@ -203,4 +219,4 @@ export default function BlogPostClient({ post }) {
       </section>
     </div>
   )
-}
+};;

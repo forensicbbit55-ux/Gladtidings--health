@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
-
-export async function DELETE() {
+import { cookies } from 'next/headers';
+;import { NextResponse } from 'next/server'
+;
+;export async function DELETE() {
   try {
     // Clear admin session
     const cookieStore = cookies()
@@ -18,4 +18,4 @@ export async function DELETE() {
       error: 'Internal server error' 
     }, { status: 500 })
   }
-}
+};

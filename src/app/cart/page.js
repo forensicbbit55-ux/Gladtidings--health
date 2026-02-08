@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-export default function CartPage() {
+;
+;export default function CartPage() {
   const [cart, setCart] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -151,4 +151,4 @@ export default function CartPage() {
       </div>
     </div>
   )
-}
+};;

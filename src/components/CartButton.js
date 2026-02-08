@@ -1,8 +1,8 @@
 'use client'
 
 import { useCart } from '@/context/CartContext'
-
-export default function CartButton() {
+;
+;export default function CartButton() {
   const { toggleCart, items } = useCart()
   const count = items.reduce((sum, i) => sum + i.qty, 0)
 
@@ -34,5 +34,5 @@ export default function CartButton() {
       ) : null}
     </button>
   )
-}
+};;
 

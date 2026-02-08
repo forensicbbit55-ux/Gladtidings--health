@@ -1,8 +1,8 @@
-import { query } from '@lib/db'
-import { NextResponse } from 'next/server'
-import { verifySessionToken } from '@lib/auth'
-
-// GET /api/blog/posts/[slug] - Get single post
+import { query } from '@lib/db';
+;import { NextResponse } from 'next/server';
+;import { verifySessionToken } from '@lib/auth'
+;
+;// GET /api/blog/posts/[slug] - Get single post
 export async function GET(request, { params }) {
   try {
     const { slug } = params
@@ -40,7 +40,7 @@ export async function GET(request, { params }) {
       error: 'Failed to fetch post'
     }, { status: 500 })
   }
-}
+};
 
 // PUT /api/blog/posts/[slug] - Update post (admin only)
 export async function PUT(request, { params }) {

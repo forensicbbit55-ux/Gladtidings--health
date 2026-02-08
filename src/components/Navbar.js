@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
-
-export default function Navbar() {
+import { useState } from 'react';
+;import Link from 'next/link'
+;
+;export default function Navbar() {
   // Logo and carousel fixes deployed - Logo visible in production, carousel at original height
   const [isCartOpen, setIsCartOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -28,9 +28,9 @@ export default function Navbar() {
                       className="w-8 h-8 object-contain"
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = '<div class="text-white font-bold text-xl">GT</div>';
-                      }}
+e.target.style.display = 'none';
+e.target.parentElement.innerHTML = '<div class="text-white font-bold text-xl">GT</div>';
+                      }
                     />
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export default function Navbar() {
                   onClick={() => {
                     setIsLoginOpen(false)
                     setIsSignUp(false)
-                  }}
+                  }
                   className="p-2 text-gray-400 hover:text-gray-600 transition-colors duration-200"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

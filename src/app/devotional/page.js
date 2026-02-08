@@ -1,6 +1,6 @@
 import Link from 'next/link'
-
-export const metadata = {
+;
+;export const metadata = {
   title: 'Devotional | Glad Tidings',
   description: 'Daily devotional reading and verse of the day.',
 }

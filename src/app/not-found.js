@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
-import { useEffect } from 'react'
-
-export default function NotFound() {
+import Link from 'next/link';
+;import { useEffect } from 'react'
+;
+;export default function NotFound() {
   useEffect(() => {
     // Set custom 404 status for SEO
     document.title = 'Page Not Found - Glad Tidings'
@@ -104,4 +104,4 @@ export default function NotFound() {
       </div>
     </div>
   )
-}
+};;

@@ -1,4 +1,4 @@
-import HomeClient from '@/components/HomeClient'
+import HomeClient from '@/components/HomeClient';
 
 // SEO metadata for home page
 export const metadata = {
@@ -42,4 +42,4 @@ export const metadata = {
 
 export default function Home() {
   return <HomeClient />
-}
+};;

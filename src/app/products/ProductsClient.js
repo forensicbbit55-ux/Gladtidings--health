@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
-
-export default function ProductsClient({ categories, remedies, initialCategory }) {
+import { useState, useEffect } from 'react';
+;import Link from 'next/link';
+;import { useRouter, useSearchParams } from 'next/navigation'
+;
+;export default function ProductsClient({ categories, remedies, initialCategory }) {
   const [filteredRemedies, setFilteredRemedies] = useState(remedies)
   const [loading, setLoading] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState(initialCategory)
@@ -186,4 +186,4 @@ export default function ProductsClient({ categories, remedies, initialCategory }
       </div>
     </div>
   )
-}
+};;

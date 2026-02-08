@@ -1,9 +1,9 @@
-import { query } from '@lib/db'
-import { hashPassword, verifyPassword, createSessionToken } from '@lib/auth'
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
-
-export async function POST(request) {
+import { query } from '@lib/db';
+;import { hashPassword, verifyPassword, createSessionToken } from '@lib/auth';
+;import { cookies } from 'next/headers';
+;import { NextResponse } from 'next/server'
+;
+;export async function POST(request) {
   try {
     const { email, password } = await request.json()
 
@@ -70,7 +70,7 @@ export async function POST(request) {
       error: 'Internal server error' 
     }, { status: 500 })
   }
-}
+};
 
 export async function DELETE() {
   try {

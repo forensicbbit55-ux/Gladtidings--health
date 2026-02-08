@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function SettingsManagement() {
+;
+;export default function SettingsManagement() {
   // State for each section
   const [websiteInfo, setWebsiteInfo] = useState({
     siteName: 'Glad Tidings Medical Missionary',
@@ -677,4 +677,4 @@ export default function SettingsManagement() {
       </div>
     </div>
   )
-}
+};;

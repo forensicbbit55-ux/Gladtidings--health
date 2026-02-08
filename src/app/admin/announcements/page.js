@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function AnnouncementsManagement() {
+;
+;export default function AnnouncementsManagement() {
   const [announcements, setAnnouncements] = useState([
     {
       id: 1,
@@ -186,7 +186,6 @@ export default function AnnouncementsManagement() {
 
   const confirmDelete = () => {
     // Mock delete
-    console.log('Deleting announcement:', deleteModal?.title)
     setAnnouncements(prev => prev.filter(ann => ann.id !== deleteModal.id))
     setDeleteModal(null)
   }
@@ -695,4 +694,4 @@ export default function AnnouncementsManagement() {
       )}
     </div>
   )
-}
+};;

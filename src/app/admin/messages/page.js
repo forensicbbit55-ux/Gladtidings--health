@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function MessagesManagement() {
+;
+;export default function MessagesManagement() {
   const [selectedMessages, setSelectedMessages] = useState([])
   const [viewMessage, setViewMessage] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
@@ -126,20 +126,16 @@ export default function MessagesManagement() {
   }
 
   const handleMarkAsRead = (messageId) => {
-    console.log('Marking message as read:', messageId)
-  }
+    }
 
   const handleMarkAsUnread = (messageId) => {
-    console.log('Marking message as unread:', messageId)
-  }
+    }
 
   const handleBulkMarkAsRead = () => {
-    console.log('Marking messages as read:', selectedMessages)
     setSelectedMessages([])
   }
 
   const handleBulkMarkAsUnread = () => {
-    console.log('Marking messages as unread:', selectedMessages)
     setSelectedMessages([])
   }
 

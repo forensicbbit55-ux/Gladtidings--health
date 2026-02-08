@@ -1,8 +1,8 @@
 'use client'
 
 import { createContext, useContext, useMemo, useState } from 'react'
-
-const CartContext = createContext(null)
+;
+;const CartContext = createContext(null)
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([])
@@ -79,7 +79,7 @@ export function CartProvider({ children }) {
   )
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
-}
+};
 
 export function useCart() {
   const ctx = useContext(CartContext)

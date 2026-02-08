@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-
-export async function GET() {
+;
+;export async function GET() {
   // Generate a simple SVG logo placeholder
   const svg = `
     <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
@@ -21,4 +21,4 @@ export async function GET() {
       'Cache-Control': 'public, max-age=86400', // Cache for 1 day
     },
   })
-}
+};

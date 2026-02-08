@@ -17,7 +17,7 @@ async function getRemedy(id) {
     console.error('Error fetching remedy:', error)
     return null
   }
-}
+};
 
 export default async function RemedyPage({ params }) {
   const remedy = await getRemedy(params.id)

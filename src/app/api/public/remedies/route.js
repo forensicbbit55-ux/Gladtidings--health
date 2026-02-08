@@ -1,6 +1,6 @@
 import { query } from '@lib/db'
-
-export async function GET(request) {
+;
+;export async function GET(request) {
   try {
     // Get query parameters for filtering
     const { searchParams } = new URL(request.url)
@@ -99,4 +99,4 @@ export async function GET(request) {
       message: 'Internal server error'
     }, { status: 500 })
   }
-}
+};

@@ -1,6 +1,6 @@
 import BlogClient from '@/components/BlogClient'
-
-// SEO metadata for blog listing page
+;
+;// SEO metadata for blog listing page
 export const metadata = {
   title: 'Medical Missionary Blog - Health Tips & Natural Remedies',
   description: 'Read the latest insights on natural health, wellness tips, herbal remedies, and spiritual wellness from our medical missionary experts.',
@@ -40,4 +40,4 @@ export const metadata = {
 
 export default function Blog() {
   return <BlogClient />
-}
+};;

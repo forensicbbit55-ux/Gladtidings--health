@@ -1,0 +1,224 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Users table for authentication
+model User {
+  id           String    @id @default(uuid())
+  name         String?
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  role         UserRole  @default(USER)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  accounts Account[]
+  sessions Session[]
+  appointments Appointment[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+// Appointments table for health consultations
+model Appointment {
+  id           String    @id @default(uuid())
+  userId       String    @map("user_id")
+  serviceType  String    @map("service_type")
+  appointmentDate DateTime  @map("appointment_date")
+  appointmentTime String    @map("appointment_time") // Using String for TIME type compatibility
+  status       AppointmentStatus @default(PENDING)
+  notes        String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("appointments")
+}
+
+// Notifications table for user notifications
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// Newsletter subscribers table for email marketing
+model NewsletterSubscriber {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  subscribedAt DateTime @default(now()) @map("subscribed_at")
+
+  @@map("newsletter_subscribers")
+}
+
+// Analytics events table for tracking user behavior
+model AnalyticsEvent {
+  id           String   @id @default(uuid())
+  eventType    String   @map("event_type")
+  eventData    Json?    @map("event_data")
+  userId       String?  @map("user_id")
+  sessionId    String?  @map("session_id")
+  ipAddress    String?  @map("ip_address")
+  userAgent    String?  @map("user_agent")
+  referrer     String?  @map("referrer")
+  utmSource    String?  @map("utm_source")
+  utmMedium    String?  @map("utm_medium")
+  utmCampaign  String?  @map("utm_campaign")
+  utmTerm      String?  @map("utm_term")
+  utmContent   String?  @map("utm_content")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("analytics_events")
+}
+
+// Daily aggregates table for performance optimization
+model DailyAggregate {
+  id          String   @id @default(uuid())
+  date        DateTime @map("date") @db.Date
+  metricName  String   @map("metric_name")
+  metricValue Int      @default(0) @map("metric_value")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@unique([date, metricName])
+  @@map("daily_aggregates")
+}
+
+// User registrations analytics
+model UserRegistration {
+  id                  String   @id @default(uuid())
+  userId              String   @map("user_id")
+  registrationDate    DateTime @map("registration_date") @db.Date
+  referrer            String?  @map("referrer")
+  utmSource           String?  @map("utm_source")
+  utmMedium           String?  @map("utm_medium")
+  utmCampaign         String?  @map("utm_campaign")
+  acquisitionChannel  String?  @map("acquisition_channel")
+  createdAt           DateTime @default(now()) @map("created_at")
+
+  @@map("user_registrations")
+}
+
+// Appointment analytics
+model AppointmentAnalytics {
+  id             String   @id @default(uuid())
+  appointmentId  String   @map("appointment_id")
+  userId         String   @map("user_id")
+  serviceType    String   @map("service_type")
+  bookingDate    DateTime @map("booking_date") @db.Date
+  bookingTime    String   @map("booking_time")
+  status         String   @map("status")
+  conversionTime Int?     @map("conversion_time")
+  referrer       String?  @map("referrer")
+  utmSource      String?  @map("utm_source")
+  utmMedium      String?  @map("utm_medium")
+  utmCampaign    String?  @map("utm_campaign")
+  deviceType     String?  @map("device_type")
+  browser        String?  @map("browser")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("appointment_analytics")
+}
+
+// Newsletter analytics
+model NewsletterAnalytics {
+  id             String   @id @default(uuid())
+  subscriberId    String   @map("subscriber_id")
+  signupDate      DateTime @map("signup_date") @db.Date
+  signupSource    String?  @map("signup_source")
+  referrer        String?  @map("referrer")
+  utmSource       String?  @map("utm_source")
+  utmMedium       String?  @map("utm_medium")
+  utmCampaign     String?  @map("utm_campaign")
+  conversionTime  Int?     @map("conversion_time")
+  deviceType      String?  @map("device_type")
+  browser         String?  @map("browser")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("newsletter_analytics")
+}
+
+// Conversion funnels
+model ConversionFunnel {
+  id            String   @id @default(uuid())
+  funnelName    String   @map("funnel_name")
+  stepName      String   @map("step_name")
+  stepNumber    Int      @map("step_number")
+  usersCount    Int      @default(0) @map("users_count")
+  conversionRate Decimal  @default(0.00) @map("conversion_rate") @db.Decimal(5, 2)
+  date          DateTime @map("date") @db.Date
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@map("conversion_funnels")
+}
+
+// Required for NextAuth.js
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+enum UserRole {
+  USER
+  STAFF
+  ADMIN
+}
+
+enum AppointmentStatus {
+  PENDING
+  APPROVED
+  CANCELLED
+  COMPLETED
+}

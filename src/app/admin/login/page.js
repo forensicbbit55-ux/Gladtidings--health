@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-
-export default function AdminLoginPage() {
+import { useState } from 'react';
+;import { useRouter } from 'next/navigation'
+;
+;export default function AdminLoginPage() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -119,4 +119,4 @@ export default function AdminLoginPage() {
       </div>
     </div>
   )
-}
+};;

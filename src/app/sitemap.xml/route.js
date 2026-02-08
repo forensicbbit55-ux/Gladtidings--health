@@ -1,6 +1,6 @@
 import { query } from '@lib/db'
-
-export async function GET() {
+;
+;export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://gladtidings-health.vercel.app'
   
   // Static pages
@@ -76,4 +76,4 @@ export async function GET() {
       'Cache-Control': 'public, max-age=3600, s-maxage=3600',
     },
   })
-}
+};

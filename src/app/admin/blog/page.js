@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-
-export default function AdminBlog() {
+import { useState, useEffect } from 'react';
+;import Link from 'next/link'
+;
+;export default function AdminBlog() {
   const [posts, setPosts] = useState([])
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
@@ -381,7 +381,7 @@ export default function AdminBlog() {
                         read_time: 5,
                         categories: []
                       })
-                    }}
+                    }
                     className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     Cancel
@@ -400,4 +400,4 @@ export default function AdminBlog() {
       )}
     </div>
   )
-}
+};;

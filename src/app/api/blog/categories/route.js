@@ -1,8 +1,8 @@
-import { query } from '@lib/db'
-import { NextResponse } from 'next/server'
-import { verifySessionToken } from '@lib/auth'
-
-// GET /api/blog/categories - Fetch all categories
+import { query } from '@lib/db';
+;import { NextResponse } from 'next/server';
+;import { verifySessionToken } from '@lib/auth'
+;
+;// GET /api/blog/categories - Fetch all categories
 export async function GET() {
   try {
     const result = await query(`
@@ -28,7 +28,7 @@ export async function GET() {
       error: 'Failed to fetch categories'
     }, { status: 500 })
   }
-}
+};
 
 // POST /api/blog/categories - Create new category (admin only)
 export async function POST(request) {

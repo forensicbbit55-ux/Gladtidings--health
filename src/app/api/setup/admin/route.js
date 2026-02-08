@@ -1,7 +1,7 @@
-import { query } from '@lib/db'
-import { hashPassword } from '@lib/auth'
-
-export async function POST(request) {
+import { query } from '@lib/db';
+;import { hashPassword } from '@lib/auth'
+;
+;export async function POST(request) {
   try {
     const { email, password } = await request.json()
 
@@ -48,4 +48,4 @@ export async function POST(request) {
       error: error.message
     }, { status: 500 })
   }
-}
+};

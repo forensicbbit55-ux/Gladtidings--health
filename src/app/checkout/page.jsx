@@ -1,22 +1,21 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import Link from 'next/link'
-
-// Try to import CartContext, but provide fallback if not available
+import { useState, useMemo } from 'react';
+;import Link from 'next/link'
+;
+;// Try to import CartContext, but provide fallback if not available
 let useCart = null
 try {
   useCart = require('@/context/CartContext').useCart
 } catch (error) {
-  console.log('CartContext not available, using fallback')
-}
+  }
 
 function formatMoney(amount) {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   }).format(amount)
-}
+};
 
 export default function CheckoutPage() {
   // Force dynamic rendering
@@ -331,4 +330,4 @@ export default function CheckoutPage() {
       </div>
     </div>
   )
-}
+};

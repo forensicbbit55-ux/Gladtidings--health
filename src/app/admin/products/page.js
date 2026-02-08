@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-
-export default function AdminProducts() {
+import { useState, useEffect } from 'react';
+;import Link from 'next/link'
+;
+;export default function AdminProducts() {
   const [remedies, setRemedies] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -198,4 +198,4 @@ export default function AdminProducts() {
       </div>
     </div>
   )
-}
+};;

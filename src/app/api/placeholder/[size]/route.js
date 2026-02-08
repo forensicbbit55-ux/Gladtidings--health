@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-
-export async function GET(request) {
+;
+;export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const size = searchParams.size || '60'
   
@@ -20,4 +20,4 @@ export async function GET(request) {
       'Cache-Control': 'public, max-age=86400', // Cache for 1 day
     },
   })
-}
+};

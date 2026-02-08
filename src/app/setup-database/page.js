@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function DatabaseSetup() {
+;
+;export default function DatabaseSetup() {
   const [isLoading, setIsLoading] = useState(false)
   const [result, setResult] = useState(null)
 
@@ -84,4 +84,4 @@ export default function DatabaseSetup() {
       </div>
     </div>
   )
-}
+};;

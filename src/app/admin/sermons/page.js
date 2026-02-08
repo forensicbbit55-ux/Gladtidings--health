@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function SermonsManagement() {
+;
+;export default function SermonsManagement() {
   const [viewMode, setViewMode] = useState('table') // 'table' or 'card'
   const [showEditor, setShowEditor] = useState(false)
   const [editingSermon, setEditingSermon] = useState(null)
@@ -99,7 +99,6 @@ export default function SermonsManagement() {
 
   const confirmDelete = () => {
     // Mock delete
-    console.log('Deleting sermon:', deleteModal?.title)
     setDeleteModal(null)
   }
 
@@ -147,7 +146,7 @@ export default function SermonsManagement() {
             onClick={() => {
               setEditingSermon(null)
               setShowEditor(true)
-            }}
+            }
             className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors flex items-center"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -419,9 +418,8 @@ export default function SermonsManagement() {
               </button>
               <button
                 onClick={() => {
-                  console.log('Saving sermon...')
                   setShowEditor(false)
-                }}
+                }
                 className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
               >
                 {editingSermon ? 'Update' : 'Publish'}
@@ -467,4 +465,4 @@ export default function SermonsManagement() {
       )}
     </div>
   )
-}
+};;

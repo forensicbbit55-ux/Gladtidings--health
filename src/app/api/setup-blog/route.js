@@ -1,8 +1,8 @@
-import { query } from '@lib/db'
-import { NextResponse } from 'next/server'
-import { verifySessionToken } from '@lib/auth'
-
-export async function POST(request) {
+import { query } from '@lib/db';
+;import { NextResponse } from 'next/server';
+;import { verifySessionToken } from '@lib/auth'
+;
+;export async function POST(request) {
   try {
     // Check authentication
     const token = request.cookies.get('admin_session')?.value
@@ -35,4 +35,4 @@ export async function POST(request) {
       error: 'Failed to setup blog database: ' + error.message
     }, { status: 500 })
   }
-}
+};

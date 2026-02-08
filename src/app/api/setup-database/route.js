@@ -1,6 +1,6 @@
 import { query } from '@lib/db'
-
-export async function POST(request) {
+;
+;export async function POST(request) {
   try {
     // Skip database operations during build time
     if (process.env.NODE_ENV === 'production' && process.env.VERCEL) {
@@ -31,4 +31,4 @@ export async function POST(request) {
       error: error.message
     }, { status: 500 })
   }
-}
+};

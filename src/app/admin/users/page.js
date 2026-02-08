@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function UsersManagement() {
+;
+;export default function UsersManagement() {
   const [searchTerm, setSearchTerm] = useState('')
   const [roleFilter, setRoleFilter] = useState('all')
   const [currentPage, setCurrentPage] = useState(1)
@@ -59,18 +59,15 @@ export default function UsersManagement() {
 
   const handleStatusToggle = (userId) => {
     // Mock status toggle
-    console.log(`Toggle status for user ${userId}`)
-  }
+    }
 
   const handleRoleChange = (userId, newRole) => {
     // Mock role change
-    console.log(`Change role for user ${userId} to ${newRole}`)
-  }
+    }
 
   const handleViewUser = (user) => {
     // Mock view user
-    console.log('View user:', user)
-  }
+    }
 
   const getStatusBadge = (status) => {
     return status === 'Active' 
@@ -316,4 +313,4 @@ export default function UsersManagement() {
       </div>
     </div>
   )
-}
+};;

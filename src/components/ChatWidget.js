@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function ChatWidget() {
+;
+;export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -62,4 +62,4 @@ export default function ChatWidget() {
       </button>
     </div>
   )
-}
+};;

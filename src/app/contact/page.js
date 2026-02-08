@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-
-export default function Contact() {
+;
+;export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -276,14 +276,14 @@ export default function Contact() {
                 name="honeypot"
                 tabIndex="-1"
                 autoComplete="off"
-                style={{ 
+                style={ 
                   position: 'absolute', 
                   left: '-9999px', 
                   top: '-9999px',
                   opacity: 0,
                   height: 0,
                   width: 0
-                }}
+                }
               />
 
               <div>
@@ -368,4 +368,4 @@ export default function Contact() {
       </div>
     </div>
   )
-}
+};;

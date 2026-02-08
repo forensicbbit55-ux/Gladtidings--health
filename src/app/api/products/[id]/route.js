@@ -1,7 +1,7 @@
 // API endpoint for deleting a product
 import { query } from '@lib/db'
-
-export async function DELETE(request, { params }) {
+;
+;export async function DELETE(request, { params }) {
   try {
     const { id } = params
     
@@ -29,4 +29,4 @@ export async function DELETE(request, { params }) {
       message: 'Failed to delete product'
     }, { status: 500 })
   }
-}
+};

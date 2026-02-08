@@ -1,8 +1,8 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-
-// TODO: Replace with actual authentication logic using Neon database
+;
+;// TODO: Replace with actual authentication logic using Neon database
 
 const AuthContext = createContext({})
 
@@ -21,24 +21,20 @@ export const AuthProvider = ({ children }) => {
 
   // Placeholder auth functions - TODO: Implement with Neon database
   const signIn = async (email, password) => {
-    console.log('TODO: Implement sign in with Neon database')
     return { success: false, error: 'Authentication not implemented yet' }
   }
 
   const signUp = async (email, password) => {
-    console.log('TODO: Implement sign up with Neon database')
     return { success: false, error: 'Authentication not implemented yet' }
   }
 
   const signOut = async () => {
-    console.log('TODO: Implement sign out with Neon database')
     setUser(null)
     setProfile(null)
     return { success: true }
   }
 
   const updateProfile = async (updates) => {
-    console.log('TODO: Implement update profile with Neon database')
     return { success: false, error: 'Update profile not implemented yet' }
   }
 

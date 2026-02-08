@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-
-// Environment variable validation
+;
+;// Environment variable validation
 const requiredEnvVars = {
   // Server-side only (never exposed to client)
   DATABASE_URL: {
@@ -74,7 +74,7 @@ function validateEnvironment() {
   }
 
   return { errors, warnings }
-}
+};
 
 export async function GET() {
   const validation = validateEnvironment()

@@ -1,6 +1,7 @@
-import BlogPostClient from '@/components/BlogPostClient'
-
-// This will be handled by the API route for server-side SEO
+import BlogPostClient from '@/components/BlogPostClient';
+;import BlogShareButtons from '@/components/BlogShareButtons'
+;
+;// This will be handled by the API route for server-side SEO
 export async function generateMetadata({ params }) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/posts/${params.slug}`)
@@ -14,6 +15,8 @@ export async function generateMetadata({ params }) {
     }
 
     const post = data.post
+    const shareUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`
+    
     return {
       title: `${post.title} - Glad Tidings Blog`,
       description: post.excerpt || 'Read this insightful article on natural health and wellness from Glad Tidings Medical Missionary.',
@@ -22,6 +25,7 @@ export async function generateMetadata({ params }) {
         title: post.title,
         description: post.excerpt,
         type: 'article',
+        url: shareUrl,
         images: post.featured_image ? [
           {
             url: post.featured_image,
@@ -55,7 +59,7 @@ export async function generateMetadata({ params }) {
       description: 'Read the latest insights on natural health and wellness.',
     }
   }
-}
+};
 
 export default async function BlogPostPage({ params }) {
   // Fetch post data on server side

@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
-
-// Admin credentials from environment variables
+import { cookies } from 'next/headers';
+;import { NextResponse } from 'next/server'
+;
+;// Admin credentials from environment variables
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@gladtidings.com'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'change-this-password'
 
@@ -10,12 +10,8 @@ export async function POST(request) {
     const { email, password } = await request.json()
 
     // Debug logging
-    console.log('Login attempt:', { email, password: '***' })
-    console.log('Expected:', { ADMIN_EMAIL, ADMIN_PASSWORD: '***' })
-
     // Simple hardcoded authentication
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      console.log('Authentication successful')
       // Set secure HTTP-only cookie
       const cookieStore = cookies()
       cookieStore.set('admin_session', 'authenticated', {
@@ -31,7 +27,6 @@ export async function POST(request) {
         message: 'Authentication successful' 
       })
     } else {
-      console.log('Authentication failed: Invalid credentials')
       return NextResponse.json({ 
         success: false, 
         error: 'Invalid credentials' 
@@ -45,7 +40,7 @@ export async function POST(request) {
       error: 'Internal server error' 
     }, { status: 500 })
   }
-}
+};
 
 export async function DELETE() {
   try {

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-export default function TestNeon() {
+;
+;export default function TestNeon() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -23,7 +23,6 @@ export default function TestNeon() {
       if (data.error) {
         setError(data.error)
       } else {
-        console.log('Neon connection successful:', data)
         setProducts(data.products || [])
       }
       
@@ -123,4 +122,4 @@ export default function TestNeon() {
       </div>
     </div>
   )
-}
+};;

@@ -1,8 +1,8 @@
-import { query } from '@lib/db'
-import { verifySessionToken } from '@lib/auth'
-import { NextResponse } from 'next/server'
-
-// Helper function to check authentication
+import { query } from '@lib/db';
+;import { verifySessionToken } from '@lib/auth';
+;import { NextResponse } from 'next/server'
+;
+;// Helper function to check authentication
 function checkAuth(request) {
   const token = request.cookies.get('admin_session')?.value
   if (!token) {
@@ -11,7 +11,7 @@ function checkAuth(request) {
   
   const tokenData = verifySessionToken(token)
   return tokenData !== null
-}
+};
 
 export async function GET(request) {
   // Check authentication
