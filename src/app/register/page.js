@@ -240,7 +240,7 @@ import { useState } from 'react';
                         strength.text === 'Weak' ? 'bg-red-500' :
                         strength.text === 'Medium' ? 'bg-yellow-500' : 'bg-green-500'
                       }`}
-                      style={ width: `${(passwordStrength / 6) * 100}%` }
+                      style={{ width: `${(passwordStrength / 6) * 100}%` }}
                     />
                   </div>
                   <div className="mt-1 text-xs text-gray-500">

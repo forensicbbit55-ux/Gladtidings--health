@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-;import { PrismaClient } from "@prisma/client";
-;import bcrypt from "bcryptjs";
-;import { 
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
+import { 
   rateLimits, 
   validateInput, 
   sanitizeInput, 
@@ -11,9 +11,9 @@ import { NextRequest, NextResponse } from "next/server";
   handleSecurityError,
   getClientIP,
   addSecurityHeaders 
-} from "@/lib/security"
+} from "@/lib/security";
 
-;const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export async function POST(request) {
   const response = NextResponse.next()

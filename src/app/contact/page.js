@@ -276,14 +276,14 @@ import { useState } from 'react'
                 name="honeypot"
                 tabIndex="-1"
                 autoComplete="off"
-                style={ 
+                style={{ 
                   position: 'absolute', 
                   left: '-9999px', 
                   top: '-9999px',
                   opacity: 0,
                   height: 0,
                   width: 0
-                }
+                }}
               />
 
               <div>

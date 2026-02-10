@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-;import { getServerSession } from 'next-auth/nextjs'
-;
-;// Rate limiting storage (in production, use Redis or database)
+import { getServerSession } from 'next-auth';
+
+// Rate limiting storage (in production, use Redis or database)
 const rateLimitStore = new Map()
 
 // Rate limiting middleware
@@ -293,8 +293,6 @@ export function logSecurityEvent(event, details = {}) {
     ip: details.ip || 'unknown',
     userAgent: details.userAgent || 'unknown'
   }
-  
-  )
   
   // In production, send to security monitoring service
   if (process.env.NODE_ENV === 'production') {

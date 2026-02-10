@@ -32,8 +32,8 @@ function validateEnvironment() {
       
       // Validate DATABASE_URL format
       if (key === 'DATABASE_URL') {
-        if (!value.startsWith('postgresql://') && !value.startsWith('psql ')) {
-          errors.push(`❌ Invalid DATABASE_URL format. Must start with 'postgresql://' or 'psql '`)
+        if (!value.startsWith('postgresql://')) {
+          errors.push(`❌ Invalid DATABASE_URL format. Must start with 'postgresql://'`)
         } else {
           console.log(`✅ DATABASE_URL: Valid format`)
         }

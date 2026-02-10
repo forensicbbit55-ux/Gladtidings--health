@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-;import { getServerSession } from 'next-auth/nextjs'
-;
-;// Mock database storage (replace with actual database calls)
+import { getServerSession } from 'next-auth';
+
+// Mock database storage (replace with actual database calls)
 let notifications = []
 
 // Helper function to check if user is admin

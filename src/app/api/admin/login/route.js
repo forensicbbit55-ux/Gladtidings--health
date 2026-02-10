@@ -1,9 +1,9 @@
 import { query } from '@lib/db';
-;import { verifyPassword, createSessionToken } from '@lib/auth';
-;import { cookies } from 'next/headers';
-;import { NextResponse } from 'next/server'
-;
-;export async function POST(request) {
+import { verifyPassword, createSessionToken } from '@lib/auth';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
+
+export async function POST(request) {
   try {
     const { email, password } = await request.json()
 

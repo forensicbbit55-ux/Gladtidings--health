@@ -456,7 +456,7 @@ import { useState, useEffect } from 'react';
                           onClick={() => {
                             setSelectedAppointment(appointment)
                             setShowDetailsModal(true)
-                          }
+                          }}
                           className="text-gray-600 hover:text-gray-900"
                         >
                           Details

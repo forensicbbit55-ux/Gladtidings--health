@@ -8,9 +8,11 @@ const nextConfig = {
   webpack: (config, { dev, isServer }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@': path.resolve(__dirname, 'src'),
       '@lib': path.resolve(__dirname, 'lib'),
       '@styles': path.resolve(__dirname, 'styles'),
       '@components': path.resolve(__dirname, 'src/components'),
+      '@contexts': path.resolve(__dirname, 'src/contexts'),
     };
 
     // Bundle optimization for production

@@ -381,7 +381,7 @@ import { useState, useEffect } from 'react';
                         read_time: 5,
                         categories: []
                       })
-                    }
+                    }}
                     className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     Cancel

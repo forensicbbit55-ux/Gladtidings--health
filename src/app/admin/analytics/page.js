@@ -400,10 +400,10 @@ function SimpleChart({ data, color }) {
           <div key={index} className="flex flex-col items-center flex-1">
             <div 
               className="w-full bg-gray-200 rounded-t"
-              style={ 
+              style={{ 
                 height: `${(point.value / Math.max(...data.map(d => d.value))) * 100}%`,
                 backgroundColor: color 
-              }
+              }}
             />
             <div className="text-xs text-gray-600 mt-1 text-center">
               {point.label}
@@ -430,10 +430,10 @@ function DetailedChart({ data, title, color, showGrowth }) {
               <div key={index} className="flex flex-col items-center flex-1">
                 <div 
                   className="w-full bg-gray-200 rounded-t relative group"
-                  style={ 
+                  style={{ 
                     height: `${(point.value / Math.max(...data.map(d => d.value))) * 100}%`,
                     backgroundColor: color 
-                  }
+                  }}
                 >
                   <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
                     {point.value}

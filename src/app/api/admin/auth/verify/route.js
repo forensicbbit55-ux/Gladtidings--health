@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-;import { verifySessionToken } from '@lib/auth'
-;
-;export async function GET(request) {
+import { verifySessionToken } from '@lib/auth';
+
+export async function GET(request) {
   try {
     const token = request.cookies.get('admin_session')?.value
     

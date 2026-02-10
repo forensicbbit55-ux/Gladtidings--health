@@ -199,7 +199,7 @@ import { useState } from 'react'
               image: null
             })
             setShowForm(true)
-          }
+          }}
           className="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors flex items-center"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -307,7 +307,7 @@ import { useState } from 'react'
                         <div className="w-full bg-gray-200 rounded-full h-2">
                           <div 
                             className="bg-emerald-600 h-2 rounded-full transition-all duration-300"
-                            style={ width: `${getAttendanceProgress(mission.attendees, mission.maxAttendees)}%` }
+                            style={{ width: `${getAttendanceProgress(mission.attendees, mission.maxAttendees)}%` }}
                           ></div>
                         </div>
                       </div>

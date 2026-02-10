@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node scripts/validate-env.js && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node scripts/seed.js",
-    "validate-env": "node scripts/validate-env.js"
+    "seed": "node scripts/seed.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",

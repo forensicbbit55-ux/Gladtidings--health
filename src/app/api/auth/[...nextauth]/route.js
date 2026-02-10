@@ -1,8 +1,8 @@
 import NextAuth from 'next-auth';
-;import CredentialsProvider from 'next-auth/providers/credentials';
-;import { PrismaAdapter } from '@next-auth/prisma-adapter';
-;import { prisma } from '@/lib/prisma';
-;import bcrypt from 'bcryptjs';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { prisma } from 'c:/Users/Administrator/Documents/GLADTIDINGS/gladtiding/lib/prisma';
+import bcrypt from 'bcryptjs';
 ;import { 
   rateLimits, 
   validateInput, 
@@ -14,7 +14,7 @@ import NextAuth from 'next-auth';
   getClientIP 
 } from '@/lib/security'
 
-;const handler = NextAuth({
+const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
@@ -152,6 +152,8 @@ import NextAuth from 'next-auth';
     maxAge: 24 * 60 * 60, // 24 hours
   },
   secret: process.env.NEXTAUTH_SECRET
-})
+}
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST }

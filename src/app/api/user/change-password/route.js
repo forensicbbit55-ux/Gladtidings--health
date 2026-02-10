@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-;import { getServerSession } from 'next-auth/nextjs';
-;import bcrypt from 'bcryptjs'
-;
-;export async function POST(request) {
+import { getServerSession } from 'next-auth';
+import bcrypt from 'bcryptjs';
+
+export async function POST(request) {
   try {
     const session = await getServerSession()
     

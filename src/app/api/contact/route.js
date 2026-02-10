@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-;import { 
+import { 
   rateLimits, 
   validateInput, 
   sanitizeInput, 
@@ -9,9 +9,8 @@ import { NextResponse } from 'next/server';
   handleSecurityError,
   getClientIP,
   addSecurityHeaders 
-} from '@/lib/security'
-;import nodemailer from 'nodemailer'
-;
+} from '@/lib/security';
+import nodemailer from 'nodemailer';
 ;// Spam keywords to block
 const SPAM_KEYWORDS = [
   'viagra', 'cialis', 'lottery', 'winner', 'congratulations',

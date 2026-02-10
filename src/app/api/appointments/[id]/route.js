@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
-;import { getServerSession } from 'next-auth/nextjs';
-;import { sendAppointmentApproval, sendAppointmentCancellation } from '@/lib/email'
-;
-;// Mock database storage (replace with actual database calls)
+import { getServerSession } from 'next-auth';
+
+// Mock database storage (replace with actual database calls)
 let appointments = []
 
 // Helper function to check if user is admin

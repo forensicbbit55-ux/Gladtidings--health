@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-;import { getServerSession } from 'next-auth/nextjs'
-;
-;export async function PUT(request) {
+import { getServerSession } from 'next-auth';
+
+export async function PUT(request) {
   try {
     const session = await getServerSession()
     
