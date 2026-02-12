@@ -104,7 +104,7 @@ import { useState, useEffect, useRef } from 'react'
           className={`flex transition-transform duration-500 ease-in-out h-full ${
             isTransitioning ? '' : ''
           }`}
-          style={ transform: `translateX(-${currentIndex * 100}%)` }
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {images.map((image, index) => (
             <div key={index} className="w-full h-full flex-shrink-0 relative">

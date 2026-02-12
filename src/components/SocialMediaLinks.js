@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-;
-;export default function SocialMediaLinks({ 
+
+export default function SocialMediaLinks({ 
   className = '', 
   showLabels = false,
   size = 'md',
   variant = 'default'
-};;) {
+}) {
   const socialLinks = [
     {
       name: 'Facebook',

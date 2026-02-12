@@ -34,8 +34,9 @@ import { query } from '@lib/db'
     console.error('Error fetching blog posts for sitemap:', error)
   }
 
-  // Dynamic products
+  // Dynamic products (commented out until remedies table exists)
   let products = []
+  /*
   try {
     const result = await query(`
       SELECT id, updated_at 
@@ -53,6 +54,7 @@ import { query } from '@lib/db'
   } catch (error) {
     console.error('Error fetching products for sitemap:', error)
   }
+  */
 
   // Combine all pages
   const allPages = [...staticPages, ...blogPosts, ...products]

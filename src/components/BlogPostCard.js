@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link';
-;import BlogShareButtons from './BlogShareButtons'
-;
-;export default function BlogPostCard({ 
+import BlogShareButtons from './BlogShareButtons'
+
+export default function BlogPostCard({ 
   post, 
   showShareButtons = true,
   className = '' 
-};;) {
+}) {
   const {
     id,
     title,

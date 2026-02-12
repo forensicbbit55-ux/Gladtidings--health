@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react';
-;import Link from 'next/link';
-;import { useRouter, useSearchParams } from 'next/navigation';
-;import { useAuth } from '@/contexts/NextAuthContext'
-;
-;export default function LoginPage() {
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useAuth } from '@/contexts/NextAuthContext'
+import { Suspense } from 'react'
+
+function LoginContent() {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -247,4 +248,12 @@ import { useState } from 'react';
       </div>
     </div>
   )
-};;
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
+  )
+}

@@ -1,6 +1,6 @@
 import Head from 'next/head'
-;
-;export default function OpenGraphMeta({ 
+
+export default function OpenGraphMeta({ 
   title, 
   description, 
   image, 
@@ -8,7 +8,7 @@ import Head from 'next/head'
   type = 'website',
   siteName = 'Glad Tidings',
   locale = 'en_US'
-};;) {
+}) {
   const fullUrl = url || (typeof window !== 'undefined' ? window.location.href : '')
   const fullImageUrl = image ? (image.startsWith('http') ? image : `${process.env.NEXT_PUBLIC_APP_URL}${image}`) : ''
 
