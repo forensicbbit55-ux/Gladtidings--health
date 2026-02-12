@@ -17,6 +17,7 @@ model User {
   email        String    @unique
   passwordHash String    @map("password_hash")
   role         UserRole  @default(USER)
+  full_name    String?
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
 
@@ -25,6 +26,8 @@ model User {
   sessions Session[]
   appointments Appointment[]
   notifications Notification[]
+  posts Post[]
+  orders orders[]
 
   @@map("users")
 }
@@ -209,6 +212,116 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+// Blog posts table
+model Post {
+  id           String   @id @default(uuid())
+  title        String
+  slug         String   @unique
+  excerpt      String?
+  content      String
+  featuredImage String?  @map("featured_image")
+  published    Boolean  @default(false)
+  categoryId   String?  @map("category_id")
+  authorId     String   @map("author_id")
+  readTime     Int?     @map("read_time")
+  tags         String[]
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  category  Category? @relation(fields: [categoryId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id])
+
+  @@map("posts")
+}
+
+// Categories table for blog posts and products
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  icon        String?
+  color       String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  posts    Post[]
+  remedies Remedy[]
+
+  @@map("categories")
+}
+
+// Products/Remedies table (renamed from products to remedies for consistency)
+model Remedy {
+  id            String   @id @default(uuid())
+  title         String
+  slug          String   @unique
+  description   String
+  shortDesc     String?  @map("short_desc")
+  price         Decimal  @db.Decimal(10, 2)
+  comparePrice  Decimal? @map("compare_price") @db.Decimal(10, 2)
+  sku           String?  @unique
+  trackInventory Boolean  @default(true) @map("track_inventory")
+  inventory     Int      @default(0)
+  images        String[]
+  categoryId    String?  @map("category_id")
+  tags          String[]
+  status        String   @default("active")
+  featured      Boolean  @default(false)
+  isPublished   Boolean  @default(false) @map("is_published")
+  weight        Decimal? @db.Decimal(8, 2)
+  dimensions    String?
+  ingredients   String?
+  dosage        String?
+  warnings      String?
+  benefits      String?
+  usage         String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  category Category? @relation(fields: [categoryId], references: [id])
+  orderItems order_items[]
+
+  @@map("remedies")
+}
+
+// Orders table (existing)
+model orders {
+  id            String        @id @default(uuid())
+  customer_name String?
+  phone         String?
+  email         String?
+  total         Decimal?      @db.Decimal(10, 2)
+  status        String?       @default("pending")
+  created_at    DateTime?     @default(now()) @map("created_at")
+  userId        String?       @map("user_id")
+  
+  // Relations
+  order_items   order_items[]
+  user         User?         @relation(fields: [userId], references: [id])
+
+  @@map("orders")
+}
+
+// Order items table (existing)
+model order_items {
+  id         String    @id @default(uuid())
+  order_id   String?   @map("order_id")
+  product_id String?   @map("product_id")
+  quantity   Int       @default(1)
+  price      Decimal?  @db.Decimal(10, 2)
+  created_at DateTime? @default(now()) @map("created_at")
+  
+  // Relations
+  orders     orders?   @relation(fields: [order_id], references: [id], onDelete: Cascade)
+  remedies   Remedy?   @relation(fields: [product_id], references: [id])
+
+  @@map("order_items")
 }
 
 enum UserRole {
