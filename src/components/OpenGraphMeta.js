@@ -10,7 +10,7 @@ export default function OpenGraphMeta({
   locale = 'en_US'
 }) {
   const fullUrl = url || (typeof window !== 'undefined' ? window.location.href : '')
-  const fullImageUrl = image ? (image.startsWith('http') ? image : `${process.env.NEXT_PUBLIC_APP_URL}${image}`) : ''
+  const fullImageUrl = image ? (image.startsWith('http') ? image : `${process.env.NEXT_PUBLIC_APP_URL}${image}`) : `${process.env.NEXT_PUBLIC_APP_URL}/images/gladtidings-logo.png`
 
   return (
     <Head>
@@ -59,7 +59,7 @@ export default function OpenGraphMeta({
       {/* Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={
+        dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": type === 'article' ? "Article" : "WebPage",
@@ -73,13 +73,13 @@ export default function OpenGraphMeta({
               "url": process.env.NEXT_PUBLIC_APP_URL,
               "logo": {
                 "@type": "ImageObject",
-                "url": `${process.env.NEXT_PUBLIC_APP_URL}/logo.png`
+                "url": `${process.env.NEXT_PUBLIC_APP_URL}/images/gladtidings-logo.png`
               }
             },
             "datePublished": type === 'article' ? new Date().toISOString() : undefined,
             "dateModified": new Date().toISOString()
           })
-        }
+        }}
       />
     </Head>
   )

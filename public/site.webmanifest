@@ -1,0 +1,16 @@
+{
+  "name": "Glad Tidings - Medical Missionary Health & Wellness",
+  "short_name": "Glad Tidings",
+  "description": "Discover natural health remedies, medical missionary insights, and holistic wellness tips.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

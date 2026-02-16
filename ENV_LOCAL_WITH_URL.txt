@@ -1,7 +1,0 @@
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://zhtlknbiuafrgfyfrisi.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_g5VT7a55R05xt7Jue0JrHw_8JOBtvPw
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
-
-# Replace your_service_role_key_here with your actual service role key from Supabase dashboard
-# Go to Settings → API → Copy the "service_role" key

@@ -7,8 +7,8 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const mobileMenuClasses = isMobileMenuOpen 
-    ? "md:hidden fixed inset-y-0 left-0 w-64 bg-gray-900 shadow-xl transition-transform duration-300 ease-in-out z-[70] translate-x-0" 
-    : "md:hidden fixed inset-y-0 left-0 w-64 bg-gray-900 shadow-xl transition-transform duration-300 ease-in-out z-[70] -translate-x-full";
+    ? "md:hidden fixed inset-y-0 left-0 w-64 bg-white shadow-xl transition-transform duration-300 ease-in-out z-[60] translate-x-0" 
+    : "md:hidden fixed inset-y-0 left-0 w-64 bg-white shadow-xl transition-transform duration-300 ease-in-out z-[60] -translate-x-full";
 
   return (
     <>
@@ -102,31 +102,26 @@ export default function Navbar() {
             <Link href="/" className="block px-3 py-2 text-emerald-600 font-medium rounded hover:bg-gray-100">
               Home
             </Link>
-            <Link href="/products" className="block px-3 py-2 text-white rounded hover:bg-gray-100">
+            <Link href="/products" className="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100">
               Shop
             </Link>
-            <Link href="/about" className="block px-3 py-2 text-white rounded hover:bg-gray-100">
+            <Link href="/about" className="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100">
               About
             </Link>
-            <Link href="/blog" className="block px-3 py-2 text-white rounded hover:bg-gray-100">
+            <Link href="/blog" className="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100">
               Blog
             </Link>
-            <Link href="/contact" className="block px-3 py-2 text-white rounded hover:bg-gray-100">
+            <Link href="/contact" className="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100">
               Contact
             </Link>
-            <hr className="my-4 border-gray-200" />
-            <div className="text-sm text-white space-y-1">
-              <div className="text-white">+254723730980</div>
-              <div className="text-white">gladtidingshealth@gmail.com</div>
-            </div>
             <hr className="my-4 border-gray-200" />
             <Link href="/consultation" className="block px-3 py-2 text-emerald-600 rounded hover:bg-gray-100">
               Appointment
             </Link>
-            <Link href="/cart" className="block px-3 py-2 text-white rounded hover:bg-gray-100">
+            <Link href="/cart" className="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100">
               Cart [0] KSH 0
             </Link>
-            <Link href="/login" className="block px-3 py-2 text-white rounded hover:bg-gray-100">
+            <Link href="/login" className="block px-3 py-2 text-gray-900 rounded hover:bg-gray-100">
               Login
             </Link>
           </div>
