@@ -215,19 +215,10 @@ export default function Header() {
 
             {/* MOBILE VIEW - Center: Logo */}
             <div className="flex md:hidden flex-col items-center">
-              <div className="flex items-center space-x-2">
-                <img 
-                  src="/images/logo.png" 
-                  alt="Glad Tidings Health Logo" 
-                  className="w-8 h-8 object-contain"
-                  width="32"
-                  height="32"
-                  loading="eager"
-                  decoding="async"
-                  fetchpriority="high"
-                />
-                <div className="flex flex-col leading-tight">
-                  <span className="text-base font-bold text-gray-800">Glad Tidings</span>
+              <div className="flex items-center">
+                <span className="text-xl font-bold text-emerald-600">🌿</span>
+                <div className="flex flex-col ml-1 leading-tight">
+                  <span className="text-sm font-bold text-gray-800">Glad Tidings</span>
                   <span className="text-xs font-medium text-emerald-600">Health</span>
                 </div>
               </div>
@@ -247,20 +238,13 @@ export default function Header() {
             </div>
 
             {/* DESKTOP VIEW - Left: Logo */}
-            <div className="hidden md:flex items-center space-x-3">
-              <img 
-                src="/images/logo.png" 
-                alt="Glad Tidings Health Logo" 
-                className="w-10 h-10 object-contain"
-                width="40"
-                height="40"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-              />
-              <div className="flex flex-col">
-                <span className="text-lg font-bold text-gray-800">Glad Tidings</span>
-                <span className="text-sm font-medium text-emerald-600">Health</span>
+            <div className="hidden md:flex items-center space-x-4">
+              <div className="flex items-center">
+                <span className="text-2xl font-bold text-emerald-600">🌿</span>
+                <div className="flex flex-col ml-2">
+                  <span className="text-lg font-bold text-gray-800">Glad Tidings</span>
+                  <span className="text-sm font-medium text-emerald-600">Health</span>
+                </div>
               </div>
             </div>
 
