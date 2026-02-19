@@ -13,10 +13,10 @@ import { neon } from '@neondatabase/serverless';
  * @throws {Error} - If DATABASE_URL is not set
  */
 export async function getDb() {
-  const databaseUrl = process.env.DATABASE_URL;
+  const databaseUrl = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL;
   
   if (!databaseUrl) {
-    const error = new Error('DATABASE_URL environment variable is not set');
+    const error = new Error('Database URL environment variable is not set. Please set NEON_DATABASE_URL or DATABASE_URL');
     console.error('Database connection error:', error.message);
     
     // In development, provide more helpful error message
@@ -38,7 +38,7 @@ export async function getDb() {
  * Direct export for convenience - use when you don't need async/await
  * Note: This will throw immediately if DATABASE_URL is missing
  */
-export const sql = neon(process.env.DATABASE_URL!);
+export const sql = neon(process.env.NEON_DATABASE_URL || process.env.DATABASE_URL!);
 
 /**
  * Test database connection

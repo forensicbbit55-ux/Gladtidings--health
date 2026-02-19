@@ -3,9 +3,14 @@ import { NextResponse } from 'next/server'
 ;// Environment variable validation
 const requiredEnvVars = {
   // Server-side only (never exposed to client)
-  DATABASE_URL: {
+  NEON_DATABASE_URL: {
     required: true,
     description: 'Neon PostgreSQL database connection string',
+    exposeToClient: false
+  },
+  DATABASE_URL: {
+    required: false,
+    description: 'Legacy database connection string (fallback)',
     exposeToClient: false
   }
 }
@@ -46,6 +51,15 @@ function validateEnvironment() {
           warnings.push(`⚠️  DATABASE_URL should include 'sslmode=require' for secure connections`)
         }
       }
+      // Validate format if it's NEON_DATABASE_URL  
+      if (key === 'NEON_DATABASE_URL') {
+        if (!value.startsWith('postgresql://') && !value.startsWith('psql ')) {
+          errors.push(`❌ Invalid NEON_DATABASE_URL format. Must start with 'postgresql://' or 'psql '`)
+        }
+        if (!value.includes('sslmode=require')) {
+          warnings.push(`⚠️  NEON_DATABASE_URL should include 'sslmode=require' for secure connections`)
+        }
+      }
     }
   })
 
@@ -68,8 +82,8 @@ function validateEnvironment() {
 
   // Check for common security issues
   if (process.env.NODE_ENV === 'production') {
-    if (!process.env.DATABASE_URL?.includes('sslmode=require')) {
-      errors.push(`❌ Production DATABASE_URL must use SSL (sslmode=require)`)
+    if (!process.env.NEON_DATABASE_URL?.includes('sslmode=require') && !process.env.DATABASE_URL?.includes('sslmode=require')) {
+      errors.push(`❌ Production database URL must use SSL (sslmode=require)`)
     }
   }
 
