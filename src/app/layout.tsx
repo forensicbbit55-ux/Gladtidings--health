@@ -1,14 +1,15 @@
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/Navbar';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { CartProvider } from '@/contexts/CartContext';
 import ClientProviders from '@/components/ClientProviders';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Glad Tidings - Medical Missionary Health & Wellness',
   description: 'Discover natural health remedies, medical missionary insights, and holistic wellness tips. Your trusted source for spiritual health and natural healing.',
   keywords: [
@@ -27,7 +28,11 @@ export const metadata = {
   authors: [{ name: 'Glad Tidings Team' }],
   creator: 'Glad Tidings Medical Missionary',
   publisher: 'Glad Tidings',
-  formatDetection: { email: 'device-email', webpage: 'device-webpage' },
+  formatDetection: { 
+    email: true, 
+    address: true, 
+    telephone: true 
+  },
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   alternates: {
     canonical: '/canonical',
@@ -61,8 +66,10 @@ export const metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: 'index',
-    bingBot: 'index'
+    googleBot: {
+      index: true,
+      follow: true
+    }
   },
   icons: {
     icon: '/favicon.ico',
@@ -72,20 +79,26 @@ export const metadata = {
   manifest: '/site.webmanifest'
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <ClientProviders>
-          <CartProvider>
-            <Navbar />
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <ClientProviders>
+            <CartProvider>
+              <Header />
               <main className="min-h-screen">
                 {children}
               </main>
               <Footer />
             </CartProvider>
-        </ClientProviders>
-      </body>
-    </html>
+          </ClientProviders>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

@@ -2,6 +2,13 @@
  * Utility functions for the wellness application
  */
 
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
 /**
  * Generate a URL-friendly slug from a title
  * @param title - The title to convert to slug
