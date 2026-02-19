@@ -247,7 +247,7 @@ export default function Header() {
             </div>
 
             {/* DESKTOP VIEW - Left: Logo */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-6">
               <div className="flex items-center">
                 <img 
                   src="/images/glad-tidings-logo.png" 
@@ -259,7 +259,7 @@ export default function Header() {
                   decoding="async"
                   fetchpriority="high"
                 />
-                <div className="flex flex-col ml-2">
+                <div className="flex flex-col ml-3">
                   <span className="text-lg font-bold text-gray-800">Glad Tidings</span>
                   <span className="text-sm font-medium text-emerald-600">Health</span>
                 </div>
@@ -267,7 +267,7 @@ export default function Header() {
             </div>
 
             {/* DESKTOP VIEW - Center/Right: Navigation */}
-            <div className="hidden md:flex items-center space-x-8 flex-1 justify-center">
+            <div className="hidden md:flex items-center space-x-10 flex-1 justify-center ml-8">
               <Link href="/" className="text-gray-800 hover:text-emerald-600 font-medium transition-colors">
                 Home
               </Link>
