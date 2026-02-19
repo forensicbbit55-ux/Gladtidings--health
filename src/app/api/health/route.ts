@@ -7,14 +7,14 @@
  */
 
 import { NextResponse } from 'next/server';
-import { sql, testDatabaseConnection } from '@/lib/db';
+import { sql, testConnection } from '@/lib/db';
 
 export async function GET() {
   console.log('Health check endpoint called');
   
   try {
     // Test database connection using our helper
-    const isConnected = await testDatabaseConnection();
+    const isConnected = await testConnection();
     
     if (!isConnected) {
       return NextResponse.json(
