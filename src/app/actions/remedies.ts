@@ -12,9 +12,8 @@ export async function addRemedy(formData: FormData) {
     const description = formData.get('description') as string
     const ingredients = formData.get('ingredients') as string
     const benefits = formData.get('benefits') as string
-    const preparation = formData.get('preparation') as string
-    const category = formData.get('category') as string
-    const imageUrl = formData.get('imageUrl') as string
+    const categoryId = formData.get('category') as string
+    const images = formData.get('imageUrl') as string
 
     // Validate required fields
     if (!title || !title.trim()) {
@@ -34,9 +33,8 @@ export async function addRemedy(formData: FormData) {
       description: description?.trim() || null,
       ingredients: ingredients?.trim() || null,
       benefits: benefits?.trim() || null,
-      preparation: preparation?.trim() || null,
-      category: category?.trim() || null, // Back to category (Neon AI corrected this)
-      imageUrl: imageUrl?.trim() || null,
+      categoryId: categoryId?.trim() || null,
+      images: images?.trim() || null,
     }
 
     // Insert into database

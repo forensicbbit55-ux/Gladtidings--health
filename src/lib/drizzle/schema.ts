@@ -8,10 +8,9 @@ export const remedies = pgTable('remedies', {
   description: text('description'),
   ingredients: text('ingredients'),
   benefits: text('benefits'),
-  preparation: text('preparation'),
-  category: varchar('category', { length: 100 }), // Back to category (Neon AI corrected this)
+  categoryId: varchar('category_id', { length: 100 }),
   price: numeric('price', { precision: 10, scale: 2 }).default('0'),
-  imageUrl: varchar('image_url', { length: 500 }),
+  images: text('images'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })
 

@@ -18,7 +18,7 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
       id: remedy.id.toString(),
       title: remedy.title,
       price: parseFloat(remedy.price?.toString() || '0'),
-      image_url: remedy.imageUrl || undefined,
+      image_url: remedy.images || undefined,
     })
   }
 
@@ -57,10 +57,10 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
             {remedies.map((remedy) => (
               <div key={remedy.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                 {/* Image */}
-                {remedy.imageUrl ? (
+                {remedy.images ? (
                   <div className="aspect-video relative">
                     <Image
-                      src={remedy.imageUrl}
+                      src={remedy.images}
                       alt={remedy.title}
                       fill
                       className="object-cover"
@@ -76,10 +76,10 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
                 {/* Content */}
                 <div className="p-6">
                   {/* Category Badge */}
-                  {remedy.category && (
+                  {remedy.categoryId && (
                     <div className="mb-3">
                       <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
-                        {remedy.category}
+                        {remedy.categoryId}
                       </span>
                     </div>
                   )}
