@@ -372,24 +372,26 @@ export default function Header() {
                 <NavLink href="/contact">Contact</NavLink>
               </nav>
 
-              <div className="flex items-center space-x-4">
-                <Link href="/appointment" className="flex items-center space-x-2 px-2 py-1 text-sm font-normal border border-emerald-200 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors">
-                  <Calendar className="h-4 w-4 text-emerald-600" />
-                  <span className="text-sm font-normal">Appointment</span>
+              <div className="flex items-center space-x-6">
+                <Link href="/appointment" className="flex items-center space-x-2 px-2 py-1 text-sm text-gray-800 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
+                  <Calendar className="h-4 w-4 text-emerald-700" />
+                  <span className="text-sm">Appointment</span>
                 </Link>
 
-                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-600 relative text-sm font-normal">
+                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-700 relative text-sm">
                   <ShoppingCart className="h-5 w-5" />
                   <span className="ml-2 text-sm text-gray-700">[0]</span>
                   <span className="ml-2 text-sm text-gray-500">KSH 0</span>
                 </Link>
 
                 <SignedIn>
-                  <UserButton afterSignOutUrl="/" />
+                  <div className="px-1 py-1 rounded-md hover:bg-emerald-50 transition-colors">
+                    <UserButton afterSignOutUrl="/" />
+                  </div>
                 </SignedIn>
 
                 <SignedOut>
-                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600 text-sm font-normal">
+                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-700 text-sm px-1 py-1 rounded-md hover:bg-emerald-50 transition-colors">
                     <User className="h-5 w-5" />
                     <span className="ml-1">Login</span>
                   </Link>
