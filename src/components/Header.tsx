@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, ShoppingCart, Calendar, MessageCircle, ChevronDown, Leaf, Home, ShoppingBag, User, GraduationCap, FileText, Phone, Settings } from 'lucide-react'
+import { Menu, ShoppingCart, Calendar, MessageCircle, ChevronDown, Leaf, Home, ShoppingBag, User, GraduationCap, FileText, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -379,13 +379,7 @@ export default function Header() {
                   </Link>
                 </SignedOut>
 
-                <Link 
-                  href="/admin" 
-                  className="flex items-center space-x-2 bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-                >
-                  <Settings className="h-4 w-4" />
-                  <span>Admin</span>
-                </Link>
+                {/* Admin link removed from header; moved to footer */}
               </div>
             </div>
           </div>
