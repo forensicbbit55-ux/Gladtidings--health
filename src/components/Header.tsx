@@ -33,7 +33,7 @@ export default function Header() {
     return (
       <Link
         href={href}
-        className={`text-gray-900 hover:text-emerald-600 md:text-base text-sm font-normal transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
+        className={`text-gray-900 hover:text-emerald-600 md:text-xs text-sm font-normal leading-tight transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
       >
         {children}
       </Link>
@@ -304,16 +304,16 @@ export default function Header() {
                 </SignedOut>
               </div>
 
-              <nav className="flex-1 flex justify-center items-center gap-x-10 px-6">
+              <nav className="flex-1 flex justify-center items-center gap-x-4 px-6">
                 <NavLink href="/">Home</NavLink>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-medium">
-                      <span>Shop</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
+                      <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-normal text-sm px-0 py-0">
+                        <span className="text-sm">Shop</span>
+                        <ChevronDown className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-[220px] bg-white border-gray-200 shadow-lg rounded-lg">
                     <DropdownMenuItem asChild>
                       <Link href="/shop/herbal-remedies" className="text-gray-900 hover:text-emerald-600">
@@ -332,11 +332,11 @@ export default function Header() {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-medium">
-                      <span>Courses</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
+                      <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-normal text-sm px-0 py-0">
+                        <span className="text-sm">Courses</span>
+                        <ChevronDown className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-[220px] bg-white border-gray-200 shadow-lg rounded-lg">
                     <DropdownMenuItem asChild>
                       <Link href="/courses/natural-remedies" className="text-gray-900 hover:text-emerald-600">
@@ -356,27 +356,26 @@ export default function Header() {
                 <NavLink href="/contact">Contact</NavLink>
               </nav>
 
-              <div className="flex items-center space-x-3">
-                <Link href="/appointment" className="inline-flex items-center justify-center space-x-2 px-3 py-1.5 min-w-[92px] text-sm text-gray-800 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
+              <div className="flex items-center space-x-2">
+                <Link href="/appointment" className="inline-flex items-center justify-center space-x-1 px-2 py-1 min-w-[68px] text-sm text-gray-800 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
                   <Calendar className="h-4 w-4 text-emerald-700" />
                   <span className="text-sm">Appointment</span>
                 </Link>
 
-                <Link href="/cart" className="inline-flex items-center justify-center space-x-2 px-3 py-1.5 min-w-[92px] text-sm text-gray-900 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
-                  <ShoppingCart className="h-5 w-5" />
+                <Link href="/cart" className="inline-flex items-center justify-center space-x-1 px-2 py-1 min-w-[68px] text-sm text-gray-900 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
+                  <ShoppingCart className="h-4 w-4" />
                   <span className="text-sm text-gray-700">[0]</span>
-                  <span className="text-sm text-gray-500">KSH 0</span>
                 </Link>
 
                 <SignedIn>
-                  <div className="inline-flex items-center justify-center px-3 py-1.5 min-w-[92px] rounded-md hover:bg-emerald-50 transition-colors">
+                  <div className="inline-flex items-center justify-center px-2 py-1 min-w-[68px] rounded-md hover:bg-emerald-50 transition-colors">
                     <UserButton afterSignOutUrl="/" />
                   </div>
                 </SignedIn>
 
                 <SignedOut>
-                  <Link href="/sign-in" className="inline-flex items-center justify-center space-x-2 px-3 py-1.5 min-w-[92px] text-sm text-gray-900 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors whitespace-nowrap">
-                    <User className="h-5 w-5" />
+                  <Link href="/sign-in" className="inline-flex items-center justify-center space-x-1 px-2 py-1 min-w-[68px] text-sm text-gray-900 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors whitespace-nowrap">
+                    <User className="h-4 w-4" />
                     <span className="text-sm">Login</span>
                   </Link>
                 </SignedOut>
