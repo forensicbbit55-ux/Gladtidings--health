@@ -65,7 +65,7 @@ export default function Header() {
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-24">
+          <div className="flex items-center justify-between h-20">
             
             {/* MOBILE VIEW - Left: Hamburger Menu */}
             <div className="flex md:hidden">
@@ -268,12 +268,12 @@ export default function Header() {
               <div className="hidden md:flex items-center w-full">
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
-                  <div className="relative isolate" style={{ width: 360, height: 112 }}>
+                  <div className="relative isolate" style={{ width: 160, height: 56 }}>
                     <Image
                       src="/images/gladtidings-logo.png"
                       alt="Glad Tidings logo"
                       fill
-                      className="absolute inset-0 m-auto h-28 w-auto object-contain"
+                      className="absolute inset-0 m-auto h-12 w-auto object-contain"
                       priority
                       onError={() => setLogoBroken(true)}
                     />
