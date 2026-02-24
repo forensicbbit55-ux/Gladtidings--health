@@ -220,23 +220,17 @@ export default function Header() {
 
             {/* MOBILE VIEW - Center: Logo */}
             <div className="flex md:hidden flex-col items-center">
-              <div className="flex items-center">
-                <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center shadow-lg">
-                  <img 
-                    src="/images/logoCreator_imagetologo.jpg" 
-                    alt="Glad Tidings Health Logo" 
-                    className="w-6 h-6 object-contain"
-                    width="24"
-                    height="24"
-                    loading="eager"
-                    decoding="async"
-                  />
-                </div>
-                <div className="flex flex-col ml-1 leading-tight">
-                  <span className="text-sm font-bold text-gray-800">Glad Tidings</span>
-                  <span className="text-xs font-medium text-emerald-600">Health</span>
-                </div>
-              </div>
+              <Link href="/" className="flex items-center">
+                <img 
+                  src="/images/logo.png" 
+                  alt="Glad Tidings Health Logo" 
+                  className="h-8 w-auto object-contain"
+                  width="144"
+                  height="32"
+                  loading="eager"
+                  decoding="async"
+                />
+              </Link>
             </div>
 
             {/* MOBILE VIEW - Right: Shopping Cart & WhatsApp */}
@@ -254,21 +248,10 @@ export default function Header() {
               <Link 
                 href="https://wa.me/1234567890" 
                 target="_blank"
-                className="flex items-center"
+                className="flex items-center justify-center w-10 h-10 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors duration-200 p-0"
+                aria-label="Contact on WhatsApp"
               >
-                <img 
-                  src="/logo.png" 
-                  alt="Glad Tidings Health Logo" 
-                  className="h-8 w-auto object-contain"
-                  width="120"
-                  height="36"
-                  loading="eager"
-                  decoding="async"
-                />
-                <div className="flex flex-col ml-3">
-                  <span className="text-lg font-bold text-gray-900">Glad Tidings</span>
-                  <span className="text-sm font-medium text-emerald-600">Health</span>
-                </div>
+                <MessageCircle className="h-5 w-5" />
               </Link>
             </div>
 
@@ -279,18 +262,14 @@ export default function Header() {
                 className="flex items-center"
               >
                 <img 
-                  src="/logo.png" 
+                  src="/images/logo.png" 
                   alt="Glad Tidings Health Logo" 
-                  className="h-8 w-auto object-contain"
-                  width="120"
-                  height="36"
+                  className="h-10 w-auto object-contain"
+                  width="180"
+                  height="40"
                   loading="eager"
                   decoding="async"
                 />
-                <div className="flex flex-col ml-3">
-                  <span className="text-lg font-bold text-gray-900">Glad Tidings</span>
-                  <span className="text-sm font-medium text-emerald-600">Health</span>
-                </div>
               </Link>
             </div>
 
