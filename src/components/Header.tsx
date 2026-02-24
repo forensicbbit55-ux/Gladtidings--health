@@ -304,7 +304,7 @@ export default function Header() {
                 </SignedOut>
               </div>
 
-              <nav className="flex-1 flex justify-center items-center space-x-10 px-6">
+              <nav className="flex-1 flex justify-center items-center gap-x-10 px-6">
                 <NavLink href="/">Home</NavLink>
 
                 <DropdownMenu>
