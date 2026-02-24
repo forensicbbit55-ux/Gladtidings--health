@@ -239,7 +239,7 @@ export default function Header() {
               <Link href="/" className="flex items-center">
                 <div className="relative isolate" style={{ width: 200, height: 56 }}>
                   <Image
-                    src="/images/logo.png"
+                    src="/images/gladtidings-logo.png"
                     alt="Glad Tidings logo"
                     fill
                     className="absolute inset-0 m-auto h-14 w-auto object-contain"
@@ -270,7 +270,7 @@ export default function Header() {
                 <Link href="/" className="flex items-center">
                   <div className="relative isolate" style={{ width: 360, height: 112 }}>
                     <Image
-                      src="/images/logo.png"
+                      src="/images/gladtidings-logo.png"
                       alt="Glad Tidings logo"
                       fill
                       className="absolute inset-0 m-auto h-28 w-auto object-contain"
@@ -356,28 +356,28 @@ export default function Header() {
                 <NavLink href="/contact">Contact</NavLink>
               </nav>
 
-              <div className="flex items-center space-x-4">
-                <Link href="/appointment" className="flex items-center space-x-2 px-2 py-1 text-sm text-gray-800 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
+              <div className="flex items-center space-x-3">
+                <Link href="/appointment" className="inline-flex items-center justify-center space-x-2 px-3 py-1.5 min-w-[92px] text-sm text-gray-800 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
                   <Calendar className="h-4 w-4 text-emerald-700" />
                   <span className="text-sm">Appointment</span>
                 </Link>
 
-                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-700 relative text-sm">
+                <Link href="/cart" className="inline-flex items-center justify-center space-x-2 px-3 py-1.5 min-w-[92px] text-sm text-gray-900 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
                   <ShoppingCart className="h-5 w-5" />
-                  <span className="ml-1 text-sm text-gray-700">[0]</span>
-                  <span className="ml-1 text-sm text-gray-500">KSH 0</span>
+                  <span className="text-sm text-gray-700">[0]</span>
+                  <span className="text-sm text-gray-500">KSH 0</span>
                 </Link>
 
                 <SignedIn>
-                  <div className="px-0 py-1 rounded-md hover:bg-emerald-50 transition-colors">
+                  <div className="inline-flex items-center justify-center px-3 py-1.5 min-w-[92px] rounded-md hover:bg-emerald-50 transition-colors">
                     <UserButton afterSignOutUrl="/" />
                   </div>
                 </SignedIn>
 
                 <SignedOut>
-                  <Link href="/sign-in" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-700 text-sm px-1 py-1 rounded-md hover:bg-emerald-50 transition-colors whitespace-nowrap">
+                  <Link href="/sign-in" className="inline-flex items-center justify-center space-x-2 px-3 py-1.5 min-w-[92px] text-sm text-gray-900 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors whitespace-nowrap">
                     <User className="h-5 w-5" />
-                    <span className="ml-0">Login</span>
+                    <span className="text-sm">Login</span>
                   </Link>
                 </SignedOut>
 
