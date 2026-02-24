@@ -33,7 +33,7 @@ export default function Header() {
     return (
       <Link
         href={href}
-        className={`text-gray-900 hover:text-emerald-600 font-medium transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
+        className={`text-gray-900 hover:text-emerald-600 md:text-base text-sm font-medium transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
       >
         {children}
       </Link>
@@ -65,7 +65,7 @@ export default function Header() {
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             
             {/* MOBILE VIEW - Left: Hamburger Menu */}
             <div className="flex md:hidden">
@@ -243,7 +243,7 @@ export default function Header() {
                     alt="Glad Tidings logo"
                     width={140}
                     height={32}
-                    className="h-8 w-auto object-contain mr-2"
+                    className="h-9 w-auto object-contain mr-2"
                     priority
                     onError={() => setLogoBroken(true)}
                   />
@@ -273,16 +273,16 @@ export default function Header() {
             </div>
 
             {/* DESKTOP VIEW - Logo, Centered Nav, and Actions */}
-            <div className="hidden md:flex items-center w-full">
+              <div className="hidden md:flex items-center w-full">
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
                   {!logoBroken ? (
                     <Image
                       src="/images/logo.png"
                       alt="Glad Tidings logo"
-                      width={180}
-                      height={40}
-                      className="h-10 w-auto object-contain mr-3"
+                      width={200}
+                      height={48}
+                      className="h-12 w-auto object-contain mr-4"
                       priority
                       onError={() => setLogoBroken(true)}
                     />
@@ -297,7 +297,7 @@ export default function Header() {
                 </Link>
               </div>
 
-              <nav className="flex-1 flex justify-center items-center space-x-8">
+              <nav className="flex-1 flex justify-center items-center space-x-6">
                 <NavLink href="/">Home</NavLink>
 
                 <DropdownMenu>
