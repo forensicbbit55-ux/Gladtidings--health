@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, ShoppingCart, Calendar, MessageCircle, ChevronDown, Leaf, Home, ShoppingBag, User, GraduationCap, FileText, Phone } from 'lucide-react'
+import { Menu, ShoppingCart, Calendar, ChevronDown, Leaf, Home, ShoppingBag, User, GraduationCap, FileText, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -222,18 +222,14 @@ export default function Header() {
             {/* MOBILE VIEW - Center: Logo */}
             <div className="flex md:hidden flex-col items-center">
               <Link href="/" className="flex items-center">
-                <Image 
-                  src="/images/logo.png" 
-                  alt="Glad Tidings Health Logo" 
-                  width={144}
-                  height={32}
-                  className="h-8 w-auto object-contain"
-                  priority
-                />
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-2">
+                  <Leaf className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-lg font-semibold text-gray-900">Glad Tidings</span>
               </Link>
             </div>
 
-            {/* MOBILE VIEW - Right: Shopping Cart & WhatsApp */}
+            {/* MOBILE VIEW - Right: Shopping Cart (WhatsApp removed) */}
             <div className="flex md:hidden">
               <Link 
                 href="/cart" 
@@ -244,44 +240,25 @@ export default function Header() {
                   0
                 </span>
               </Link>
-
-              <Link 
-                href="https://wa.me/1234567890" 
-                target="_blank"
-                className="flex items-center justify-center w-10 h-10 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors duration-200 p-0"
-                aria-label="Contact on WhatsApp"
-              >
-                <MessageCircle className="h-5 w-5" />
-              </Link>
+              
             </div>
 
-            {/* DESKTOP VIEW - Center: Logo & Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Link 
-                href="/" 
-                className="flex items-center"
-              >
-                <Image 
-                  src="/images/logo.png" 
-                  alt="Glad Tidings Health Logo" 
-                  width={180}
-                  height={40}
-                  className="h-10 w-auto object-contain"
-                  priority
-                />
-              </Link>
-            </div>
+            {/* DESKTOP VIEW - Logo, Centered Nav, and Actions */}
+            <div className="hidden md:flex items-center w-full">
+              <div className="flex items-center">
+                <Link href="/" className="flex items-center">
+                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-3">
+                    <Leaf className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xl font-bold text-gray-900">Glad Tidings</span>
+                </Link>
+              </div>
 
-            {/* DESKTOP VIEW - Right: Navigation & Actions */}
-            <div className="hidden md:flex items-center space-x-6">
-              <nav className="flex items-center space-x-6">
-                <Link 
-                  href="/" 
-                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
-                >
+              <nav className="flex-1 flex justify-center items-center space-x-8">
+                <Link href="/" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
                   Home
                 </Link>
-                
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-medium">
@@ -302,14 +279,11 @@ export default function Header() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                
-                <Link 
-                  href="/about" 
-                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
-                >
+
+                <Link href="/about" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
                   About
                 </Link>
-                
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-medium">
@@ -330,56 +304,40 @@ export default function Header() {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                
-                <Link 
-                  href="/blog" 
-                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
-                >
+
+                <Link href="/blog" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
                   Blog
                 </Link>
-                
-                <Link 
-                  href="/contact" 
-                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
-                >
+
+                <Link href="/contact" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
                   Contact
                 </Link>
               </nav>
 
-              <div className="flex items-center space-x-4">
-                <Link 
-                  href="/appointment" 
-                  className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors"
-                >
+              <div className="flex items-center space-x-6">
+                <Link href="/appointment" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600 font-medium">
                   <Calendar className="h-4 w-4" />
                   <span>Appointment</span>
                 </Link>
 
-                <Link 
-                  href="/cart" 
-                  className="flex items-center text-gray-900 hover:text-emerald-600 relative"
-                >
+                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-600 relative">
                   <ShoppingCart className="h-5 w-5" />
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold">
-                    0
-                  </span>
+                  <span className="ml-3 text-sm text-gray-700">[ 0 ]</span>
+                  <span className="ml-2 text-sm text-gray-500">KSH 0</span>
                 </Link>
 
                 <SignedIn>
                   <UserButton afterSignOutUrl="/" />
                 </SignedIn>
-                
+
                 <SignedOut>
-                  <Link 
-                    href="/sign-in" 
-                    className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600"
-                  >
+                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600">
                     <User className="h-5 w-5" />
                     <span className="ml-2">Login</span>
                   </Link>
                 </SignedOut>
 
-                {/* Admin link removed from header; moved to footer */}
+                {/* Admin moved to footer */}
               </div>
             </div>
           </div>
