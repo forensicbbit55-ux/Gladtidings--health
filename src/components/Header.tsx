@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, ShoppingCart, Calendar, ChevronDown, Leaf, Home, ShoppingBag, User, GraduationCap, FileText, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -25,6 +26,19 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [logoBroken, setLogoBroken] = useState(false)
   const { user } = useUser()
+  const pathname = usePathname()
+
+  const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => {
+    const isActive = pathname === href
+    return (
+      <Link
+        href={href}
+        className={`text-gray-900 hover:text-emerald-600 font-medium transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
+      >
+        {children}
+      </Link>
+    )
+  }
 
   const shopItems = [
     'Herbal Remedies',
@@ -187,12 +201,12 @@ export default function Header() {
 
                       {/* Special Actions */}
                       <SheetClose asChild>
-                        <Link 
-                          href="/appointment" 
-                          className="flex items-center space-x-3 px-4 py-4 text-lg font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg"
+                        <Link
+                          href="/appointment"
+                          className="flex items-center space-x-3 px-4 py-2 text-lg font-medium text-emerald-600 border border-emerald-200 rounded hover:bg-emerald-50 transition-colors duration-150"
                         >
-                          <Calendar className="h-5 w-5" />
-                          <span>Book Appointment</span>
+                          <Calendar className="h-5 w-5 text-emerald-600" />
+                          <span>Appointment</span>
                         </Link>
                       </SheetClose>
 
@@ -284,9 +298,7 @@ export default function Header() {
               </div>
 
               <nav className="flex-1 flex justify-center items-center space-x-8">
-                <Link href="/" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
-                  Home
-                </Link>
+                <NavLink href="/">Home</NavLink>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -309,9 +321,7 @@ export default function Header() {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Link href="/about" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
-                  About
-                </Link>
+                <NavLink href="/about">About</NavLink>
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -334,19 +344,15 @@ export default function Header() {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <Link href="/blog" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
-                  Blog
-                </Link>
+                <NavLink href="/blog">Blog</NavLink>
 
-                <Link href="/contact" className="text-gray-900 hover:text-emerald-600 font-medium transition-colors">
-                  Contact
-                </Link>
+                <NavLink href="/contact">Contact</NavLink>
               </nav>
 
               <div className="flex items-center space-x-6">
-                <Link href="/appointment" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600 font-medium">
-                  <Calendar className="h-4 w-4" />
-                  <span>Appointment</span>
+                <Link href="/appointment" className="flex items-center space-x-2 px-3 py-2 border border-emerald-200 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors">
+                  <Calendar className="h-4 w-4 text-emerald-600" />
+                  <span className="text-sm font-medium">Appointment</span>
                 </Link>
 
                 <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-600 relative">
