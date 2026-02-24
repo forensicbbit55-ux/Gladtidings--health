@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Menu, ShoppingCart, Calendar, MessageCircle, ChevronDown, Leaf, Home, ShoppingBag, User, GraduationCap, FileText, Phone } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -221,14 +222,13 @@ export default function Header() {
             {/* MOBILE VIEW - Center: Logo */}
             <div className="flex md:hidden flex-col items-center">
               <Link href="/" className="flex items-center">
-                <img 
+                <Image 
                   src="/images/logo.png" 
                   alt="Glad Tidings Health Logo" 
+                  width={144}
+                  height={32}
                   className="h-8 w-auto object-contain"
-                  width="144"
-                  height="32"
-                  loading="eager"
-                  decoding="async"
+                  priority
                 />
               </Link>
             </div>
@@ -261,14 +261,13 @@ export default function Header() {
                 href="/" 
                 className="flex items-center"
               >
-                <img 
+                <Image 
                   src="/images/logo.png" 
                   alt="Glad Tidings Health Logo" 
+                  width={180}
+                  height={40}
                   className="h-10 w-auto object-contain"
-                  width="180"
-                  height="40"
-                  loading="eager"
-                  decoding="async"
+                  priority
                 />
               </Link>
             </div>
@@ -379,6 +378,14 @@ export default function Header() {
                     <span className="ml-2">Login</span>
                   </Link>
                 </SignedOut>
+
+                <Link 
+                  href="/admin" 
+                  className="flex items-center space-x-2 bg-gray-800 text-white px-3 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  <Settings className="h-4 w-4" />
+                  <span>Admin</span>
+                </Link>
               </div>
             </div>
           </div>
