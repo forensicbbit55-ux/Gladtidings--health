@@ -25,6 +25,19 @@ export default function AdminDashboard() {
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold text-gray-900">Remedies</h3>
+          <p className="text-gray-600 mt-2">Manage and add natural remedies</p>
+          <div className="mt-4 space-x-2">
+            <a href="/admin/remedies" className="inline-block px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700">
+              Manage Remedies
+            </a>
+            <a href="/admin/remedies/new" className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              Add Remedy
+            </a>
+          </div>
+        </div>
+        
+        <div className="bg-white p-6 rounded-lg shadow">
           <h3 className="text-lg font-semibold text-gray-900">Website</h3>
           <p className="text-gray-600 mt-2">View your website</p>
           <a href="/" className="mt-4 inline-block px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
