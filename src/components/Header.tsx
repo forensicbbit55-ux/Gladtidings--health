@@ -64,7 +64,7 @@ export default function Header() {
     <>
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             
             {/* MOBILE VIEW - Left: Hamburger Menu */}
@@ -101,9 +101,9 @@ export default function Header() {
                       <SheetClose asChild>
                         <Link 
                           href="/" 
-                          className="flex items-center space-x-3 px-4 py-4 text-lg font-medium text-gray-700 rounded-xl hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-200"
+                          className="flex items-center space-x-3 px-4 py-4 text-lg font-normal text-gray-700 rounded-xl hover:bg-emerald-50 hover:text-emerald-700 transition-all duration-200"
                         >
-                          <Home className="h-5 w-5 text-emerald-600" />
+                          <Home className="h-5 w-5 text-gray-600" />
                           <span>Home</span>
                         </Link>
                       </SheetClose>
@@ -297,7 +297,7 @@ export default function Header() {
                 </Link>
               </div>
 
-              <nav className="flex-1 flex justify-center items-center space-x-6">
+              <nav className="flex-1 flex justify-start items-center space-x-6 pl-6">
                 <NavLink href="/">Home</NavLink>
 
                 <DropdownMenu>
