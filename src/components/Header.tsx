@@ -234,28 +234,18 @@ export default function Header() {
               </Sheet>
             </div>
 
-            {/* MOBILE VIEW - Center: Logo (large centered container like provided design) */}
+            {/* MOBILE VIEW - Center: Logo */}
             <div className="flex md:hidden flex-col items-center">
-              <Link href="/" className="relative isolate" aria-label="Home">
-                <div style={{ width: 360, height: 112 }} className="relative isolate">
-                  {!logoBroken ? (
-                    <Image
-                      src="/images/logo.png"
-                      alt="Glad Tidings logo"
-                      width={360}
-                      height={112}
-                      className="absolute inset-0 m-auto h-28 w-auto object-contain mix-blend-screen"
-                      priority
-                      onError={() => setLogoBroken(true)}
-                    />
-                  ) : (
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-2">
-                        <Leaf className="w-4 h-4 text-white" />
-                      </div>
-                      <span className="text-lg font-semibold text-gray-900">Glad Tidings</span>
-                    </div>
-                  )}
+              <Link href="/" className="flex items-center">
+                <div className="relative isolate" style={{ width: 200, height: 56 }}>
+                  <Image
+                    src="/images/logo.png"
+                    alt="Glad Tidings logo"
+                    fill
+                    className="absolute inset-0 m-auto h-14 w-auto object-contain"
+                    priority
+                    onError={() => setLogoBroken(true)}
+                  />
                 </div>
               </Link>
             </div>
@@ -277,26 +267,16 @@ export default function Header() {
             {/* DESKTOP VIEW - Logo, Centered Nav, and Actions */}
               <div className="hidden md:flex items-center w-full">
               <div className="flex items-center">
-                <Link href="/" className="relative isolate" aria-label="Home">
-                  <div style={{ width: 360, height: 112 }} className="relative isolate">
-                    {!logoBroken ? (
-                      <Image
-                        src="/images/logo.png"
-                        alt="Glad Tidings logo"
-                        width={360}
-                        height={112}
-                        className="absolute inset-0 m-auto h-28 w-auto object-contain mix-blend-screen mr-4"
-                        priority
-                        onError={() => setLogoBroken(true)}
-                      />
-                    ) : (
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-3">
-                          <Leaf className="w-5 h-5 text-white" />
-                        </div>
-                        <span className="text-lg font-normal text-gray-900">Glad Tidings</span>
-                      </div>
-                    )}
+                <Link href="/" className="flex items-center">
+                  <div className="relative isolate" style={{ width: 360, height: 112 }}>
+                    <Image
+                      src="/images/logo.png"
+                      alt="Glad Tidings logo"
+                      fill
+                      className="absolute inset-0 m-auto h-28 w-auto object-contain"
+                      priority
+                      onError={() => setLogoBroken(true)}
+                    />
                   </div>
                 </Link>
               </div>
@@ -376,7 +356,7 @@ export default function Header() {
                 <NavLink href="/contact">Contact</NavLink>
               </nav>
 
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-4">
                 <Link href="/appointment" className="flex items-center space-x-2 px-2 py-1 text-sm text-gray-800 hover:text-emerald-700 rounded-md hover:bg-emerald-50 transition-colors">
                   <Calendar className="h-4 w-4 text-emerald-700" />
                   <span className="text-sm">Appointment</span>
@@ -384,20 +364,20 @@ export default function Header() {
 
                 <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-700 relative text-sm">
                   <ShoppingCart className="h-5 w-5" />
-                  <span className="ml-2 text-sm text-gray-700">[0]</span>
-                  <span className="ml-2 text-sm text-gray-500">KSH 0</span>
+                  <span className="ml-1 text-sm text-gray-700">[0]</span>
+                  <span className="ml-1 text-sm text-gray-500">KSH 0</span>
                 </Link>
 
                 <SignedIn>
-                  <div className="px-1 py-1 rounded-md hover:bg-emerald-50 transition-colors">
+                  <div className="px-0 py-1 rounded-md hover:bg-emerald-50 transition-colors">
                     <UserButton afterSignOutUrl="/" />
                   </div>
                 </SignedIn>
 
                 <SignedOut>
-                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-700 text-sm px-1 py-1 rounded-md hover:bg-emerald-50 transition-colors">
+                  <Link href="/sign-in" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-700 text-sm px-1 py-1 rounded-md hover:bg-emerald-50 transition-colors whitespace-nowrap">
                     <User className="h-5 w-5" />
-                    <span className="ml-1">Login</span>
+                    <span className="ml-0">Login</span>
                   </Link>
                 </SignedOut>
 
