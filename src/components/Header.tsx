@@ -33,7 +33,7 @@ export default function Header() {
     return (
       <Link
         href={href}
-        className={`text-gray-900 hover:text-emerald-600 md:text-base text-sm font-medium transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
+        className={`text-gray-900 hover:text-emerald-600 md:text-base text-sm font-normal transition-colors ${isActive ? 'text-emerald-600 border-b-2 border-emerald-600 pb-1' : ''}`}
       >
         {children}
       </Link>
@@ -64,8 +64,8 @@ export default function Header() {
     <>
       {/* Fixed Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="flex items-center justify-between h-24">
             
             {/* MOBILE VIEW - Left: Hamburger Menu */}
             <div className="flex md:hidden">
@@ -277,27 +277,50 @@ export default function Header() {
               <div className="flex items-center">
                 <Link href="/" className="flex items-center">
                   {!logoBroken ? (
-                    <Image
-                      src="/images/logo.png"
-                      alt="Glad Tidings logo"
-                      width={200}
-                      height={48}
-                      className="h-12 w-auto object-contain mr-4"
-                      priority
-                      onError={() => setLogoBroken(true)}
-                    />
+                        <Image
+                          src="/images/logo.png"
+                          alt="Glad Tidings logo"
+                          width={180}
+                          height={44}
+                          className="h-10 w-auto object-contain mr-4"
+                          priority
+                          onError={() => setLogoBroken(true)}
+                        />
                   ) : (
                     <>
                       <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-3">
                         <Leaf className="w-5 h-5 text-white" />
                       </div>
-                      <span className="text-xl font-bold text-gray-900">Glad Tidings</span>
+                      <span className="text-lg font-normal text-gray-900">Glad Tidings</span>
                     </>
                   )}
                 </Link>
               </div>
+              <div className="hidden">
+                <Link href="/appointment" className="flex items-center space-x-2 px-2 py-1.5 text-sm font-normal border border-emerald-200 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors">
+                  <Calendar className="h-4 w-4 text-emerald-600" />
+                  <span className="text-sm font-normal">Appointment</span>
+                </Link>
 
-              <nav className="flex-1 flex justify-start items-center space-x-6 pl-6">
+                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-600 relative text-sm font-normal">
+                  <ShoppingCart className="h-5 w-5" />
+                  <span className="ml-2 text-sm text-gray-700">[0]</span>
+                  <span className="ml-2 text-sm text-gray-500">KSH 0</span>
+                </Link>
+
+                <SignedIn>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+
+                <SignedOut>
+                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600 text-sm font-normal">
+                    <User className="h-5 w-5" />
+                    <span className="ml-1">Login</span>
+                  </Link>
+                </SignedOut>
+              </div>
+
+              <nav className="flex-1 flex justify-center items-center space-x-10 px-6">
                 <NavLink href="/">Home</NavLink>
 
                 <DropdownMenu>
@@ -349,15 +372,15 @@ export default function Header() {
                 <NavLink href="/contact">Contact</NavLink>
               </nav>
 
-              <div className="flex items-center space-x-6">
-                <Link href="/appointment" className="flex items-center space-x-2 px-3 py-2 border border-emerald-200 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors">
+              <div className="flex items-center space-x-4">
+                <Link href="/appointment" className="flex items-center space-x-2 px-2 py-1 text-sm font-normal border border-emerald-200 rounded-md text-emerald-600 hover:bg-emerald-50 transition-colors">
                   <Calendar className="h-4 w-4 text-emerald-600" />
-                  <span className="text-sm font-medium">Appointment</span>
+                  <span className="text-sm font-normal">Appointment</span>
                 </Link>
 
-                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-600 relative">
+                <Link href="/cart" className="flex items-center text-gray-900 hover:text-emerald-600 relative text-sm font-normal">
                   <ShoppingCart className="h-5 w-5" />
-                  <span className="ml-3 text-sm text-gray-700">[ 0 ]</span>
+                  <span className="ml-2 text-sm text-gray-700">[0]</span>
                   <span className="ml-2 text-sm text-gray-500">KSH 0</span>
                 </Link>
 
@@ -366,9 +389,9 @@ export default function Header() {
                 </SignedIn>
 
                 <SignedOut>
-                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600">
+                  <Link href="/sign-in" className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600 text-sm font-normal">
                     <User className="h-5 w-5" />
-                    <span className="ml-2">Login</span>
+                    <span className="ml-1">Login</span>
                   </Link>
                 </SignedOut>
 
