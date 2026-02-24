@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, text, timestamp } from 'drizzle-orm/pg-core'
+import { pgTable, serial, varchar, text, timestamp, numeric } from 'drizzle-orm/pg-core'
 
 // Remedies table for natural health remedies
 export const remedies = pgTable('remedies', {
@@ -9,7 +9,8 @@ export const remedies = pgTable('remedies', {
   ingredients: text('ingredients'),
   benefits: text('benefits'),
   preparation: text('preparation'),
-  category: varchar('category', { length: 100 }),
+  category: varchar('category', { length: 100 }), // Back to category (Neon AI corrected this)
+  price: numeric('price', { precision: 10, scale: 2 }).default('0'),
   imageUrl: varchar('image_url', { length: 500 }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 })

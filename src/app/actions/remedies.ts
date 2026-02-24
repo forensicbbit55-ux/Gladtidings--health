@@ -35,7 +35,7 @@ export async function addRemedy(formData: FormData) {
       ingredients: ingredients?.trim() || null,
       benefits: benefits?.trim() || null,
       preparation: preparation?.trim() || null,
-      category: category?.trim() || null,
+      category: category?.trim() || null, // Back to category (Neon AI corrected this)
       imageUrl: imageUrl?.trim() || null,
     }
 
@@ -46,7 +46,10 @@ export async function addRemedy(formData: FormData) {
     revalidatePath('/')
     revalidatePath('/remedies')
 
-    return { success: true }
+    return { 
+      success: true, 
+      message: 'Remedy added successfully!' 
+    }
   } catch (error) {
     console.error('Error adding remedy:', error)
     return { 

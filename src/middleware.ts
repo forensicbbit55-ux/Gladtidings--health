@@ -1,25 +1,26 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { withClerkMiddleware } from '@clerk/nextjs'
 import { NextResponse } from 'next/server'
 
-const isPublicRoute = createRouteMatcher([
-  '/',
-  '/remedies',
-  '/shop',
-  '/courses',
-  '/about',
-  '/blog',
-  '/contact',
-  '/sign-in(.*)',
-  '/sign-up(.*)',
-  '/api/webhooks(.*)',
-])
+export default withClerkMiddleware((req) => {
+  const isPublicRoute = [
+    '/',
+    '/remedies',
+    '/shop',
+    '/courses',
+    '/about',
+    '/blog',
+    '/contact',
+    '/sign-in',
+    '/sign-up',
+    '/api/webhooks'
+  ].some(path => req.nextUrl.pathname.startsWith(path))
 
-export default clerkMiddleware((auth, req) => {
-  if (!isPublicRoute(req)) {
-    // Redirect to sign-in if trying to access protected route
+  if (!isPublicRoute) {
     const signInUrl = new URL('/sign-in', req.url)
     return NextResponse.redirect(signInUrl)
   }
+
+  return NextResponse.next()
 })
 
 export const config = {

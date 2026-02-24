@@ -21,6 +21,7 @@ import { useUser, UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
 export default function Header() {
   const [shopOpen, setShopOpen] = useState(false)
   const [coursesOpen, setCoursesOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { user } = useUser()
 
   const shopItems = [
@@ -38,6 +39,10 @@ export default function Header() {
     'Nutrition Courses',
     'Meditation & Mindfulness'
   ]
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
 
   return (
     <>
@@ -216,16 +221,17 @@ export default function Header() {
             {/* MOBILE VIEW - Center: Logo */}
             <div className="flex md:hidden flex-col items-center">
               <div className="flex items-center">
-                <img 
-                  src="/images/glad-tidings-logo.png" 
-                  alt="Glad Tidings Health Logo" 
-                  className="w-8 h-8 object-contain"
-                  width="32"
-                  height="32"
-                  loading="eager"
-                  decoding="async"
-                  fetchpriority="high"
-                />
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-400 to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                  <img 
+                    src="/images/logoCreator_imagetologo.jpg" 
+                    alt="Glad Tidings Health Logo" 
+                    className="w-6 h-6 object-contain"
+                    width="24"
+                    height="24"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
                 <div className="flex flex-col ml-1 leading-tight">
                   <span className="text-sm font-bold text-gray-800">Glad Tidings</span>
                   <span className="text-xs font-medium text-emerald-600">Health</span>
@@ -233,7 +239,7 @@ export default function Header() {
               </div>
             </div>
 
-            {/* MOBILE VIEW - Right: Shopping Cart */}
+            {/* MOBILE VIEW - Right: Shopping Cart & WhatsApp */}
             <div className="flex md:hidden">
               <Link 
                 href="/cart" 
@@ -244,145 +250,161 @@ export default function Header() {
                   0
                 </span>
               </Link>
-            </div>
 
-            {/* DESKTOP VIEW - Left: Logo */}
-            <div className="hidden md:flex items-center space-x-6">
-              <div className="flex items-center">
+              <Link 
+                href="https://wa.me/1234567890" 
+                target="_blank"
+                className="flex items-center"
+              >
                 <img 
-                  src="/images/glad-tidings-logo.png" 
+                  src="/logo.png" 
                   alt="Glad Tidings Health Logo" 
-                  className="w-10 h-10 object-contain"
-                  width="40"
-                  height="40"
+                  className="h-8 w-auto object-contain"
+                  width="120"
+                  height="36"
                   loading="eager"
                   decoding="async"
-                  fetchpriority="high"
                 />
                 <div className="flex flex-col ml-3">
-                  <span className="text-lg font-bold text-gray-800">Glad Tidings</span>
+                  <span className="text-lg font-bold text-gray-900">Glad Tidings</span>
                   <span className="text-sm font-medium text-emerald-600">Health</span>
                 </div>
-              </div>
-            </div>
-
-            {/* DESKTOP VIEW - Center/Right: Navigation */}
-            <div className="hidden md:flex items-center space-x-10 flex-1 justify-center ml-8">
-              <Link href="/" className="text-gray-800 hover:text-emerald-600 font-medium transition-colors">
-                Home
-              </Link>
-              
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-gray-800 hover:text-emerald-600 font-medium">
-                    Shop
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[280px] bg-white border-emerald-200 shadow-xl">
-                  {shopItems.map((item) => (
-                    <DropdownMenuItem key={item} asChild>
-                      <Link href={`/shop/${item.toLowerCase().replace(/\s+/g, '-')}`}>
-                        {item}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <Link href="/about" className="text-gray-800 hover:text-emerald-600 font-medium transition-colors">
-                About
-              </Link>
-              
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-gray-800 hover:text-emerald-600 font-medium">
-                    Courses
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[280px] bg-white border-emerald-200 shadow-xl">
-                  {courseItems.map((item) => (
-                    <DropdownMenuItem key={item} asChild>
-                      <Link href={`/courses/${item.toLowerCase().replace(/\s+/g, '-')}`}>
-                        {item}
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <Link href="/blog" className="text-gray-800 hover:text-emerald-600 font-medium transition-colors">
-                Blog
-              </Link>
-              
-              <Link href="/contact" className="text-gray-800 hover:text-emerald-600 font-medium transition-colors">
-                Contact
               </Link>
             </div>
 
-            {/* DESKTOP VIEW - Right: Actions */}
-            <div className="hidden md:flex items-center space-x-4">
+            {/* DESKTOP VIEW - Center: Logo & Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
               <Link 
-                href="/appointment" 
-                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200"
+                href="/" 
+                className="flex items-center"
               >
-                <Calendar className="h-4 w-4" />
-                <span>Appointment</span>
-              </Link>
-              
-              <Link 
-                href="/cart" 
-                className="flex items-center space-x-2 text-gray-800 hover:text-emerald-600 hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200 relative"
-              >
-                <ShoppingCart className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold">
-                  0
-                </span>
-              </Link>
-
-              <SignedOut>
-                <Link 
-                  href="/sign-in" 
-                  className="flex items-center space-x-2 text-gray-800 hover:text-emerald-600 hover:bg-gray-50 p-2 rounded-lg transition-colors duration-200"
-                >
-                  <User className="h-5 w-5" />
-                  <span>Login</span>
-                </Link>
-              </SignedOut>
-              
-              <SignedIn>
-                <div className="flex items-center space-x-3">
-                  <span className="text-sm text-gray-600">
-                    Welcome, {user?.firstName || 'User'}
-                  </span>
-                  <UserButton 
-                    appearance={{
-                      elements: {
-                        avatarBox: "w-8 h-8",
-                      }
-                    }}
-                    afterSignOutUrl="/"
-                  />
+                <img 
+                  src="/logo.png" 
+                  alt="Glad Tidings Health Logo" 
+                  className="h-8 w-auto object-contain"
+                  width="120"
+                  height="36"
+                  loading="eager"
+                  decoding="async"
+                />
+                <div className="flex flex-col ml-3">
+                  <span className="text-lg font-bold text-gray-900">Glad Tidings</span>
+                  <span className="text-sm font-medium text-emerald-600">Health</span>
                 </div>
-              </SignedIn>
+              </Link>
+            </div>
+
+            {/* DESKTOP VIEW - Right: Navigation & Actions */}
+            <div className="hidden md:flex items-center space-x-6">
+              <nav className="flex items-center space-x-6">
+                <Link 
+                  href="/" 
+                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
+                >
+                  Home
+                </Link>
+                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-medium">
+                      <span>Shop</span>
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-[220px] bg-white border-gray-200 shadow-lg rounded-lg">
+                    <DropdownMenuItem asChild>
+                      <Link href="/shop/herbal-remedies" className="text-gray-900 hover:text-emerald-600">
+                        Herbal Remedies
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/shop/supplements" className="text-gray-900 hover:text-emerald-600">
+                        Supplements
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                
+                <Link 
+                  href="/about" 
+                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
+                >
+                  About
+                </Link>
+                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center space-x-1 text-gray-900 hover:text-emerald-600 font-medium">
+                      <span>Courses</span>
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-[220px] bg-white border-gray-200 shadow-lg rounded-lg">
+                    <DropdownMenuItem asChild>
+                      <Link href="/courses/natural-remedies" className="text-gray-900 hover:text-emerald-600">
+                        Natural Remedies
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/courses/wellness" className="text-gray-900 hover:text-emerald-600">
+                        Wellness Programs
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                
+                <Link 
+                  href="/blog" 
+                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
+                >
+                  Blog
+                </Link>
+                
+                <Link 
+                  href="/contact" 
+                  className="text-gray-900 hover:text-emerald-600 font-medium transition-colors"
+                >
+                  Contact
+                </Link>
+              </nav>
+
+              <div className="flex items-center space-x-4">
+                <Link 
+                  href="/appointment" 
+                  className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors"
+                >
+                  <Calendar className="h-4 w-4" />
+                  <span>Appointment</span>
+                </Link>
+
+                <Link 
+                  href="/cart" 
+                  className="flex items-center text-gray-900 hover:text-emerald-600 relative"
+                >
+                  <ShoppingCart className="h-5 w-5" />
+                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold">
+                    0
+                  </span>
+                </Link>
+
+                <SignedIn>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+                
+                <SignedOut>
+                  <Link 
+                    href="/sign-in" 
+                    className="flex items-center space-x-2 text-gray-900 hover:text-emerald-600"
+                  >
+                    <User className="h-5 w-5" />
+                    <span className="ml-2">Login</span>
+                  </Link>
+                </SignedOut>
+              </div>
             </div>
           </div>
         </div>
       </header>
-
-      {/* Floating WhatsApp Button */}
-      <a
-        href="https://wa.me/254723730980"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-br from-emerald-500 to-green-600 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center animate-pulse"
-      >
-        <MessageCircle className="h-6 w-6 text-white" />
-      </a>
-
-      {/* Spacer for fixed header */}
-      <div className="h-16"></div>
     </>
   )
 }

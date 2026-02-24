@@ -93,7 +93,7 @@ import { useState, useEffect, useRef } from 'react'
 
   return (
     <div 
-      className="relative w-full h-[600px] overflow-hidden bg-gray-900"
+      className="relative w-full h-[800px] overflow-hidden bg-gray-900"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
