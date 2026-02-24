@@ -234,27 +234,29 @@ export default function Header() {
               </Sheet>
             </div>
 
-            {/* MOBILE VIEW - Center: Logo */}
+            {/* MOBILE VIEW - Center: Logo (large centered container like provided design) */}
             <div className="flex md:hidden flex-col items-center">
-              <Link href="/" className="flex items-center">
-                {!logoBroken ? (
-                  <Image
-                    src="/images/logo.png"
-                    alt="Glad Tidings logo"
-                    width={140}
-                    height={32}
-                    className="h-9 w-auto object-contain mr-2"
-                    priority
-                    onError={() => setLogoBroken(true)}
-                  />
-                ) : (
-                  <>
-                    <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-2">
-                      <Leaf className="w-4 h-4 text-white" />
+              <Link href="/" className="relative isolate" aria-label="Home">
+                <div style={{ width: 360, height: 112 }} className="relative isolate">
+                  {!logoBroken ? (
+                    <Image
+                      src="/images/logo.png"
+                      alt="Glad Tidings logo"
+                      width={360}
+                      height={112}
+                      className="absolute inset-0 m-auto h-28 w-auto object-contain mix-blend-screen"
+                      priority
+                      onError={() => setLogoBroken(true)}
+                    />
+                  ) : (
+                    <div className="flex items-center">
+                      <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-2">
+                        <Leaf className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-lg font-semibold text-gray-900">Glad Tidings</span>
                     </div>
-                    <span className="text-lg font-semibold text-gray-900">Glad Tidings</span>
-                  </>
-                )}
+                  )}
+                </div>
               </Link>
             </div>
 
@@ -275,25 +277,27 @@ export default function Header() {
             {/* DESKTOP VIEW - Logo, Centered Nav, and Actions */}
               <div className="hidden md:flex items-center w-full">
               <div className="flex items-center">
-                <Link href="/" className="flex items-center">
-                  {!logoBroken ? (
-                        <Image
-                          src="/images/logo.png"
-                          alt="Glad Tidings logo"
-                          width={180}
-                          height={44}
-                          className="h-10 w-auto object-contain mr-4"
-                          priority
-                          onError={() => setLogoBroken(true)}
-                        />
-                  ) : (
-                    <>
-                      <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-3">
-                        <Leaf className="w-5 h-5 text-white" />
+                <Link href="/" className="relative isolate" aria-label="Home">
+                  <div style={{ width: 360, height: 112 }} className="relative isolate">
+                    {!logoBroken ? (
+                      <Image
+                        src="/images/logo.png"
+                        alt="Glad Tidings logo"
+                        width={360}
+                        height={112}
+                        className="absolute inset-0 m-auto h-28 w-auto object-contain mix-blend-screen mr-4"
+                        priority
+                        onError={() => setLogoBroken(true)}
+                      />
+                    ) : (
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full flex items-center justify-center shadow-sm mr-3">
+                          <Leaf className="w-5 h-5 text-white" />
+                        </div>
+                        <span className="text-lg font-normal text-gray-900">Glad Tidings</span>
                       </div>
-                      <span className="text-lg font-normal text-gray-900">Glad Tidings</span>
-                    </>
-                  )}
+                    )}
+                  </div>
                 </Link>
               </div>
               <div className="hidden">
