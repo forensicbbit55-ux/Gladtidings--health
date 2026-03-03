@@ -1,6 +1,29 @@
 import Link from 'next/link'
 import { ShoppingCart, Star, Heart, Filter, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { prisma } from '@/lib/prisma'
+
+// Fetch remedies server-side
+async function getRemedies() {
+  try {
+    const remedies = await prisma.remedy.findMany({
+      where: {
+        isPublished: true
+      },
+      include: {
+        category: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: 8 // Show first 8 remedies
+    })
+    return remedies
+  } catch (error) {
+    console.error('Error fetching remedies:', error)
+    return []
+  }
+}
 
 const shopCategories = [
   {
@@ -40,58 +63,12 @@ const shopCategories = [
   }
 ]
 
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Echinacea Immune Support',
-    category: 'Herbal Remedies',
-    price: 24.99,
-    originalPrice: 34.99,
-    rating: 4.8,
-    reviews: 127,
-    image: '/images/products/echinacea.jpg',
-    inStock: true,
-    badge: 'Best Seller'
-  },
-  {
-    id: 2,
-    name: 'Vitamin C Complex',
-    category: 'Natural Supplements',
-    price: 19.99,
-    originalPrice: 29.99,
-    rating: 4.6,
-    reviews: 89,
-    image: '/images/products/vitamin-c.jpg',
-    inStock: true,
-    badge: 'New'
-  },
-  {
-    id: 3,
-    name: 'Lavender Essential Oil',
-    category: 'Essential Oils',
-    price: 15.99,
-    originalPrice: null,
-    rating: 4.9,
-    reviews: 203,
-    image: '/images/products/lavender.jpg',
-    inStock: true,
-    badge: 'Popular'
-  },
-  {
-    id: 4,
-    name: 'Herbal Tea Collection',
-    category: 'Herbal Remedies',
-    price: 18.99,
-    originalPrice: null,
-    rating: 4.7,
-    reviews: 156,
-    image: '/images/products/herbal-tea.jpg',
-    inStock: true,
-    badge: null
+export default async function ShopPage() {
+  const remedies = await getRemedies()
+  
+  const formatPrice = (price) => {
+    return `KSH ${parseFloat(price).toFixed(2)}`
   }
-]
-
-export default function ShopPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -117,9 +94,9 @@ export default function ShopPage() {
       </div>
 
       {/* Shop Categories */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-8">Shop by Category</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6 sm:mb-8">Shop by Category</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6">
           {shopCategories.map((category) => (
             <Link
               key={category.id}
@@ -127,16 +104,16 @@ export default function ShopPage() {
               className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
             >
               <div className="aspect-square bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center">
-                <div className="text-emerald-600 text-4xl font-bold">
+                <div className="text-emerald-600 text-2xl sm:text-3xl md:text-4xl font-bold">
                   {category.name.charAt(0)}
                 </div>
               </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-800 mb-2 group-hover:text-emerald-600 transition-colors">
+              <div className="p-3 sm:p-4">
+                <h3 className="font-semibold text-gray-800 mb-1 sm:mb-2 group-hover:text-emerald-600 transition-colors text-sm sm:text-base">
                   {category.name}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">{category.description}</p>
-                <p className="text-sm text-emerald-600 font-medium">
+                <p className="text-xs sm:text-sm text-gray-600 mb-2 line-clamp-2">{category.description}</p>
+                <p className="text-xs sm:text-sm text-emerald-600 font-medium">
                   {category.productCount} products
                 </p>
               </div>
@@ -145,73 +122,95 @@ export default function ShopPage() {
         </div>
       </div>
 
-      {/* Featured Products */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-800">Featured Products</h2>
-          <div className="flex gap-4">
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
-              <Filter className="h-4 w-4" />
-              Filter
+      {/* Featured Remedies */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Featured Natural Remedies</h2>
+          <div className="flex gap-2 sm:gap-4">
+            <Button variant="outline" size="sm" className="flex items-center gap-2 text-xs sm:text-sm">
+              <Filter className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Filter</span>
+              <span className="sm:hidden">🔽</span>
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
               Sort by
             </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {featuredProducts.map((product) => (
-            <div key={product.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          {remedies.map((remedy) => (
+            <div key={remedy.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
               <div className="relative">
-                <div className="aspect-square bg-gradient-to-br from-emerald-50 to-green-50 flex items-center justify-center">
-                  <div className="text-emerald-600 text-3xl font-bold">
-                    {product.name.charAt(0)}
-                  </div>
-                </div>
-                {product.badge && (
-                  <div className="absolute top-2 left-2 bg-emerald-600 text-white text-xs px-2 py-1 rounded-full">
-                    {product.badge}
+                {remedy.images && remedy.images.length > 0 ? (
+                  <img 
+                    src={remedy.images[0]} 
+                    alt={remedy.title} 
+                    className="w-full h-40 sm:h-48 object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-40 sm:h-48 bg-gradient-to-br from-emerald-50 to-green-50 flex items-center justify-center">
+                    <div className="text-emerald-600 text-2xl sm:text-3xl font-bold">
+                      🌿
+                    </div>
                   </div>
                 )}
-                <button className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors">
-                  <Heart className="h-4 w-4 text-gray-600" />
+                {remedy.featured && (
+                  <div className="absolute top-2 left-2 bg-emerald-600 text-white text-xs px-2 py-1 rounded-full">
+                    Featured
+                  </div>
+                )}
+                <button className="absolute top-2 right-2 bg-white rounded-full p-1.5 sm:p-2 shadow-md hover:bg-gray-100 transition-colors">
+                  <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-gray-600" />
                 </button>
               </div>
               
               <div className="p-4">
                 <div className="mb-2">
-                  <span className="text-xs text-emerald-600 font-medium">{product.category}</span>
+                  <span className="text-xs text-emerald-600 font-medium">
+                    {remedy.category?.name || 'Natural Remedy'}
+                  </span>
                 </div>
-                <h3 className="font-semibold text-gray-800 mb-2">{product.name}</h3>
+                <h3 className="font-semibold text-gray-800 mb-2">{remedy.title}</h3>
                 
-                <div className="flex items-center mb-2">
-                  <div className="flex items-center">
-                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                    <span className="text-sm text-gray-600 ml-1">{product.rating}</span>
-                  </div>
-                  <span className="text-sm text-gray-500 ml-2">({product.reviews} reviews)</span>
-                </div>
+                {remedy.description && (
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{remedy.description}</p>
+                )}
 
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <span className="text-lg font-bold text-gray-800">${product.price}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-gray-500 line-through ml-2">
-                        ${product.originalPrice}
-                      </span>
-                    )}
+                    <span className="text-lg font-bold text-gray-800">{formatPrice(remedy.price)}</span>
                   </div>
                 </div>
 
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2">
-                  <ShoppingCart className="h-4 w-4" />
-                  Add to Cart
-                </Button>
+                <div className="flex gap-2">
+                  <Button className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2">
+                    <ShoppingCart className="h-4 w-4" />
+                    Add to Cart
+                  </Button>
+                  <Link 
+                    href={`/remedies/${remedy.slug}`}
+                    className="flex-1"
+                  >
+                    <Button variant="outline" className="w-full">
+                      View Details
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
         </div>
+        
+        {remedies.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-400 text-6xl mb-4">🌿</div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">No remedies available</h3>
+            <p className="text-gray-600 mb-6">
+              Check back soon for natural health remedies
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Newsletter Section */}

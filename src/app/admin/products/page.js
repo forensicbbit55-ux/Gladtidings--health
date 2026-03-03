@@ -18,14 +18,16 @@ import { useState, useEffect } from 'react';
       const response = await fetch('/api/remedies')
       const data = await response.json()
 
-      if (data.success) {
-        setRemedies(data.remedies)
+      if (data.success && data.data) {
+        setRemedies(Array.isArray(data.data) ? data.data : [])
       } else {
-        setError(data.error)
+        setError(data.error || 'Failed to fetch remedies')
+        setRemedies([])
       }
     } catch (err) {
       console.error('Error fetching remedies:', err)
       setError('Failed to fetch remedies')
+      setRemedies([])
     } finally {
       setLoading(false)
     }
@@ -103,7 +105,27 @@ import { useState, useEffect } from 'react';
           </Link>
         </div>
 
-        {remedies.length === 0 ? (
+        {loading ? (
+          <div className="bg-white rounded-lg shadow p-8 text-center">
+            <div className="text-gray-500">
+              <div className="text-lg font-medium mb-2">Loading remedies...</div>
+              <div className="text-sm">Please wait while we fetch your remedies</div>
+            </div>
+          </div>
+        ) : error ? (
+          <div className="bg-white rounded-lg shadow p-8 text-center">
+            <div className="text-red-500">
+              <div className="text-lg font-medium mb-2">Error</div>
+              <div className="text-sm mb-4">{error}</div>
+              <button
+                onClick={fetchRemedies}
+                className="inline-block px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        ) : remedies.length === 0 ? (
           <div className="bg-white rounded-lg shadow p-8 text-center">
             <div className="text-gray-500">
               <div className="text-lg font-medium mb-2">No remedies found</div>

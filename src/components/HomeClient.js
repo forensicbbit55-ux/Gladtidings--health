@@ -6,13 +6,30 @@ import Link from 'next/link';
 export default function HomeClient() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [remedies, setRemedies] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(price)
+    return `KSH ${parseFloat(price).toFixed(2)}`
   }
+
+  // Fetch remedies from API
+  useEffect(() => {
+    const fetchRemedies = async () => {
+      try {
+        const response = await fetch('/api/remedies')
+        const data = await response.json()
+        if (data.success) {
+          setRemedies(data.data)
+        }
+      } catch (error) {
+        console.error('Error fetching remedies:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchRemedies()
+  }, [])
 
   const slides = [
     {
@@ -42,18 +59,6 @@ export default function HomeClient() {
     { id: 'herbal', name: 'Herbal Remedies', icon: '🌿' },
     { id: 'wellness', name: 'Wellness', icon: '💚' },
     { id: 'spiritual', name: 'Spiritual Health', icon: '🙏' }
-  ]
-
-  const products = [
-    { id: 1, name: 'Natural Herbal Tea Blend', category: 'Herbal Remedies', price: 12.99, rating: 4.5, image: '/images/products/herbal-tea.jpg', badge: 'New' },
-    { id: 2, name: 'Organic Echinacea Extract', category: 'Immune Support', price: 8.99, rating: 4.3, image: '/images/products/echinacea.jpg' },
-    { id: 3, name: 'Essential Oil Collection', category: 'Aromatherapy', price: 15.99, rating: 4.7, image: '/images/products/essential-oils.jpg', badge: 'Sale' },
-    { id: 4, name: 'Natural Vitamin C Complex', category: 'Supplements', price: 9.99, rating: 4.4, image: '/images/products/vitamin-c.jpg' },
-    { id: 5, name: 'Herbal Detox Formula', category: 'Cleansing', price: 7.99, rating: 4.2, image: '/images/products/detox.jpg' },
-    { id: 6, name: 'Organic Ginger Root', category: 'Digestive Health', price: 11.99, rating: 4.6, image: '/images/products/ginger.jpg', badge: 'Best Seller' },
-    { id: 7, name: 'Natural Sleep Aid', category: 'Wellness', price: 6.99, rating: 4.8, image: '/images/products/sleep-aid.jpg', badge: 'Popular' },
-    { id: 8, name: 'Probiotic Supplement', category: 'Digestive Health', price: 5.99, rating: 4.1, image: '/images/products/probiotic.jpg' },
-    { id: 9, name: 'Natural Pain Relief', category: 'Pain Management', price: 8.49, rating: 4.0, image: '/images/products/pain-relief.jpg' }
   ]
 
   const features = [
@@ -87,7 +92,7 @@ export default function HomeClient() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Carousel Section */}
-      <section className="relative h-[600px] md:h-[700px] overflow-hidden border-b-4 border-emerald-600">
+      <section className="relative h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden border-b-4 border-emerald-600">
         {slides.map((slide) => (
           <div
             key={slide.id}
@@ -102,15 +107,15 @@ export default function HomeClient() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 to-gray-800/30"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center text-white px-4">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4">{slide.title}</h1>
-                <h2 className="text-3xl md:text-5xl font-bold mb-6">{slide.subtitle}</h2>
-                <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">{slide.description}</p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="bg-emerald-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors">
+              <div className="text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-2 sm:mb-4">{slide.title}</h1>
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-6">{slide.subtitle}</h2>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-8 max-w-2xl mx-auto">{slide.description}</p>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                  <button className="bg-emerald-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-emerald-700 transition-colors text-sm sm:text-base">
                     Shop Now
                   </button>
-                  <button className="bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-colors">
+                  <button className="bg-white text-emerald-600 px-6 sm:px-8 py-2 sm:py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-colors text-sm sm:text-base">
                     Get Consultation
                   </button>
                 </div>
@@ -122,17 +127,17 @@ export default function HomeClient() {
         {/* Carousel Navigation */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all"
+          className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all"
+          className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 sm:p-3 rounded-full shadow-lg transition-all"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -151,41 +156,51 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* WhatsApp Button Below Carousel */}
-      <section className="py-8 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <Link 
-              href="https://wa.me/1234567890" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center space-x-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.891m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 9.891-5.335 9.891-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-              </svg>
-              <span className="text-lg font-medium">Chat with us on WhatsApp</span>
-            </Link>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Get instant support and consultation for your natural health and wellness needs
-            </p>
+      {/* Floating WhatsApp Button */}
+      <div className="fixed right-4 sm:right-8 bottom-4 sm:bottom-8 z-50 group">
+        {/* Wave Effect Rings */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute w-16 h-16 rounded-full border-2 border-green-400 animate-ping"></div>
+          <div className="absolute w-20 h-20 rounded-full border border-green-300 animate-ping animation-delay-200"></div>
+          <div className="absolute w-24 h-24 rounded-full border border-green-200 animate-ping animation-delay-400"></div>
+        </div>
+        
+        <Link 
+          href="https://wa.me/254723730980" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 animate-pulse border-2 border-green-400"
+          aria-label="Chat with us on WhatsApp"
+        >
+          <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.149-.67.149-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.891m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 9.891-5.335 9.891-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+        </Link>
+        
+        {/* Tooltip Message */}
+        <div className="absolute bottom-full right-0 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap shadow-lg">
+            Contact us here for support!
+            <div className="absolute top-full right-4 -mt-1">
+              <div className="border-4 border-transparent border-t-gray-800"></div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Categories Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Shop by Category</h2>
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-10">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Shop by Category</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
             {categories.map((category) => (
               <div key={category.id} className="text-center group cursor-pointer">
-                <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-200 transition-colors">
-                  <span className="text-3xl">{category.icon}</span>
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-emerald-200 transition-colors">
+                  <span className="text-2xl sm:text-3xl">{category.icon}</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{category.name}</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{category.name}</h3>
                 <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
                   View Products →
                 </Link>
@@ -196,25 +211,20 @@ export default function HomeClient() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Our Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in">
+      <section className="py-16 sm:py-20 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Our Services</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in">
               Comprehensive natural health solutions for your wellness journey
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categories.map((category, index) => (
-              <div key={category.id} className="feature-card animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
-                <div className="feature-icon">
-                  {category.icon}
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{category.name}</h3>
-                <p className="text-gray-600 text-center">{category.description}</p>
-                <Link href="/products" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
-                  Explore →
-                </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {features.map((feature, index) => (
+              <div key={feature.id} className="text-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{ animationDelay: `${index * 150}ms` }}>
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600 text-sm sm:text-base mb-4">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -222,34 +232,34 @@ export default function HomeClient() {
       </section>
 
       {/* Blog Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Latest Blog Posts</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in">
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 animate-fade-in">Latest Blog Posts</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto animate-slide-in">
               Stay informed with our latest health and wellness insights
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {blogPosts.slice(0, 3).map((post, index) => (
               <article key={post.id} className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="relative">
-                  <img src={post.image} alt={post.title} className="w-full h-48 object-cover rounded-t-xl" />
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  <img src={post.image} alt={post.title} className="w-full h-40 sm:h-48 object-cover rounded-t-xl" />
+                  <div className="absolute top-2 sm:top-4 right-2 sm:right-4">
+                    <span className="bg-emerald-600 text-white px-2 sm:px-3 py-1 rounded-full text-xs font-semibold">
                       {post.category}
                     </span>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center mb-3">
-                    <span className="text-gray-500 text-sm">{post.date}</span>
+                <div className="p-4 sm:p-6">
+                  <div className="flex items-center mb-2 sm:mb-3">
+                    <span className="text-gray-500 text-xs sm:text-sm">{post.date}</span>
                     <span className="mx-2 text-gray-300">•</span>
-                    <span className="text-gray-500 text-sm">{post.readTime}</span>
+                    <span className="text-gray-500 text-xs sm:text-sm">{post.readTime}</span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
-                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3 line-clamp-2">{post.title}</h3>
+                  <p className="text-gray-600 mb-3 sm:mb-4 line-clamp-2 text-sm sm:text-base">{post.excerpt}</p>
+                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200 text-sm sm:text-base">
                     Read More →
                   </Link>
                 </div>
@@ -264,43 +274,65 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* New Products Section */}
+      {/* Featured Remedies Section */}
       <section className="py-16 bg-gradient-to-b from-emerald-50 to-white">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 animate-fade-in">New Products</h2>
-            <Link href="/products" className="btn-outline">
-              View All →
+            <h2 className="text-4xl font-bold text-gray-900 animate-fade-in">Featured Natural Remedies</h2>
+            <Link href="/remedies" className="btn-outline">
+              View All Remedies →
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.slice(0, 4).map((product, index) => (
-              <div key={product.id} className="product-card animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="relative overflow-hidden rounded-t-xl">
-                  <img src={product.image} alt={product.name} className="product-image" />
-                  {product.badge && (
-                    <span className="product-badge">
-                      {product.badge}
-                    </span>
-                  )}
-                </div>
-                <div className="p-6">
-                  <h3 className="font-bold text-gray-900 mb-2 text-lg">{product.name}</h3>
-                  <p className="text-gray-600 mb-4">{product.category}</p>
-                  <div className="flex items-center mb-4">
-                    <span className="text-yellow-400 text-lg">★</span>
-                    <span className="text-sm text-gray-600 ml-2">{product.rating}</span>
+          
+          {loading ? (
+            <div className="text-center py-8">
+              <div className="text-gray-400 text-6xl mb-4">🌿</div>
+              <p className="text-gray-600">Loading natural remedies...</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {remedies.slice(0, 8).map((remedy, index) => (
+                <div key={remedy.id} className="product-card animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                  <div className="relative overflow-hidden rounded-t-xl">
+                    {remedy.images && remedy.images.length > 0 ? (
+                      <img 
+                        src={remedy.images[0]} 
+                        alt={remedy.title} 
+                        className="product-image w-full h-48 object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-48 bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center">
+                        <div className="text-emerald-600 text-4xl">🌿</div>
+                      </div>
+                    )}
+                    {remedy.featured && (
+                      <span className="product-badge">
+                        Featured
+                      </span>
+                    )}
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-emerald-600">{product.price}</span>
-                    <button className="btn-primary text-sm">
-                      Add to Cart
-                    </button>
+                  <div className="p-6">
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">{remedy.title}</h3>
+                    <p className="text-gray-600 mb-4">{remedy.category?.name || 'Natural Remedy'}</p>
+                    
+                    {remedy.description && (
+                      <p className="text-gray-600 text-sm mb-4 line-clamp-2">{remedy.description}</p>
+                    )}
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-emerald-600">{formatPrice(remedy.price)}</span>
+                      <Link 
+                        href={`/remedies/${remedy.slug}`}
+                        className="btn-primary text-sm"
+                      >
+                        View Details
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

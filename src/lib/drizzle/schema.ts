@@ -1,8 +1,8 @@
-import { pgTable, serial, varchar, text, timestamp, numeric } from 'drizzle-orm/pg-core'
+import { pgTable, uuid, varchar, text, timestamp, numeric } from 'drizzle-orm/pg-core'
 
 // Remedies table for natural health remedies
 export const remedies = pgTable('remedies', {
-  id: serial('id').primaryKey(),
+  id: uuid('id').primaryKey().defaultRandom(),
   title: varchar('title', { length: 255 }).notNull(),
   slug: varchar('slug', { length: 255 }).notNull().unique(),
   description: text('description'),

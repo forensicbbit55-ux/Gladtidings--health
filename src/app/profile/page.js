@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react';
-;import { useAuth } from '@/contexts/NextAuthContext';
-;import { useRouter } from 'next/navigation'
-;
-;export default function ProfilePage() {
+import { useState, useEffect } from 'react'
+import { useAuth } from '@/contexts/NextAuthContext'
+import { useRouter } from 'next/navigation'
+
+export default function ProfilePage() {
   const { user, loading } = useAuth()
   const router = useRouter()
 

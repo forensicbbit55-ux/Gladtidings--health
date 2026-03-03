@@ -4,7 +4,27 @@ import { useCartStore } from '../../../store/cartStore'
 import { Calendar, Clock, ShoppingCart, Plus } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Remedy } from '@/lib/drizzle/schema'
+
+// Define the remedy type based on Prisma schema
+interface Remedy {
+  id: string
+  title: string
+  slug: string
+  description: string | null
+  price: number | any // Prisma Decimal type
+  images: string[]
+  categoryId: string | null
+  ingredients: string | null
+  benefits: string | null
+  createdAt: Date
+  updatedAt: Date
+  isPublished: boolean
+  category?: {
+    id: string
+    name: string
+    slug: string
+  } | null
+}
 
 interface RemediesClientProps {
   remedies: Remedy[]
@@ -18,7 +38,7 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
       id: remedy.id.toString(),
       title: remedy.title,
       price: parseFloat(remedy.price?.toString() || '0'),
-      image_url: remedy.images || undefined,
+      image_url: remedy.images?.[0] || undefined, // Get first image from array
     })
   }
 
@@ -57,10 +77,10 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
             {remedies.map((remedy) => (
               <div key={remedy.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                 {/* Image */}
-                {remedy.images ? (
+                {remedy.images && remedy.images.length > 0 ? (
                   <div className="aspect-video relative">
                     <Image
-                      src={remedy.images}
+                      src={remedy.images[0]} // Use first image from array
                       alt={remedy.title}
                       fill
                       className="object-cover"
@@ -76,10 +96,10 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
                 {/* Content */}
                 <div className="p-6">
                   {/* Category Badge */}
-                  {remedy.categoryId && (
+                  {remedy.category && (
                     <div className="mb-3">
                       <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
-                        {remedy.categoryId}
+                        {remedy.category.name}
                       </span>
                     </div>
                   )}
@@ -92,7 +112,7 @@ export default function RemediesClient({ remedies }: RemediesClientProps) {
                   {/* Price */}
                   <div className="mb-3">
                     <span className="text-2xl font-bold text-green-600">
-                      KES {parseFloat(remedy.price?.toString() || '0').toFixed(2)}
+                      KSH {parseFloat(remedy.price?.toString() || '0').toFixed(2)}
                     </span>
                   </div>
 

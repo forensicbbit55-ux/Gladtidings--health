@@ -159,22 +159,40 @@ import { useState, useEffect } from 'react'
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Dr. Sarah Johnson</h3>
-              <p className="text-gray-600 mb-2">Medical Director</p>
-              <p className="text-sm text-gray-500">20+ years experience in natural medicine</p>
+              <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden transform -translate-y-4">
+                <img 
+                  src="https://i.postimg.cc/d1q87b6Z/image-(9).jpg" 
+                  alt="Moses Ochieng" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">MOSES OCHIENG</h3>
+              <p className="text-gray-600 mb-2">Senior Medical Missionary Expert</p>
+              <p className="text-sm text-gray-500">Leading our medical mission with over 20 years of experience in natural healing and compassionate care. Specializes in herbal remedies and holistic wellness approaches.</p>
             </div>
             <div className="text-center">
-              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Michael Chen</h3>
-              <p className="text-gray-600 mb-2">Head of Operations</p>
-              <p className="text-sm text-gray-500">Expert in organic sourcing and quality control</p>
+              <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden transform -translate-y-4">
+                <img 
+                  src="https://i.postimg.cc/jqZwmhmx/e2afcdad-63e1-4955-a934-a923f4d48d44.jpg" 
+                  alt="Brian Bildad" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">BRIAN BILDAD</h3>
+              <p className="text-gray-600 mb-2">EV./ Medical Missionary Expert</p>
+              <p className="text-sm text-gray-500">Dedicated evangelist and medical missionary combining spiritual guidance with natural health solutions. Passionate about bringing hope and healing to communities through faith-based care.</p>
             </div>
             <div className="text-center">
-              <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Rev. Mary Williams</h3>
-              <p className="text-gray-600 mb-2">Spiritual Counselor</p>
-              <p className="text-sm text-gray-500">Dedicated to holistic healing and prayer support</p>
+              <div className="w-32 h-32 rounded-full mx-auto mb-4 overflow-hidden transform -translate-y-4">
+                <img 
+                  src="https://i.postimg.cc/d10ndjfq/6ae67cfe-0372-4f65-b4da-1e430040ff9b.jpg" 
+                  alt="Eliazar Ouko" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">ELIAZAR OUKO</h3>
+              <p className="text-gray-600 mb-2">Software Engineer /Medical Missionary Expert</p>
+              <p className="text-sm text-gray-500">Innovative software engineer bridging technology and healthcare. Develops digital solutions to enhance medical missionary work while providing expert natural health consultations and technical support.</p>
             </div>
           </div>
         </div>

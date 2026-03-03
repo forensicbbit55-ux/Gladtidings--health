@@ -9,19 +9,29 @@ export default function AdminDashboard() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-gray-900">Products</h3>
-          <p className="text-gray-600 mt-2">Manage your products</p>
-          <a href="/admin/products" className="mt-4 inline-block px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700">
-            Manage Products
-          </a>
+          <h3 className="text-lg font-semibold text-gray-900">Shop Products</h3>
+          <p className="text-gray-600 mt-2">Manage shop inventory and products</p>
+          <div className="mt-4 space-x-2">
+            <a href="/admin/shop" className="inline-block px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700">
+              Manage Shop
+            </a>
+            <a href="/admin/shop/add" className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              Add Product
+            </a>
+          </div>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-semibold text-gray-900">Add Product</h3>
-          <p className="text-gray-600 mt-2">Create a new product</p>
-          <a href="/admin/products/add" className="mt-4 inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-            Add Product
-          </a>
+          <h3 className="text-lg font-semibold text-gray-900">Courses</h3>
+          <p className="text-gray-600 mt-2">Manage online courses and content</p>
+          <div className="mt-4 space-x-2">
+            <a href="/admin/courses" className="inline-block px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+              Manage Courses
+            </a>
+            <a href="/admin/courses/add" className="inline-block px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+              Add Course
+            </a>
+          </div>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">
@@ -35,6 +45,27 @@ export default function AdminDashboard() {
               Add Remedy
             </a>
           </div>
+        </div>
+        
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold text-gray-900">Blog</h3>
+          <p className="text-gray-600 mt-2">Manage blog posts and articles</p>
+          <div className="mt-4 space-x-2">
+            <a href="/admin/blog" className="inline-block px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+              Manage Blog
+            </a>
+            <a href="/admin/blog/new" className="inline-block px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
+              Add Post
+            </a>
+          </div>
+        </div>
+        
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-lg font-semibold text-gray-900">Orders</h3>
+          <p className="text-gray-600 mt-2">View and manage customer orders</p>
+          <a href="/admin/orders" className="mt-4 inline-block px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+            Manage Orders
+          </a>
         </div>
         
         <div className="bg-white p-6 rounded-lg shadow">

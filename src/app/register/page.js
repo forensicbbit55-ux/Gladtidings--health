@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react';
-;import Link from 'next/link';
-;import { useRouter } from 'next/navigation';
-;import { useAuth } from '@/contexts/NextAuthContext'
-;
-;export default function RegisterPage() {
+import { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/NextAuthContext'
+
+export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',

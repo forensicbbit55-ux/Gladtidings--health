@@ -1,40 +1,30 @@
 'use client'
 
-import { useState, useEffect } from 'react';
-;import Link from 'next/link';
-;import { usePathname, useRouter } from 'next/navigation';
-;import { useAuth } from '@/contexts/NextAuthContext'
-;
-;function AdminLayoutContent({ children }) {
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useUser, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+
+const ADMIN_PASSCODE = 'gladtidings.org2026'; // Updated passcode
+
+function AdminLayoutContent({ children }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const { user, isAdmin, loading } = useAuth()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [passcode, setPasscode] = useState('')
+  const [error, setError] = useState('')
+  const { user } = useUser()
   const pathname = usePathname()
-  const router = useRouter()
 
-  useEffect(() => {
-    if (!loading) {
-      if (!user) {
-        router.push('/login?callbackUrl=/admin')
-        return
-      }
-      
-      if (!isAdmin) {
-        router.push('/dashboard')
-        return
-      }
+  const handlePasscodeSubmit = (e) => {
+    e.preventDefault()
+    if (passcode === ADMIN_PASSCODE) {
+      setIsAuthenticated(true)
+      setError('')
+    } else {
+      setError('Invalid passcode')
+      setPasscode('')
     }
-  }, [user, isAdmin, loading, router])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
-      </div>
-    )
-  }
-
-  if (!user || !isAdmin) {
-    return null // Will redirect
   }
 
   const navigation = [
@@ -47,7 +37,49 @@ import { useState, useEffect } from 'react';
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <>
+      <SignedIn>
+        {!isAuthenticated ? (
+          <div className="min-h-screen flex items-center justify-center bg-gray-50">
+            <div className="max-w-md w-full space-y-8 p-8">
+              <div>
+                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                  Admin Access
+                </h2>
+                <p className="mt-2 text-center text-sm text-gray-600">
+                  Enter passcode to access admin panel
+                </p>
+              </div>
+              <form className="mt-8 space-y-6" onSubmit={handlePasscodeSubmit}>
+                <div>
+                  <label htmlFor="passcode" className="sr-only">Passcode</label>
+                  <input
+                    id="passcode"
+                    name="passcode"
+                    type="password"
+                    required
+                    className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 focus:z-10 sm:text-sm"
+                    placeholder="Enter passcode"
+                    value={passcode}
+                    onChange={(e) => setPasscode(e.target.value)}
+                  />
+                </div>
+                {error && (
+                  <div className="text-red-600 text-sm text-center">{error}</div>
+                )}
+                <div>
+                  <button
+                    type="submit"
+                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                  >
+                    Access Admin
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        ) : (
+          <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
         <div className="flex items-center justify-between h-16 px-4 border-b">
@@ -93,8 +125,9 @@ import { useState, useEffect } from 'react';
               </div>
               <div className="flex items-center space-x-4">
                 <span className="text-sm text-gray-600">
-                  {user.name} ({user.role})
+                  {user.firstName || user.emailAddresses?.[0]?.emailAddress}
                 </span>
+                <UserButton afterSignOutUrl="/" />
                 <a
                   href="/dashboard"
                   className="text-sm text-emerald-600 hover:text-emerald-700"
@@ -113,7 +146,19 @@ import { useState, useEffect } from 'react';
           </div>
         </main>
       </div>
-    </div>
+          </div>
+        )}
+      </SignedIn>
+      <SignedOut>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Authentication Required</h1>
+            <p className="text-gray-600 mb-4">Please sign in to access the admin panel.</p>
+            <a href="/sign-in" className="inline-block px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">Sign In</a>
+          </div>
+        </div>
+      </SignedOut>
+    </>
   )
 };
 

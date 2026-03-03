@@ -312,56 +312,88 @@ import { useState } from 'react'
             
             <div className="space-y-4">
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-10 w-10 text-emerald-600">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a42 42 0 01.6.33.42.42l6.67-6.67L3 8m0 8l4.26 4.26m0-8L3 16m7.89 4.26L21 12M3 12h18" />
-                  </svg>
+                <div className="flex-shrink-0 h-10 w-10">
+                  <img 
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMkAAACUCAMAAAAOCP0eAAAAbFBMVEX///8AAADd3d1YWFj29vaPj4+wsLAcHBy6urq0tLQHBwe+vr7Gxsb5+fmCgoI3NzdBQUFRUVHS0tJlZWVeXl4ODg4YGBju7u5sbGwwMDDMzMzn5+ciIiKXl5eJiYlxcXEpKSl5eXlJSUmmpqZ2AIvzAAAEoElEQVR4nO2c6XqqMBCGA1JFC4gbLkHFev/3eECP8iUsbsnknD7z/WoTS/J2kpnJgkKwWCwWi8VisVgsFovFYrFYLJZrBb5LrQ2SRMuBQ30bJAlXnkONTZKMHIJMmIRJmIRJjJCkX1a1T3IqkvwcBzZ1WFGReKPQ4MMb2qtx2PI8MZlBaNoTzpNKtqwS6yD2fZcdqwQNEEsk2couStMitkiShV2rAEg+tUoSyoGlf9ZFX/B/OuytkgyFTOvGRmZRYgQ5BWPLJCLIAMWoB0OQYyyGtklEDCgm5wpO9kX5u30SEaQWUBSvdaxKCEiEnEGrkZEWlDhyiqsiChLhgwczYhW0yCQJLmUkJMZRDvXTVsnf/S0aEmWAZR83hV7rBkJFIuS0bjz/sC2wSBlHbqVUJCKG5vOP4gqCbOJ7MRmJENCB1QcoCLKAckKSeAt9eBdFSVEQhJJErH+gF+95sEDJtZQqShLhgwebvGMVxSJJoNSRknyMgnMk0c5JaEmEDwPs9cw46QGhJhESpn3xYpsIcgr0WmoSEUB3ti9ZBUE2zWpyEiWuvBIiT/B3i5Z6ByRB8cZciZMHIC5IhIRpnz8XV3riyE0uSBRn/BSKGkfi1s84IVFQiicGmOJ+G17rKjckKspDq5yeAHFFouyDbR+gIEgzjtzkikSss2dREKTVa13ljEQEsPvdN1cQpCUg3uWORKwhcZl2WSV+ENlrOSRR4koHSqCs2Xuf5pJEzIsHKDGCHPof5pRkjOvhactcwaHl7fsf5pJkWGBHvWKnf+Co1Gf9KA5JwsxTNdX2jI9afb9V3JFEej9LFMUqDRDPO/c8zxlJ2OynGiI3bR/oQXFF8o1uq/4xvQ0wJY7UyoftibA7km/o/TKCdDIdy4rDR5ADmKfoRHFD8g3541KKOW4eHc/D4Rfu8SUigCmz7UJxQhIByMIvCxBF16Hs+RpROnrqgiTCoeVfirpRDpc0XgJKx+aSA5I53GoZ+LdCPFYF3Za6EuZK1pqj0ZNI6OfMvxf7YKhaddK4xosj83+BZA4dGvhQ4bdYBbNfBaXlBJmaBNPfma9UrQda+jJVsxO5rKvyJgoxCU6Hn8YYOS9gCqUnvR5RmosAWpIdxIkmSGmWcL9J88lqO0vOjcy4RIHD8FS3CikJWiRtm7VVb+e7KNp1vETiL7tRKEnQPXWBPBBeUdiqjyAkkTAJpi1j5ylhCM0Uj0FHggcn6bsg6u6lJ6GCjESaAdESG0ChIvHh7nvD7bwmRBnVc4WIBAO4vlx/WXPcJ7ujEN2KwrOfT4bWVXPYXbo7QZqbanh2/TlIGWFb/DnJ7UEYWisTINru5dUZU9zohLEwMXMNsrQKeJDRJSEguGXrQZumQEqr4HqmWldaJ1FuEpgDUdfQFYptErw1+PhA8SUhSiEtk4R4k3Nk+mWHCKb9jwytkiQPVqwfagdPXyZWSfBNGvMgCsoqs0pi1SKVds2GbJPYAWlDsUxiC6REmVCSWH0zMyroSOy+LasfV/7PbzCnZCS0YhImYRImeZfk13ybz+/5hqXf861XLBaLxWKxWCwWi8VisVgsFov1nv4Ao/lUHXQlAREAAAAASUVORK5CYII=" 
+                    alt="Email Icon" 
+                    className="h-10 w-10 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">Email</h3>
-                  <p className="text-gray-600">info@gladtidings.com</p>
+                  <p className="text-gray-600">glad.tidings.health@gmail.com</p>
                 </div>
               </div>
 
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-10 w-10 text-emerald-600">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.64L3 16h3.82a1 1 0 01.94-.64L21 5a2 2 0 012-2h-3.28a1 1 0 01-.94.64L3 5z" />
-                  </svg>
+                <div className="flex-shrink-0 h-10 w-10">
+                  <img 
+                    src="data:image/png;base64,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" 
+                    alt="Phone Icon" 
+                    className="h-10 w-10 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">Phone</h3>
-                  <p className="text-gray-600">+1 (555) 123-4567</p>
+                  <p className="text-gray-600">+254 237 30980</p>
                 </div>
               </div>
 
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-10 w-10 text-emerald-600">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-1.414.586l-1.829-1.828A2 2 0 0112.172 2H6a2 2 0 01-2-2V4a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1.1 0 01.707-.293l1.829-1.828A2 2 0 0117.657 16.657z" />
-                  </svg>
+                <div className="flex-shrink-0 h-10 w-10">
+                  <img 
+                    src="data:image/png;base64,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" 
+                    alt="Address Icon" 
+                    className="h-10 w-10 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">Address</h3>
-                  <p className="text-gray-600">123 Health Street<br />Medical City, MC 12345</p>
+                  <p className="text-gray-600">
+                    P.O. Box 107, Sare<br />
+                    Awendo Town<br />
+                    MIGORI, Kenya
+                  </p>
                 </div>
               </div>
 
               <div className="flex items-start">
-                <div className="flex-shrink-0 h-10 w-10 text-emerald-600">
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-4l1 1M4 4v4l3 3m6-4l1 1M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                  </svg>
+                <div className="flex-shrink-0 h-10 w-10">
+                  <img 
+                    src="data:image/png;base64,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" 
+                    alt="Office Hours Icon" 
+                    className="h-10 w-10 object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-gray-900">Office Hours</h3>
                   <p className="text-gray-600">
-                    Monday - Friday: 9:00 AM - 6:00 PM<br />
-                    Saturday: 10:00 AM - 4:00 PM<br />
-                    Sunday: Closed
+                    <span className="font-medium">Sunday - Friday:</span> 9:00 AM - 6:00 PM<br />
+                    <span className="font-medium text-red-600">Saturday:</span> Closed
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Google Map */}
+            <div className="mt-8">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Find Us at Skyrider Awendo</h3>
+              <div className="rounded-lg overflow-hidden shadow-md">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d-1.0437!2d34.4833!3d0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sSkyrider%20Awendo%2C%20Migori%2C%20Kenya!5e0!3m2!1sen!2ske!4v1234567890"
+                  width="100%"
+                  height="300"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full"
+                  title="Glad Tidings Office Location - Skyrider Awendo"
+                />
+              </div>
+              <p className="text-sm text-gray-600 mt-2">
+                Located at Skyrider Awendo, easily accessible from all directions in Migori County.
+              </p>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
-import { query } from '@lib/db'
-;
-;export async function GET(request) {
+import { NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+
+export async function GET(request) {
   try {
     // Get query parameters for filtering
     const { searchParams } = new URL(request.url)
@@ -9,76 +10,58 @@ import { query } from '@lib/db'
     const limit = parseInt(searchParams.get('limit')) || 50
     const offset = parseInt(searchParams.get('offset')) || 0
 
-    // Build the base query
-    let queryText = `
-      SELECT 
-        r.id,
-        r.title,
-        r.description,
-        r.usage,
-        r.image_url,
-        r.created_at,
-        c.id as category_id,
-        c.name as category_name
-      FROM remedies r
-      LEFT JOIN categories c ON r.category_id = c.id
-      WHERE 1=1
-    `
+    // Build the where clause
+    const where = {}
     
-    const queryParams = []
-    let paramIndex = 1
-
-    // Add filters
     if (category_id) {
-      queryText += ` AND r.category_id = $${paramIndex}`
-      queryParams.push(category_id)
-      paramIndex++
+      where.categoryId = category_id
     }
 
     if (published !== null) {
-      queryText += ` AND r.is_published = $${paramIndex}`
-      queryParams.push(published === 'true')
-      paramIndex++
+      where.isPublished = published === 'true'
     } else {
       // By default, only show published remedies for public API
-      queryText += ` AND r.is_published = true`
+      where.isPublished = true
     }
 
-    // Add ordering and pagination
-    queryText += ` ORDER BY r.created_at DESC LIMIT $${paramIndex} OFFSET $${paramIndex + 1}`
-    queryParams.push(limit, offset)
-
-    // Execute the query
-    const result = await query(queryText, queryParams)
+    // Execute the query with Prisma
+    const remedies = await prisma.remedy.findMany({
+      where,
+      include: {
+        category: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      take: limit,
+      skip: offset
+    })
     
     // Get total count for pagination
-    let countQuery = `
-      SELECT COUNT(*) as total
-      FROM remedies r
-      WHERE 1=1
-    `
-    const countParams = []
-    let countParamIndex = 1
+    const total = await prisma.remedy.count({
+      where
+    })
 
-    if (category_id) {
-      countQuery += ` AND r.category_id = $${countParamIndex}`
-      countParams.push(category_id)
-      countParamIndex++
-    }
+    // Transform the data to match the expected format
+    const transformedRemedies = remedies.map(remedy => ({
+      id: remedy.id,
+      title: remedy.title,
+      description: remedy.description,
+      usage: remedy.usage,
+      image_url: remedy.images?.[0] || null, // Get first image
+      created_at: remedy.createdAt,
+      category_id: remedy.categoryId,
+      category_name: remedy.category?.name || null
+    }))
 
-    if (published !== null) {
-      countQuery += ` AND r.is_published = $${countParamIndex}`
-      countParams.push(published === 'true')
-    } else {
-      countQuery += ` AND r.is_published = true`
-    }
-
-    const countResult = await query(countQuery, countParams)
-    const total = parseInt(countResult.rows[0].total)
-
-    return Response.json({
+    return NextResponse.json({
       success: true,
-      remedies: result.rows,
+      remedies: transformedRemedies,
       pagination: {
         total,
         limit,
@@ -93,10 +76,10 @@ import { query } from '@lib/db'
     
   } catch (error) {
     console.error('Error fetching public remedies:', error)
-    return Response.json({
+    return NextResponse.json({
       success: false,
       error: 'Failed to fetch remedies',
       message: 'Internal server error'
     }, { status: 500 })
   }
-};
+}

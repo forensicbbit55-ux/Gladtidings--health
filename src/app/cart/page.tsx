@@ -1,12 +1,12 @@
 'use client'
 
-import { useCartStore } from '../../../store/cartStore'
+import { useCartStore, type CartItem } from '@/store/cartStore'
 import { Minus, Plus, Trash2, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 
 export default function CartPage() {
-  const { items, removeFromCart, updateQuantity, getTotalPrice, getTotalItems } = useCartStore()
+  const { items, removeItem, updateQuantity, getTotalPrice, getTotalItems } = useCartStore()
 
   const totalPrice = getTotalPrice()
   const totalItems = getTotalItems()
@@ -48,9 +48,9 @@ export default function CartPage() {
                   <div key={item.id} className="flex items-center space-x-4 pb-6 border-b last:border-b-0">
                     {/* Product Image */}
                     <div className="flex-shrink-0">
-                      {item.image_url ? (
+                      {item.image ? (
                         <Image
-                          src={item.image_url}
+                          src={item.image}
                           alt={item.title}
                           width={80}
                           height={80}
@@ -97,7 +97,7 @@ export default function CartPage() {
 
                     {/* Remove Button */}
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeItem(item.id)}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
                       aria-label="Remove item"
                     >

@@ -1,6 +1,8 @@
 import { query } from '@lib/db'
-;
-;export async function GET() {
+
+export const dynamic = 'force-dynamic'
+
+export async function GET() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://gladtidings-health.vercel.app'
   
   // Static pages

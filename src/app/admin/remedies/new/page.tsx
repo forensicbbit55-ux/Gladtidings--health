@@ -1,15 +1,32 @@
-import { currentUser } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation'
+'use client'
+
+import { useUser } from '@clerk/nextjs'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import NewRemedyClient from './NewRemedyClient'
 
-export const dynamic = 'force-dynamic'
+export default function NewRemedyPage() {
+  const { isLoaded, isSignedIn } = useUser()
+  const router = useRouter()
 
-export default async function NewRemedyPage() {
-  const user = await currentUser()
-  
-  if (!user) {
-    redirect('/sign-in?redirect_url=/admin/remedies/new')
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push('/sign-in?redirect_url=/admin/remedies/new')
+    }
+  }, [isLoaded, isSignedIn, router])
+
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      </div>
+    )
   }
 
-  return <NewRemedyClient />
+  return (
+    <SignedIn>
+      <NewRemedyClient />
+    </SignedIn>
+  )
 }

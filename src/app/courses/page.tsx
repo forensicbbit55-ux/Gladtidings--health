@@ -18,30 +18,6 @@ const courseCategories = [
     icon: '🌸',
     courseCount: 6,
     color: 'from-purple-500 to-pink-600'
-  },
-  {
-    id: 'wellness-coaching',
-    name: 'Wellness Coaching',
-    description: 'Become a certified wellness coach',
-    icon: '💚',
-    courseCount: 4,
-    color: 'from-blue-500 to-cyan-600'
-  },
-  {
-    id: 'nutrition-courses',
-    name: 'Nutrition Courses',
-    description: 'Master the science of nutrition and diet',
-    icon: '🥗',
-    courseCount: 7,
-    color: 'from-orange-500 to-red-600'
-  },
-  {
-    id: 'meditation-mindfulness',
-    name: 'Meditation & Mindfulness',
-    description: 'Practice mental wellness and inner peace',
-    icon: '🧘',
-    courseCount: 5,
-    color: 'from-indigo-500 to-purple-600'
   }
 ]
 
@@ -84,60 +60,6 @@ const featuredCourses = [
   },
   {
     id: 3,
-    title: 'Wellness Coaching Certification',
-    instructor: 'Lisa Anderson',
-    category: 'Wellness Coaching',
-    level: 'Intermediate',
-    duration: '10 weeks',
-    students: 567,
-    rating: 4.8,
-    reviews: 98,
-    price: 249.99,
-    originalPrice: 349.99,
-    image: '/images/courses/wellness-coaching.jpg',
-    badge: 'Professional',
-    lessons: 40,
-    certificate: true,
-    description: 'Become a certified wellness coach with expert guidance'
-  },
-  {
-    id: 4,
-    title: 'Nutrition Science Masterclass',
-    instructor: 'Dr. Robert Williams',
-    category: 'Nutrition Courses',
-    level: 'Advanced',
-    duration: '14 weeks',
-    students: 445,
-    rating: 4.9,
-    reviews: 76,
-    price: 299.99,
-    originalPrice: null,
-    image: '/images/courses/nutrition.jpg',
-    badge: 'Advanced',
-    lessons: 56,
-    certificate: true,
-    description: 'Deep dive into nutritional science and dietary planning'
-  },
-  {
-    id: 5,
-    title: 'Meditation & Mindfulness Mastery',
-    instructor: 'Emma Thompson',
-    category: 'Meditation & Mindfulness',
-    level: 'All Levels',
-    duration: '6 weeks',
-    students: 1567,
-    rating: 4.8,
-    reviews: 234,
-    price: 99.99,
-    originalPrice: 149.99,
-    image: '/images/courses/meditation.jpg',
-    badge: 'New',
-    lessons: 24,
-    certificate: false,
-    description: 'Transform your life through meditation and mindfulness practices'
-  },
-  {
-    id: 6,
     title: 'Essential Oils & Aromatherapy',
     instructor: 'Jennifer Davis',
     category: 'Natural Healing',
