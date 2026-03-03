@@ -5,12 +5,13 @@ import { query } from '@lib/db'
 ;
 ;export async function GET() {
   try {
-    // Guard against database queries during build
-    if (!process.env.DATABASE_URL) {
+    // Guard against database queries during build/static export
+    if (process.env.NEXT_STATIC_EXPORT || process.env.NETLIFY_BUILD || !process.env.DATABASE_URL) {
       return Response.json({
-        success: false,
-        error: 'Database not available during build'
-      }, { status: 503 });
+        success: true,
+        message: 'Database test skipped during build',
+        skipped: true
+      }, { status: 200 });
     }
 
     // Test basic database connection

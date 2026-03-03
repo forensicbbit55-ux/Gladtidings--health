@@ -39,6 +39,11 @@ export async function getDb() {
  * Note: This will throw immediately if DATABASE_URL is missing
  */
 export function getSql() {
+  // Guard against database connections during build/static export
+  if (process.env.NEXT_STATIC_EXPORT || process.env.NETLIFY_BUILD) {
+    throw new Error('Database connections are disabled during build');
+  }
+  
   const databaseUrl = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL;
   if (!databaseUrl) {
     throw new Error('Database URL environment variable is not set');

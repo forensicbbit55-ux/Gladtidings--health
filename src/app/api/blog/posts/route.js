@@ -1,10 +1,21 @@
-import { query } from '@lib/db'
+import { getSql } from '@/lib/db'
 import { NextResponse } from 'next/server'
 import { verifySessionToken } from '@lib/auth'
 
 // GET /api/blog/posts - Fetch posts (public)
 export async function GET(request) {
   try {
+    // Guard against database queries during build/static export
+    if (process.env.NEXT_STATIC_EXPORT || process.env.NETLIFY_BUILD || !process.env.DATABASE_URL) {
+      return NextResponse.json({
+        success: true,
+        message: 'Posts fetch skipped during build',
+        skipped: true,
+        posts: [],
+        count: 0
+      }, { status: 200 });
+    }
+
     const { searchParams } = new URL(request.url)
     const published = searchParams.get('published') || 'true'
     const featured = searchParams.get('featured')
@@ -13,28 +24,11 @@ export async function GET(request) {
     const offset = parseInt(searchParams.get('offset')) || 0
     const search = searchParams.get('search')
 
-    let whereClause = 'WHERE 1=1'
-    const params = []
+    // Get SQL instance
+    const sql = getSql();
 
-    if (published === 'true') {
-      whereClause += ' AND p.published = TRUE'
-    }
-
-    if (featured === 'true') {
-      whereClause += ' AND p.featured = TRUE'
-    }
-
-    if (category) {
-      whereClause += ' AND c.slug = $' + (params.length + 1)
-      params.push(category)
-    }
-
-    if (search) {
-      whereClause += ' AND (p.title ILIKE $' + (params.length + 1) + ' OR p.excerpt ILIKE $' + (params.length + 2) + ')'
-      params.push(`%${search}%`, `%${search}%`)
-    }
-
-    const postsQuery = `
+    // Build the query using SQL template literals
+    let query = sql`
       SELECT 
         p.id,
         p.title,
@@ -53,37 +47,73 @@ export async function GET(request) {
       FROM posts p
       LEFT JOIN post_categories pc ON p.id = pc.post_id
       LEFT JOIN categories c ON pc.category_id = c.id
-      ${whereClause}
+      WHERE 1=1
+    `
+
+    // Add conditions dynamically
+    if (published === 'true') {
+      query = query`AND p.published = TRUE`
+    }
+
+    if (featured === 'true') {
+      query = query`AND p.featured = TRUE`
+    }
+
+    if (category) {
+      query = query`AND c.slug = ${category}`
+    }
+
+    if (search) {
+      query = query`AND (p.title ILIKE ${`%${search}%`} OR p.excerpt ILIKE ${`%${search}%`})`
+    }
+
+    // Final query with grouping and ordering
+    const postsQuery = query`
       GROUP BY p.id, p.title, p.slug, p.excerpt, p.cover_image, 
                p.author_name, p.published, p.featured, 
                p.read_time, p.created_at, p.updated_at, p.published_at
       ORDER BY p.published_at DESC NULLS LAST, p.created_at DESC
-      LIMIT $${params.length + 1} OFFSET $${params.length + 2}
+      LIMIT ${limit} OFFSET ${offset}
     `
 
-    params.push(limit, offset)
-
-    const postsResult = await query(postsQuery, params)
+    const postsResult = await postsQuery
 
     // Get total count for pagination
-    const countQuery = `
+    let countQuery = sql`
       SELECT COUNT(DISTINCT p.id) as total
       FROM posts p
       LEFT JOIN post_categories pc ON p.id = pc.post_id
       LEFT JOIN categories c ON pc.category_id = c.id
-      ${whereClause}
+      WHERE 1=1
     `
 
-    const countResult = await query(countQuery, params.slice(0, -2))
+    // Add same conditions to count query
+    if (published === 'true') {
+      countQuery = countQuery`AND p.published = TRUE`
+    }
+
+    if (featured === 'true') {
+      countQuery = countQuery`AND p.featured = TRUE`
+    }
+
+    if (category) {
+      countQuery = countQuery`AND c.slug = ${category}`
+    }
+
+    if (search) {
+      countQuery = countQuery`AND (p.title ILIKE ${`%${search}%`} OR p.excerpt ILIKE ${`%${search}%`})`
+    }
+
+    const countResult = await countQuery
 
     return NextResponse.json({
       success: true,
-      posts: postsResult.rows,
+      posts: postsResult,
       pagination: {
-        total: parseInt(countResult.rows[0].total),
+        total: parseInt(countResult[0].total),
         limit,
         offset,
-        hasMore: offset + limit < parseInt(countResult.rows[0].total)
+        hasMore: offset + limit < parseInt(countResult[0].total)
       }
     })
 

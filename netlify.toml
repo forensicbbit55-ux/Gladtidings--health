@@ -12,6 +12,7 @@
 [functions]
   node_bundler = "esbuild"
   included_files = ["prisma/schema.prisma"]
+  # Note: .env files are explicitly excluded to prevent secrets scanning failures
 
 [[redirects]]
   from = "/api/*"

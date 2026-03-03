@@ -5,6 +5,14 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
   try {
+    // Guard against database queries during build/static export
+    if (process.env.NEXT_STATIC_EXPORT || process.env.NETLIFY_BUILD || !process.env.DATABASE_URL) {
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Authentication not available during build' 
+      }, { status: 503 });
+    }
+
     const { email, password } = await request.json()
 
     // Validate input

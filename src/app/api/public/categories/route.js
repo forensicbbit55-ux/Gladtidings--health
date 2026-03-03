@@ -1,21 +1,34 @@
-import { query } from '@lib/db'
+import { getSql } from '@/lib/db'
 ;
 ;export async function GET() {
   try {
+    // Guard against database queries during build/static export
+    if (process.env.NEXT_STATIC_EXPORT || process.env.NETLIFY_BUILD || !process.env.DATABASE_URL) {
+      return Response.json({
+        success: true,
+        message: 'Categories fetch skipped during build',
+        skipped: true,
+        data: []
+      }, { status: 200 });
+    }
+
+    // Get SQL instance
+    const sql = getSql();
+
     // Fetch all categories for public access
-    const result = await query(`
+    const result = await sql`
       SELECT 
         id,
         name,
         created_at
       FROM categories 
       ORDER BY name ASC
-    `)
+    `
     
     return Response.json({
       success: true,
-      categories: result.rows,
-      count: result.rowCount
+      categories: result,
+      count: result.length
     })
     
   } catch (error) {

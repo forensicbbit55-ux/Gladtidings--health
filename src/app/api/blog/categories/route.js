@@ -5,6 +5,16 @@ import { query } from '@lib/db';
 ;// GET /api/blog/categories - Fetch all categories
 export async function GET() {
   try {
+    // Guard against database queries during build/static export
+    if (process.env.NEXT_STATIC_EXPORT || process.env.NETLIFY_BUILD || !process.env.DATABASE_URL) {
+      return NextResponse.json({
+        success: true,
+        message: 'Categories fetch skipped during build',
+        skipped: true,
+        data: []
+      }, { status: 200 });
+    }
+
     const result = await query(`
       SELECT 
         c.*,
