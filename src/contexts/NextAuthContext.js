@@ -1,7 +1,6 @@
 'use client'
 
 import React, { createContext, useContext, useState } from 'react';
-import { signIn, signOut } from 'next-auth/react';
 
 const AuthContext = createContext(undefined);
 
@@ -14,24 +13,23 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const result = await signIn('credentials', {
-        email,
-        password,
-        redirect: false
+      // Simple API call to our auth endpoint
+      const response = await fetch('/api/auth/[...nextauth]', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
-      
-      if (result?.error) {
-        throw new Error(result.error);
-      }
 
-      if (result?.user) {
-        setUser({
-          id: result.user.id || '',
-          name: result.user.name,
-          email: result.user.email,
-          image: result.user.image,
-          role: result.user.role
-        });
+      const data = await response.json();
+
+      if (response.ok && data.user) {
+        setUser(data.user);
+        // Store token in localStorage
+        localStorage.setItem('authToken', data.token);
+      } else {
+        throw new Error(data.error || 'Login failed');
       }
     } catch (error) {
       console.error('Login error:', error);
@@ -44,8 +42,8 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     setLoading(true);
     try {
-      await signOut({ redirect: false });
       setUser(null);
+      localStorage.removeItem('authToken');
     } catch (error) {
       console.error('Logout error:', error);
     } finally {

@@ -1,14 +1,15 @@
 'use client';
 
-import { SessionProvider } from 'next-auth/react';
+// Temporarily disabled SessionProvider to avoid build issues
+// import { SessionProvider } from 'next-auth/react';
 import { AuthProvider } from '@/contexts/NextAuthContext';
 
 export default function ClientProviders({ children }) {
   return (
-    <SessionProvider>
+    // <SessionProvider>
       <AuthProvider>
         {children}
       </AuthProvider>
-    </SessionProvider>
+    // </SessionProvider>
   );
 }
