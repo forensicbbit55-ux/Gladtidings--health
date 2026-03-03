@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
     setLoading(true);
     try {
       // Simple API call to our auth endpoint
-      const response = await fetch('/api/auth/[...nextauth]', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
