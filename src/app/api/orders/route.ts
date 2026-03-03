@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getOrders } from '@/app/actions/orders'
 
+export const dynamic = 'force-dynamic'
+
 // GET: Return all orders
 export async function GET() {
   try {
