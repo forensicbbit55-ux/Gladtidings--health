@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/NextAuthContext'
 import { useRouter } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 export default function ProfilePage() {
   const { user, loading } = useAuth()
   const router = useRouter()

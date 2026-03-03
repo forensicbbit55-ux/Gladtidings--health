@@ -1,6 +1,8 @@
 import BlogPostClient from '@/components/BlogPostClient'
-;
-;// This will be handled by the API route for server-side SEO
+
+export const dynamic = 'force-dynamic'
+
+// This will be handled by the API route for server-side SEO
 export async function generateMetadata({ params }) {
   try {
     const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/posts/${params.slug}`)

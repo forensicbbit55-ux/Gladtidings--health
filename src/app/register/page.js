@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/NextAuthContext'
 
+export const dynamic = 'force-dynamic'
+
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: '',

@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-;import { useAuth } from '@/contexts/NextAuthContext';
-;import { useRouter } from 'next/navigation'
-;
-;export default function AppointmentsPage() {
+import { useAuth } from '@/contexts/NextAuthContext';
+import { useRouter } from 'next/navigation';
+
+export const dynamic = 'force-dynamic'
+
+export default function AppointmentsPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
 

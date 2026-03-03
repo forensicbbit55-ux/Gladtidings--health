@@ -1,10 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-;import { useAuth } from '@/contexts/NextAuthContext';
-;import Link from 'next/link'
-;
-;export default function DashboardPage() {
+import { useAuth } from '@/contexts/NextAuthContext';
+import Link from 'next/link';
+
+export const dynamic = 'force-dynamic'
+
+export default function DashboardPage() {
   const { user, loading } = useAuth()
   const [appointments, setAppointments] = useState([])
   const [notifications, setNotifications] = useState([])
