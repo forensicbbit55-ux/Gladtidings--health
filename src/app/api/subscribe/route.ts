@@ -13,7 +13,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { getSql } from '@/lib/db';
 import { SubscribeRequest, SubscribeResponse } from '@/types/newsletter';
 
 /**
@@ -53,6 +53,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     }
 
     console.log(`Processing newsletter subscription for: ${email}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Check if email already exists
     const existingSubscriber = await sql`
@@ -124,6 +127,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
  */
 export async function GET(): Promise<NextResponse<SubscribeResponse>> {
   try {
+    // Get SQL instance
+    const sql = getSql();
+    
     const result = await sql`
       SELECT COUNT(*) as count FROM newsletter_subscribers
     `;

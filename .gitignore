@@ -34,3 +34,8 @@ next-env.d.ts
 
 .vercel
 .env*.local
+.env
+
+# Environment files with secrets
+.env.production
+.env.production.local

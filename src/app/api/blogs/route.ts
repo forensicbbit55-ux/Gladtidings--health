@@ -22,7 +22,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { getSql } from '@/lib/db';
 import { generateSlug, generateUniqueSlug, generateExcerpt } from '@/lib/utils';
 import { Blog, CreateBlogRequest, BlogListResponse, BlogResponse } from '@/types/blog';
 
@@ -42,6 +42,9 @@ export async function GET(request: NextRequest): Promise<NextResponse<BlogListRe
     const offset = Math.max(parseInt(offsetParam || '0'), 0);
 
     console.log(`Fetching blogs: category=${category}, limit=${limit}, offset=${offset}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Build query based on filters
     let query = sql`
@@ -105,6 +108,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<BlogRespo
 
     // Generate slug if not provided
     let slug = body.slug?.trim() || generateSlug(body.title.trim());
+    
+    // Get SQL instance
+    const sql = getSql();
     
     // Get existing slugs to ensure uniqueness
     const existingBlogs = await sql`

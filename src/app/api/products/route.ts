@@ -21,7 +21,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { getSql } from '@/lib/db';
 import { Product, CreateProductRequest, ProductListResponse, ProductResponse } from '@/types/product';
 
 /**
@@ -40,6 +40,9 @@ export async function GET(request: NextRequest): Promise<NextResponse<ProductLis
     const offset = Math.max(parseInt(offsetParam || '0'), 0);
 
     console.log(`Fetching products: category=${category}, limit=${limit}, offset=${offset}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Build query based on filters
     let query = sql`
@@ -108,6 +111,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<ProductRe
     const stock = body.stock !== undefined ? Math.max(parseInt(String(body.stock)), 0) : 0;
 
     console.log(`Creating product: ${body.name}, price: ${body.price}, category: ${category}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Insert new product
     const result = await sql`

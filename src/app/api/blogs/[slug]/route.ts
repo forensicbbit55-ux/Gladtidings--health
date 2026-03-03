@@ -10,7 +10,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { getSql } from '@/lib/db';
 import { generateSlug, generateExcerpt } from '@/lib/utils';
 import { Blog, BlogResponse } from '@/types/blog';
 
@@ -34,6 +34,9 @@ export async function GET(
     }
 
     console.log(`Fetching blog post with slug: ${slug}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Query blog post by slug
     const result = await sql`
@@ -118,6 +121,9 @@ export async function PUT(
     }
 
     console.log(`Updating blog post with slug: ${slug}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Check if blog post exists first
     const existingBlog = await sql`
@@ -245,6 +251,9 @@ export async function DELETE(
     }
 
     console.log(`Deleting blog post with slug: ${slug}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Check if blog post exists first
     const existingBlog = await sql`

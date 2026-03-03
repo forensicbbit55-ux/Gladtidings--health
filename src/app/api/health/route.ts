@@ -7,7 +7,7 @@
  */
 
 import { NextResponse } from 'next/server';
-import { sql, testConnection } from '@/lib/db';
+import { getSql, testConnection } from '@/lib/db';
 
 export async function GET() {
   console.log('Health check endpoint called');
@@ -27,6 +27,9 @@ export async function GET() {
       );
     }
 
+    // Get SQL instance
+    const sql = getSql();
+    
     // Get current time from database
     const result = await sql`SELECT NOW() as current_time`;
     

@@ -5,6 +5,14 @@ import { query } from '@lib/db'
 ;
 ;export async function GET() {
   try {
+    // Guard against database queries during build
+    if (!process.env.DATABASE_URL) {
+      return Response.json({
+        success: false,
+        error: 'Database not available during build'
+      }, { status: 503 });
+    }
+
     // Test basic database connection
     const versionResult = await query('SELECT version()')
     // Try to fetch products from the database

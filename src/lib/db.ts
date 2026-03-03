@@ -38,7 +38,13 @@ export async function getDb() {
  * Direct export for convenience - use when you don't need async/await
  * Note: This will throw immediately if DATABASE_URL is missing
  */
-export const sql = neon(process.env.NEON_DATABASE_URL || process.env.DATABASE_URL!);
+export function getSql() {
+  const databaseUrl = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL;
+  if (!databaseUrl) {
+    throw new Error('Database URL environment variable is not set');
+  }
+  return neon(databaseUrl);
+}
 
 /**
  * Test database connection

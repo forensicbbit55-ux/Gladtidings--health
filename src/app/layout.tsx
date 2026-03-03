@@ -88,11 +88,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ClerkClientProvider>
-          <Header />
-          <main className="min-h-screen">
-            {children}
-          </main>
-          <Footer />
+          <ClientProviders>
+            <Header />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+          </ClientProviders>
         </ClerkClientProvider>
       </body>
     </html>

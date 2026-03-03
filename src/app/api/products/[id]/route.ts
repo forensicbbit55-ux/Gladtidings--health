@@ -10,7 +10,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { sql } from '@/lib/db';
+import { getSql } from '@/lib/db';
 import { Product, ProductResponse } from '@/types/product';
 
 /**
@@ -22,6 +22,14 @@ export async function GET(
   { params }: { params: { id: string } }
 ): Promise<NextResponse<ProductResponse>> {
   try {
+    // Guard against database queries during build
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({
+        success: false,
+        error: 'Database not available during build'
+      }, { status: 503 });
+    }
+
     const productId = parseInt(params.id);
 
     // Validate ID parameter
@@ -33,6 +41,9 @@ export async function GET(
     }
 
     console.log(`Fetching product with ID: ${productId}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Query product by ID
     const result = await sql`
@@ -76,6 +87,14 @@ export async function PUT(
   { params }: { params: { id: string } }
 ): Promise<NextResponse<ProductResponse>> {
   try {
+    // Guard against database queries during build
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({
+        success: false,
+        error: 'Database not available during build'
+      }, { status: 503 });
+    }
+
     const productId = parseInt(params.id);
 
     // Validate ID parameter
@@ -128,6 +147,9 @@ export async function PUT(
 
     console.log(`Updating product with ID: ${productId}`);
 
+    // Get SQL instance
+    const sql = getSql();
+
     // Execute update query - simpler approach
     const result = await sql`
       UPDATE products 
@@ -177,6 +199,14 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ): Promise<NextResponse<ProductResponse>> {
   try {
+    // Guard against database queries during build
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({
+        success: false,
+        error: 'Database not available during build'
+      }, { status: 503 });
+    }
+
     const productId = parseInt(params.id);
 
     // Validate ID parameter
@@ -188,6 +218,9 @@ export async function DELETE(
     }
 
     console.log(`Deleting product with ID: ${productId}`);
+
+    // Get SQL instance
+    const sql = getSql();
 
     // Check if product exists first
     const existingProduct = await sql`
