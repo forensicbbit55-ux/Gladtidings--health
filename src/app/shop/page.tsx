@@ -3,6 +3,8 @@ import { ShoppingCart, Star, Heart, Filter, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { prisma } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+
 // Fetch remedies server-side
 async function getRemedies() {
   try {
