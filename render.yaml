@@ -1,0 +1,30 @@
+services:
+  # Web Service
+  - type: web
+    name: gladtidings-health
+    env: node
+    plan: free
+    repo: https://github.com/forensicbbit55-ux/gladtidings-health.git
+    rootDir: .
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - fromGroup: gladtidings-secrets
+    
+  # Environment Variable Groups
+envVarGroups:
+  - name: gladtidings-secrets
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: NEXT_PUBLIC_CLERK_SIGN_IN_URL
+        value: /sign-in
+      - key: NEXT_PUBLIC_CLERK_SIGN_UP_URL
+        value: /sign-up
