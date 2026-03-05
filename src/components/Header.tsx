@@ -166,20 +166,23 @@ export default function Header() {
                   </Button>
                 </SheetTrigger>
                 
-                <SheetContent side="left" className="w-full sm:w-[400px] bg-white border-r-emerald-200 p-0">
+                <SheetContent side="left" className="w-[80vw] max-w-[400px] bg-white border-r-emerald-200 shadow-2xl p-0">
                   {/* Mobile Menu Content */}
                   <div className="flex flex-col h-full">
                     {/* Header with Logo */}
                     <div className="flex items-center justify-between p-6 border-b border-emerald-100">
-                      <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
+                      <Link href="/" className="flex items-center space-x-3" onClick={() => setMobileMenuOpen(false)}>
                         <Image 
                           src="https://i.postimg.cc/Z5xPtcJS/5f3aa4e5-98d9-4cbc-ae08-6b3c948c48ae-removebg-preview.png" 
-                          alt="Glad Tidings Health" 
+                          alt="Gladtidings Health" 
                           width={80}
                           height={80}
                           className="h-16 w-16 object-contain"
                           priority
                         />
+                        <span className="text-lg font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent tracking-wider">
+                          Gladtidings Health
+                        </span>
                       </Link>
                       <SheetClose asChild>
                         <Button variant="ghost" size="sm" className="p-2">
@@ -339,14 +342,14 @@ export default function Header() {
               <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
                 <Image 
                   src="https://i.postimg.cc/Z5xPtcJS/5f3aa4e5-98d9-4cbc-ae08-6b3c948c48ae-removebg-preview.png" 
-                  alt="Glad Tidings Health" 
+                  alt="Gladtidings Health" 
                   width={120}
                   height={120}
                   className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 object-contain transition-transform duration-300 hover:scale-105"
                   priority
                 />
-                <span className="text-sm sm:text-lg lg:text-xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent tracking-wider hidden xs:block">
-                  Glad Tidings Health
+                <span className="text-sm sm:text-lg lg:text-xl font-semibold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent tracking-wider">
+                  Gladtidings Health
                 </span>
               </Link>
             </div>

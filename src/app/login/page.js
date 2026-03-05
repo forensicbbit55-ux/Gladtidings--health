@@ -91,7 +91,7 @@ function LoginContent() {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900">Sign In</h2>
-            <p className="mt-2 text-gray-600">Welcome back to Glad Tidings</p>
+            <p className="mt-2 text-gray-600">Welcome back to Gladtidings Health</p>
           </div>
 
           {errors.general && (

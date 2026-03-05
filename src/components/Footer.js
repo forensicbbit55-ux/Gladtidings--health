@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Glad Tidings</h3>
+            <h3 className="text-xl font-bold mb-4">Gladtidings Health</h3>
             <p className="text-gray-300 text-sm">
               Natural health remedies and medical missionary services for your well-being.
             </p>
@@ -176,7 +176,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-300 text-sm">
-          <p>&copy; {new Date().getFullYear()} Glad Tidings Medical Missionary. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Gladtidings Health Medical Missionary. All rights reserved.</p>
         </div>
       </div>
     </footer>

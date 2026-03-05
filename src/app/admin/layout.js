@@ -84,7 +84,7 @@ function AdminLayoutContent({ children }) {
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} bg-white shadow-lg transition-all duration-300 flex-shrink-0`}>
         <div className="flex items-center justify-between h-16 px-4 border-b">
           <h1 className={`font-bold text-gray-900 ${sidebarCollapsed ? 'text-xs' : 'text-lg'}`}>
-            {sidebarCollapsed ? 'GT' : 'Glad Tidings'}
+            {sidebarCollapsed ? 'GT' : 'Gladtidings Health'}
           </h1>
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
