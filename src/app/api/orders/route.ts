@@ -1,28 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getOrders } from '@/app/actions/orders'
+import { neon } from '@neondatabase/serverless'
+
+const sql = neon(process.env.DATABASE_URL!)
 
 export const dynamic = 'force-dynamic'
 
 // GET: Return all orders
 export async function GET() {
   try {
-    const result = await getOrders()
+    const orders = await sql`
+      SELECT * FROM orders 
+      ORDER BY created_at DESC
+    `
     
-    if (result.success) {
-      return NextResponse.json({
-        success: true,
-        orders: result.orders,
-        count: result.orders.length
-      })
-    } else {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: result.error || 'Failed to fetch orders' 
-        },
-        { status: 500 }
-      )
-    }
+    return NextResponse.json({
+      success: true,
+      orders,
+      count: orders.length
+    })
   } catch (error) {
     console.error('Error fetching orders:', error)
     return NextResponse.json(
