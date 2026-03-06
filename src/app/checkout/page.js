@@ -1,19 +1,58 @@
-import { getCartItems } from '@/lib/cart'
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import MpesaPayment from '@/components/MpesaPayment'
-import { getServerSession } from '@/lib/auth'
+import { getCartItems } from '@/lib/cart'
+import { useUser } from '@clerk/nextjs'
 
-export default async function CheckoutPage() {
-  const session = await getServerSession()
-  
-  if (!session) {
-    redirect('/login?callbackUrl=/checkout')
-  }
+export default function CheckoutPage() {
+  const router = useRouter()
+  const { isSignedIn } = useUser()
+  const [cartItems, setCartItems] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  // Get cart items
-  const cartItems = await getCartItems()
-  
-  if (!cartItems || cartItems.length === 0) {
-    redirect('/cart')
+  useEffect(() => {
+    // Check if user is signed in
+    if (!isSignedIn) {
+      router.push('/login?callbackUrl=/checkout')
+      return
+    }
+
+    // Get cart items
+    const items = getCartItems()
+    setCartItems(items)
+    setLoading(false)
+
+    // Redirect if cart is empty
+    if (items.length === 0) {
+      router.push('/cart')
+    }
+  }, [isSignedIn, router])
+
+  // Listen for cart updates
+  useEffect(() => {
+    const handleCartUpdate = () => {
+      const items = getCartItems()
+      setCartItems(items)
+      if (items.length === 0) {
+        router.push('/cart')
+      }
+    }
+
+    window.addEventListener('cartUpdated', handleCartUpdate)
+    return () => window.removeEventListener('cartUpdated', handleCartUpdate)
+  }, [router])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading checkout...</p>
+        </div>
+      </div>
+    )
   }
 
   // Calculate totals
@@ -73,8 +112,9 @@ export default async function CheckoutPage() {
               orderId={orderId}
               amount={total}
               onPaymentSuccess={(order) => {
-                // Redirect to success page
-                window.location.href = `/order-success?orderId=${order.orderId}`
+                // Clear cart on successful payment
+                localStorage.removeItem('gladtidings_cart')
+                router.push(`/order-success?orderId=${order.orderId}`)
               }}
               onPaymentError={(error) => {
                 console.error('Payment error:', error)
