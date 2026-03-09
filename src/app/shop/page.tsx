@@ -158,11 +158,11 @@ export default function ShopPage() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
             {filteredRemedies.map((remedy) => (
-              <div key={remedy.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div key={remedy.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                 {/* Product Image */}
-                <div className="relative h-48 bg-gray-200">
+                <div className="relative h-24 sm:h-28 bg-gray-200">
                   {remedy.images && remedy.images.length > 0 ? (
                     <img
                       src={remedy.images[0]}
@@ -171,51 +171,40 @@ export default function ShopPage() {
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center">
-                      <div className="text-emerald-600 text-4xl">🌿</div>
+                      <div className="text-emerald-600 text-2xl sm:text-3xl">🌿</div>
                     </div>
                   )}
-                  <span className="absolute top-2 right-2 bg-emerald-500 text-white px-2 py-1 rounded-full text-xs">
-                    In Stock
+                  <span className="absolute top-1 right-1 bg-emerald-500 text-white px-1 py-0.5 rounded-full text-xs">
+                    Stock
                   </span>
                 </div>
 
                 {/* Product Info */}
-                <div className="p-4">
+                <div className="p-2 sm:p-3">
                   {/* Category Badge */}
                   {remedy.category && (
-                    <div className="mb-2">
-                      <span className="inline-block px-2 py-1 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
+                    <div className="mb-1">
+                      <span className="inline-block px-1 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
                         {remedy.category.name}
                       </span>
                     </div>
                   )}
 
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{remedy.title}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">{remedy.title}</h3>
                   
-                  {remedy.description && (
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">{remedy.description}</p>
-                  )}
-
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-bold text-emerald-600">KES {remedy.price}</span>
-                    <div className="flex items-center">
-                      <span className="text-sm text-gray-500">Natural Remedy</span>
-                    </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm sm:text-base font-bold text-emerald-600">KES {remedy.price}</span>
+                    <span className="text-xs text-gray-500">Natural</span>
                   </div>
 
-                  <div className="flex gap-2">
-                    <Button
-                      id={`add-to-cart-${remedy.id}`}
-                      onClick={() => handleAddToCart(remedy)}
-                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
-                    >
-                      <ShoppingCart className="h-4 w-4 mr-2" />
-                      Add to Cart
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Heart className="h-4 w-4" />
-                    </Button>
-                  </div>
+                  <button
+                    id={`add-to-cart-${remedy.id}`}
+                    onClick={() => handleAddToCart(remedy)}
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm py-1.5 px-2 rounded transition-colors duration-200 flex items-center justify-center"
+                  >
+                    <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                    Add
+                  </button>
                 </div>
               </div>
             ))}
