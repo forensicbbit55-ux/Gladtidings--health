@@ -108,9 +108,6 @@ export default function ShopPage() {
                   src={product.image_url}
                   alt={product.title}
                   className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.src = '/images/placeholder.jpg'
-                  }}
                 />
                 {product.inStock && (
                   <span className="absolute top-2 right-2 bg-emerald-500 text-white px-2 py-1 rounded-full text-xs">
