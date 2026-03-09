@@ -3,11 +3,17 @@
 // Cart management functions for client-side localStorage
 
 export function getCartItems() {
-  if (typeof window === 'undefined') return []
+  if (typeof window === 'undefined') {
+    console.log('getCartItems: window is undefined')
+    return []
+  }
   
   try {
     const cartData = localStorage.getItem('gladtidings_cart')
-    return cartData ? JSON.parse(cartData) : []
+    console.log('getCartItems: raw cart data =', cartData)
+    const parsed = cartData ? JSON.parse(cartData) : []
+    console.log('getCartItems: parsed cart =', parsed)
+    return parsed
   } catch (error) {
     console.error('Error getting cart items:', error)
     return []
@@ -15,14 +21,19 @@ export function getCartItems() {
 }
 
 export function addToCart(product, quantity = 1) {
-  if (typeof window === 'undefined') return
+  if (typeof window === 'undefined') {
+    console.log('addToCart: window is undefined')
+    return
+  }
   
   try {
+    console.log('addToCart: adding product =', product)
     const cart = getCartItems()
     const existingItem = cart.find(item => item.id === product.id)
     
     if (existingItem) {
       existingItem.quantity += quantity
+      console.log('addToCart: updated existing item quantity =', existingItem.quantity)
     } else {
       cart.push({
         id: product.id,
@@ -31,12 +42,15 @@ export function addToCart(product, quantity = 1) {
         image_url: product.image_url,
         quantity: quantity
       })
+      console.log('addToCart: added new item to cart')
     }
     
     localStorage.setItem('gladtidings_cart', JSON.stringify(cart))
+    console.log('addToCart: saved to localStorage')
     
     // Trigger cart update event
     window.dispatchEvent(new Event('cartUpdated'))
+    console.log('addToCart: dispatched cartUpdated event')
     
     return cart
   } catch (error) {
