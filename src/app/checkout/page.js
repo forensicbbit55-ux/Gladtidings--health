@@ -57,7 +57,7 @@ export default function CheckoutPage() {
 
   // Calculate totals
   const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  const shipping = subtotal > 0 ? 200 : 0 // KES 200 shipping
+  const shipping = subtotal > 0 ? 300 : 0 // KES 300 shipping
   const total = subtotal + shipping
 
   // Generate order ID

@@ -33,8 +33,18 @@ export default function ShopPage() {
 
   const handleAddToCart = (product) => {
     addToCart(product)
-    // You could add a toast notification here
-    alert(`${product.title} added to cart!`)
+    // Show success feedback without blocking alert
+    const button = document.getElementById(`add-to-cart-${product.id}`)
+    if (button) {
+      const originalText = button.textContent
+      button.textContent = '✓ Added!'
+      button.classList.add('bg-green-600')
+      
+      setTimeout(() => {
+        button.textContent = originalText
+        button.classList.remove('bg-green-600')
+      }, 1500)
+    }
   }
 
   if (loading) {
@@ -124,6 +134,7 @@ export default function ShopPage() {
 
                 <div className="flex gap-2">
                   <Button
+                    id={`add-to-cart-${product.id}`}
                     onClick={() => handleAddToCart(product)}
                     className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
                   >

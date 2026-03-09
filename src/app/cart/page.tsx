@@ -83,8 +83,8 @@ export default function CartPage() {
                           width={80}
                           height={80}
                           className="rounded-lg object-cover"
-                          onError={(e) => {
-                            e.target.src = '/images/placeholder.jpg'
+                          onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                            e.currentTarget.src = '/images/placeholder.jpg'
                           }}
                         />
                       ) : (
@@ -152,12 +152,12 @@ export default function CartPage() {
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Delivery Fee</span>
-                  <span>KES 200</span>
+                  <span>KES 300</span>
                 </div>
                 <div className="border-t pt-3">
                   <div className="flex justify-between text-lg font-semibold text-gray-900">
                     <span>Total</span>
-                    <span>KES {totalPrice + 200}</span>
+                    <span>KES {totalPrice + 300}</span>
                   </div>
                 </div>
               </div>
