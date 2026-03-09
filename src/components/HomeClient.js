@@ -98,13 +98,6 @@ export default function HomeClient() {
     { id: 'spiritual', name: 'Spiritual Health', icon: '🙏' }
   ]
 
-  const features = [
-    { id: 1, icon: '🚚', title: 'Free Shipping', description: 'Free shipping on qualifying orders and select natural remedy bundles.' },
-    { id: 2, icon: '🎧', title: 'Support 24/7', description: 'Caring support for questions about products, lifestyle changes, and prayer.' },
-    { id: 3, icon: '↩️', title: 'Easy Returns', description: 'Simple return options if something isn\'t the right fit for you.' },
-    { id: 4, icon: '🔒', title: '100% Payment Secure', description: 'Secure checkout for every order with trusted payment providers.' }
-  ]
-
   const blogPosts = [
     { id: 1, title: 'Natural Remedies for Seasonal Wellness', category: 'Health Tips', date: '2 days ago', image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop', excerpt: 'Discover natural ways to boost your immune system during seasonal changes with herbal remedies and lifestyle adjustments.', slug: 'natural-remedies-seasonal-wellness', readTime: '5 min read' },
     { id: 2, title: 'Spiritual Practices for Holistic Healing', category: 'Spiritual Health', date: '5 days ago', image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', excerpt: 'Explore how spiritual practices can complement natural healing methods for complete wellness.', slug: 'spiritual-practices-holistic-healing', readTime: '7 min read' },
@@ -405,42 +398,6 @@ export default function HomeClient() {
                       Explore Category
                     </Link>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-8 sm:py-12 bg-gradient-to-br from-gray-50 to-emerald-50/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8">
-            <div className="inline-block px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full mb-4">
-              <span className="text-sm font-semibold">Why Choose Us</span>
-            </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Our Services
-            </h2>
-            <p className="text-sm sm:text-base text-gray-600 max-w-3xl mx-auto">
-              Natural health solutions for your wellness journey
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {features.map((feature, index) => (
-              <div key={feature.id} className="group relative">
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-2xl transform group-hover:scale-105 transition-all duration-300 blur-xl"></div>
-                
-                {/* Card */}
-                <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-3 sm:p-4 shadow-lg hover:shadow-xl transition-all duration-300 border border-emerald-100/50">
-                  {/* Icon */}
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-lg flex items-center justify-center mx-auto mb-2 sm:mb-3 transform group-hover:rotate-12 transition-transform duration-300">
-                    <span className="text-lg sm:text-xl">{feature.icon}</span>
-                  </div>
-                  
-                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-2 text-center">{feature.title}</h3>
-                  <p className="text-gray-600 text-xs sm:text-sm text-center leading-relaxed">{feature.description}</p>
                 </div>
               </div>
             ))}
