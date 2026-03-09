@@ -13,19 +13,26 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    console.log('Checkout page useEffect called')
+    console.log('isSignedIn:', isSignedIn)
+    
     // Check if user is signed in
     if (!isSignedIn) {
+      console.log('Not signed in, redirecting to sign-in')
       router.push('/sign-in?callbackUrl=/checkout')
       return
     }
 
+    console.log('User is signed in, getting cart items')
     // Get cart items
     const items = getCartItems()
+    console.log('Cart items:', items)
     setCartItems(items)
     setLoading(false)
 
     // Redirect if cart is empty
     if (items.length === 0) {
+      console.log('Cart is empty, redirecting to cart')
       router.push('/cart')
     }
   }, [isSignedIn, router])
