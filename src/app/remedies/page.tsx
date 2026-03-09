@@ -49,7 +49,7 @@ export default function RemediesPage() {
 
   const handleAddToCart = (remedy) => {
     if (!isSignedIn) {
-      router.push('/login?callbackUrl=/remedies')
+      router.push('/sign-in?callbackUrl=/remedies')
       return
     }
 

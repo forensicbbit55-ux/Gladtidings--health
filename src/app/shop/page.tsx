@@ -47,7 +47,7 @@ export default function ShopPage() {
 
   const handleAddToCart = (remedy) => {
     if (!isSignedIn) {
-      router.push('/login?callbackUrl=/shop')
+      router.push('/sign-in?callbackUrl=/shop')
       return
     }
 

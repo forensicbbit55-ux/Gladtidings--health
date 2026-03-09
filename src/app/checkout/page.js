@@ -15,7 +15,7 @@ export default function CheckoutPage() {
   useEffect(() => {
     // Check if user is signed in
     if (!isSignedIn) {
-      router.push('/login?callbackUrl=/checkout')
+      router.push('/sign-in?callbackUrl=/checkout')
       return
     }
 
