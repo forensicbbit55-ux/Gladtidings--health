@@ -2,8 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
+import { ShoppingCart } from 'lucide-react';
+import { getCartItems, addToCart } from '@/lib/cart';
 
 export default function HomeClient() {
+  const { isSignedIn } = useUser()
+  const router = useRouter()
   const [currentSlide, setCurrentSlide] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [remedies, setRemedies] = useState([])
@@ -11,6 +17,37 @@ export default function HomeClient() {
 
   const formatPrice = (price) => {
     return `KSH ${parseFloat(price).toFixed(2)}`
+  }
+
+  const handleAddToCart = (remedy) => {
+    if (!isSignedIn) {
+      router.push('/sign-in?callbackUrl=/')
+      return
+    }
+
+    // Convert remedy to cart format
+    const cartItem = {
+      id: remedy.id,
+      title: remedy.title,
+      price: remedy.price,
+      image_url: remedy.imageUrl || (remedy.images && remedy.images[0]) || '/images/placeholder.jpg',
+      quantity: 1
+    }
+
+    addToCart(cartItem)
+    
+    // Show success feedback
+    const button = document.getElementById(`home-add-to-cart-${remedy.id}`)
+    if (button) {
+      const originalText = button.textContent
+      button.textContent = '✓ Added!'
+      button.classList.add('bg-green-600')
+      
+      setTimeout(() => {
+        button.textContent = originalText
+        button.classList.remove('bg-green-600')
+      }, 1500)
+    }
   }
 
   // Fetch remedies from API
@@ -92,7 +129,7 @@ export default function HomeClient() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
       {/* Hero Carousel Section */}
-      <section className="relative h-[250px] sm:h-[350px] md:h-[400px] overflow-hidden border-b-4 border-emerald-600">
+      <section className="relative h-[180px] sm:h-[250px] md:h-[300px] overflow-hidden border-b-4 border-emerald-600">
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/90 via-teal-600/80 to-emerald-700/90">
           <div className="absolute inset-0 bg-black/20"></div>
@@ -186,6 +223,111 @@ export default function HomeClient() {
               }`}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Featured Remedies Section */}
+      <section className="py-6 sm:py-8 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6 sm:mb-8">
+            <div className="inline-block px-4 py-2 bg-emerald-100 rounded-full mb-4">
+              <span className="text-emerald-700 text-sm font-semibold">Featured Products</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              Natural Health Remedies
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+              Discover our curated selection of natural remedies for your wellness journey
+            </p>
+          </div>
+          
+          {remedies.length === 0 ? (
+            <div className="text-center py-8">
+              <div className="text-gray-400 text-4xl mb-4">🌿</div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">Coming Soon</h3>
+              <p className="text-gray-600 mb-4">Natural remedies will appear here soon</p>
+              <Link 
+                href="/shop"
+                className="inline-block bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-colors"
+              >
+                Visit Shop
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
+              {remedies.slice(0, 12).map((remedy) => (
+                <div key={remedy.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden border border-gray-100">
+                  {/* Product Image */}
+                  <div className="relative h-16 sm:h-20 bg-gray-100">
+                    {remedy.images && remedy.images.length > 0 ? (
+                      <img
+                        src={remedy.images[0]}
+                        alt={remedy.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center">
+                        <div className="text-emerald-600 text-lg sm:text-xl">🌿</div>
+                      </div>
+                    )}
+                    <span className="absolute top-1 right-1 bg-emerald-500 text-white px-1 py-0.5 rounded-full text-xs">
+                      New
+                    </span>
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="p-2 sm:p-3">
+                    {/* Category Badge */}
+                    {remedy.category && (
+                      <div className="mb-1">
+                        <span className="inline-block px-1 py-0.5 bg-emerald-100 text-emerald-700 text-xs font-medium rounded-full">
+                          {remedy.category.name}
+                        </span>
+                      </div>
+                    )}
+
+                    <h3 className="text-xs sm:text-sm font-semibold text-gray-900 mb-1 line-clamp-2">{remedy.title}</h3>
+                    
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs sm:text-sm font-bold text-emerald-600">KES {remedy.price}</span>
+                      <span className="text-xs text-gray-500">Natural</span>
+                    </div>
+
+                    <div className="flex gap-1">
+                      <button
+                        id={`home-add-to-cart-${remedy.id}`}
+                        onClick={() => handleAddToCart(remedy)}
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-1 px-1 rounded transition-colors duration-200 flex items-center justify-center"
+                      >
+                        <ShoppingCart className="h-2 w-2 sm:h-3 sm:w-3 mr-1" />
+                        Add
+                      </button>
+                      <Link 
+                        href={`/shop`}
+                        className="bg-gray-100 hover:bg-gray-200 text-gray-600 text-xs p-1 rounded transition-colors"
+                      >
+                        →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {remedies.length > 0 && (
+            <div className="text-center mt-6">
+              <Link 
+                href="/shop"
+                className="inline-flex items-center bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-lg hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                View All Remedies
+                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          )}
         </div>
       </section>
 

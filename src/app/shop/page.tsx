@@ -206,11 +206,11 @@ export default function ShopPage() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-2 sm:gap-3">
             {filteredRemedies.map((remedy) => (
               <div key={remedy.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
                 {/* Product Image */}
-                <div className="relative h-24 sm:h-28 bg-gray-200">
+                <div className="relative h-16 sm:h-20 bg-gray-200">
                   {remedy.images && remedy.images.length > 0 ? (
                     <img
                       src={remedy.images[0]}
@@ -219,7 +219,7 @@ export default function ShopPage() {
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-emerald-100 to-green-100 flex items-center justify-center">
-                      <div className="text-emerald-600 text-2xl sm:text-3xl">🌿</div>
+                      <div className="text-emerald-600 text-xl sm:text-2xl">🌿</div>
                     </div>
                   )}
                   <span className="absolute top-1 right-1 bg-emerald-500 text-white px-1 py-0.5 rounded-full text-xs">
@@ -228,7 +228,7 @@ export default function ShopPage() {
                 </div>
 
                 {/* Product Info */}
-                <div className="p-2 sm:p-3">
+                <div className="p-2 sm:p-2">
                   {/* Category Badge */}
                   {remedy.category && (
                     <div className="mb-1">
@@ -238,19 +238,19 @@ export default function ShopPage() {
                     </div>
                   )}
 
-                  <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">{remedy.title}</h3>
+                  <h3 className="text-xs font-semibold text-gray-900 mb-1 line-clamp-1">{remedy.title}</h3>
                   
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm sm:text-base font-bold text-emerald-600">KES {remedy.price}</span>
+                    <span className="text-xs font-bold text-emerald-600">KES {remedy.price}</span>
                     <span className="text-xs text-gray-500">Natural</span>
                   </div>
 
                   <button
                     id={`add-to-cart-${remedy.id}`}
                     onClick={() => handleAddToCart(remedy)}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm py-1.5 px-2 rounded transition-colors duration-200 flex items-center justify-center"
+                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs py-1 px-1 rounded transition-colors duration-200 flex items-center justify-center"
                   >
-                    <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                    <ShoppingCart className="h-3 w-3 mr-1" />
                     Add
                   </button>
                 </div>
