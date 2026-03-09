@@ -17,7 +17,7 @@ export async function POST(request) {
     }
 
     // Validate phone number format (Kenya)
-    const phoneRegex = /^(\+254|07)[0-9]{8}$/
+    const phoneRegex = /^(\+254|0|07)[0-9]{9}$/
     if (!phoneRegex.test(phoneNumber.replace(/\s/g, ''))) {
       return NextResponse.json(
         { success: false, error: 'Please enter a valid Kenyan phone number' },

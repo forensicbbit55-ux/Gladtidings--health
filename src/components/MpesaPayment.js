@@ -10,7 +10,7 @@ export default function MpesaPayment({ orderId, amount, onPaymentSuccess, onPaym
   const [checkoutRequestID, setCheckoutRequestID] = useState('')
 
   const validatePhoneNumber = (phone) => {
-    const phoneRegex = /^(\+254|07)[0-9]{8}$/
+    const phoneRegex = /^(\+254|0|07)[0-9]{9}$/
     return phoneRegex.test(phone.replace(/\s/g, ''))
   }
 
@@ -140,12 +140,12 @@ export default function MpesaPayment({ orderId, amount, onPaymentSuccess, onPaym
             id="phone"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
-            placeholder="07XX XXX XXX or +254 XXX XXX XXX"
+            placeholder="0712345678 or +254712345678"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             disabled={isLoading}
           />
           <p className="text-xs text-gray-500 mt-1">
-            Enter your M-Pesa registered phone number
+            Examples: 0712345678, 012345678, +254712345678
           </p>
         </div>
 
