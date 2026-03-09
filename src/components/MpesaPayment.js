@@ -40,6 +40,11 @@ export default function MpesaPayment({ orderId, amount, onPaymentSuccess, onPaym
 
     try {
       const formattedPhone = formatPhoneNumber(phoneNumber)
+      console.log('Initiating payment with:', {
+        phoneNumber: formattedPhone,
+        amount: amount,
+        orderId: orderId
+      })
       
       const response = await fetch('/api/mpesa/initiate', {
         method: 'POST',
@@ -55,7 +60,9 @@ export default function MpesaPayment({ orderId, amount, onPaymentSuccess, onPaym
         })
       })
 
+      console.log('M-Pesa API response status:', response.status)
       const data = await response.json()
+      console.log('M-Pesa API response:', data)
 
       if (data.success) {
         setCheckoutRequestID(data.checkoutRequestID)
@@ -64,6 +71,7 @@ export default function MpesaPayment({ orderId, amount, onPaymentSuccess, onPaym
         // Start polling for payment status
         pollPaymentStatus(data.checkoutRequestID)
       } else {
+        console.error('M-Pesa payment failed:', data.error)
         setPaymentStatus(data.error || 'Payment initiation failed')
         onPaymentError?.(data.error)
       }
