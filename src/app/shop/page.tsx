@@ -46,7 +46,12 @@ export default function ShopPage() {
   })
 
   const handleAddToCart = (remedy) => {
+    console.log('Shop handleAddToCart called')
+    console.log('isSignedIn:', isSignedIn)
+    console.log('remedy:', remedy)
+    
     if (!isSignedIn) {
+      console.log('Not signed in, redirecting to sign-in')
       router.push('/sign-in?callbackUrl=/shop')
       return
     }
@@ -60,6 +65,7 @@ export default function ShopPage() {
       quantity: 1
     }
 
+    console.log('Adding cartItem:', cartItem)
     addToCart(cartItem)
     
     // Show success feedback
