@@ -19,10 +19,16 @@ export default function ShopPage() {
     // Fetch remedies from API
     const fetchRemedies = async () => {
       try {
+        console.log('Fetching remedies from API...')
         const response = await fetch('/api/remedies')
+        console.log('API response status:', response.status)
         const data = await response.json()
+        console.log('API response data:', data)
         if (data.success) {
           setRemedies(data.data)
+          console.log('Remedies loaded:', data.data.length, 'items')
+        } else {
+          console.error('API returned error:', data.error)
         }
       } catch (error) {
         console.error('Error fetching remedies:', error)
@@ -103,6 +109,21 @@ export default function ShopPage() {
             <p className="text-lg sm:text-xl text-emerald-100 max-w-2xl mx-auto">
               Discover our collection of natural health remedies crafted from the finest herbs
             </p>
+            {/* Debug Info */}
+            <div className="mt-4">
+              <button
+                onClick={() => console.log('Test button clicked!')}
+                className="bg-white text-emerald-600 px-4 py-2 rounded mr-2"
+              >
+                Test Click
+              </button>
+              <button
+                onClick={() => console.log('Remedies count:', remedies.length)}
+                className="bg-white text-emerald-600 px-4 py-2 rounded"
+              >
+                Check Remedies
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -144,15 +165,36 @@ export default function ShopPage() {
 
       {/* Products Grid */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {filteredRemedies.length === 0 ? (
+        {!loading && remedies.length === 0 && (
           <div className="text-center py-12">
             <div className="text-gray-400 text-6xl mb-4">🌿</div>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">No Remedies Available</h2>
+            <p className="text-gray-600 mb-6">
+              There are no remedies in the database yet. You can add remedies through the admin panel.
+            </p>
+            <div className="space-x-4">
+              <button
+                onClick={() => window.location.href = '/admin/remedies/new'}
+                className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-700"
+              >
+                Add First Remedy
+              </button>
+              <button
+                onClick={() => window.location.reload()}
+                className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
+              >
+                Refresh Page
+              </button>
+            </div>
+          </div>
+        )}
+        
+        {filteredRemedies.length === 0 && remedies.length > 0 ? (
+          <div className="text-center py-12">
+            <div className="text-gray-400 text-6xl mb-4">🔍</div>
             <h2 className="text-2xl font-semibold text-gray-800 mb-2">No Remedies Found</h2>
             <p className="text-gray-600 mb-6">
-              {remedies.length === 0 
-                ? "No remedies available yet." 
-                : "No remedies match your search criteria."
-              }
+              No remedies match your search criteria.
             </p>
             {searchTerm && (
               <button
