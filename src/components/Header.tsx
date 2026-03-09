@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -19,17 +19,34 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useUser, UserButton, SignedIn, SignedOut } from '@clerk/nextjs'
-import { useCartStore } from '@/store/cartStore'
+import { getCartItems } from '@/lib/cart'
 
 export default function Header() {
   const [shopOpen, setShopOpen] = useState(false)
   const [coursesOpen, setCoursesOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
   const { user } = useUser()
   const pathname = usePathname()
-  const getTotalItems = useCartStore((state) => state.getTotalItems)
-  const totalItems = getTotalItems()
+
+  useEffect(() => {
+    // Load cart count
+    const updateCartCount = () => {
+      const items = getCartItems()
+      const count = items.reduce((total, item) => total + item.quantity, 0)
+      setCartCount(count)
+    }
+
+    // Initial load
+    updateCartCount()
+
+    // Listen for cart updates
+    window.addEventListener('cartUpdated', updateCartCount)
+    
+    // Cleanup
+    return () => window.removeEventListener('cartUpdated', updateCartCount)
+  }, [])
 
   const shopItems = [
     { name: 'Natural Remedies', href: '/remedies' },
@@ -480,7 +497,7 @@ export default function Header() {
               >
                 <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
                 <span className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-semibold">
-                  {totalItems}
+                  {cartCount}
                 </span>
               </Link>
 
